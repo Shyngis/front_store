@@ -8,7 +8,7 @@ export const Header = () => {
     <div className='jogargysy'>
       <header>
         <input type="checkbox" name='' id='chk1' />
-        <div className='logo'><h1>Santech store</h1></div>
+        <div className='logo'><h1>Plumbing store</h1></div>
         <div className="search-box">
           <form action="">
               <input type="text" name='search' id='srch' placeholder='Search' />
