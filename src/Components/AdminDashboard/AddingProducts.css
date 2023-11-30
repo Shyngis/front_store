@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+
+
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.create label {
+  text-align: left;
+  display: block;
+}
+
+.create h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+
+.create input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+
+}
+
+.create textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.create button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.create .article_size {
+  display: flex;
+}
+
+.create .adding_pr {
+  background-color: #04AA6D;
+}
+
+.create .checkbox {
+  display: flex;
+  justify-content: end;
+
+}

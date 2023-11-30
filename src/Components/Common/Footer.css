@@ -1,0 +1,31 @@
+footer {
+
+  background-color: var(--primaryBackground);
+  padding: 70px;
+  margin-top: 50px;
+  /* position: relative; */
+
+}
+
+footer .iconsa {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+}
+
+footer i {
+  display: flex;
+  transition: 0.5s;
+  margin: 10px;
+  color: var(--primaryColor);
+
+}
+
+footer a i:hover {
+  transform: translateY(-8px);
+}
+
+footer p {
+  text-align: center;
+}

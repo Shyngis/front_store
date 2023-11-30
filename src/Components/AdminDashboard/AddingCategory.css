@@ -1,0 +1,49 @@
+
+
+.category {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  font-weight: bold;
+
+}
+
+.category label {
+  text-align: left;
+  display: block;
+}
+
+.category h2 {
+  font-size: 20px;
+  color: #3a232a;
+  margin-bottom: 30px;
+}
+
+.category input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+
+}
+
+.category textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+}
+
+.category button {
+  background: #3580f1;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+}

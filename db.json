@@ -1,0 +1,198 @@
+{
+  "categor": [
+    {
+      "id": 1,
+      "nazv": "json-server",
+      "image_cat": "typicode"
+    },
+    {
+      "nazv": "Kosyldy",
+      "image_cat": "",
+      "id": 2
+    },
+    {
+      "nazv": "Alhamdullillah kosyldy how amnay hours i spent I am so happy",
+      "image_cat": "",
+      "id": 3
+    },
+    {
+      "nazv": "kos",
+      "image_cat": "",
+      "id": 4
+    },
+    {
+      "nazv": "qos",
+      "image_cat": "",
+      "id": 5
+    },
+    {
+      "nazv": "i hope works",
+      "image_cat": "",
+      "id": 6
+    },
+    {
+      "nazv": "i hope 999",
+      "image_cat": "",
+      "id": 7
+    },
+    {
+      "nazv": "kosyldy au dim",
+      "image_cat": "",
+      "id": 8
+    },
+    {
+      "nazv": "tez kosyld",
+      "image_cat": "",
+      "id": 9
+    },
+    {
+      "nazv": "show ",
+      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
+      "id": 10
+    },
+    {
+      "nazv": "show ",
+      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
+      "id": 11
+    },
+    {
+      "nazv": "qoooo",
+      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
+      "id": 12
+    },
+    {
+      "nazv": "kymyx ishtim",
+      "image_cat": "C:\\fakepath\\wave.png",
+      "id": 13
+    },
+    {
+      "nazv": "kos endi",
+      "image_cat": "",
+      "id": 14
+    },
+    {
+      "nazv": "kos endi",
+      "image_cat": "",
+      "id": 15
+    },
+    {
+      "nazv": "koser brat",
+      "image_cat": "",
+      "id": 16
+    },
+    {
+      "nazv": "jqdjwejfkw",
+      "image_cat": "",
+      "id": 17
+    },
+    {
+      "nazv": "suii",
+      "image_cat": "C:\\fakepath\\photo1694065244 (1).jpeg",
+      "id": 18
+    }
+  ],
+  "posts": [
+    {
+      "name": "kosylady inw",
+      "description": "fine",
+      "image": "C:\\fakepath\\gr.jpg",
+      "artSizeData": [
+        {
+          "data_art": "dede",
+          "size_art": "2"
+        }
+      ],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 15
+    },
+    {
+      "name": "everything",
+      "description": "iiii",
+      "image": "",
+      "artSizeData": [],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 16
+    },
+    {
+      "name": "nege",
+      "description": "solai",
+      "image": "",
+      "artSizeData": [],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 17
+    },
+    {
+      "name": "woow",
+      "description": "describe",
+      "image": "",
+      "artSizeData": [],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 18
+    },
+    {
+      "name": "deed",
+      "description": "edde",
+      "image": "C:\\fakepath\\photo1699366322.jpeg",
+      "artSizeData": [],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 19
+    },
+    {
+      "name": "bhifbr",
+      "description": "jnadedn",
+      "image": "C:\\fakepath\\photo1699366322.jpeg",
+      "artSizeData": [],
+      "file_pr": "",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 20
+    },
+    {
+      "name": "qwertyu",
+      "description": "qwertyu",
+      "image": "",
+      "artSizeData": [],
+      "file_pr": "C:\\fakepath\\Shyngys cv (7).pdf",
+      "video_pr": "",
+      "checkbox_pr": "",
+      "id": 21
+    }
+  ],
+  "loginne": [
+    {
+      "id": 1,
+      "email": "user@example.com",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "email": "anotheruser@example.com",
+      "password": "securepassword"
+    },
+    {
+      "email": "send@mail.ru",
+      "password": "whynotbroo",
+      "id": 3
+    },
+    {
+      "email": "watchout@bk.ru",
+      "password": "outwatch",
+      "id": 4
+    },
+    {
+      "email": "xfghjkl@mail.ru",
+      "password": "dfghj",
+      "id": 5
+    }
+  ]
+}
