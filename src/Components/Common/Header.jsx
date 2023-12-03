@@ -45,7 +45,7 @@ export const Header = () => {
     </li>
   <li><a href="">О нас</a></li>
   <li><a href="">Контакты</a></li>
-  <li><Link to='adminpage'>Admin Dashboard</Link></li>
+  <li><Link to='/adminpage'>Admin Dashboard</Link></li>
  
   
 </ul>

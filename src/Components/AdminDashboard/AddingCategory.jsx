@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AddingCategory.css'
+import { AdminpageHeader } from './AdminpageHeader';
 
 export const AddingCategory = () => {
 const [nazv, setNazv_cat] = useState("");
@@ -23,6 +24,7 @@ const [image_cat,setImage_cat] = useState("");
 
   }
   return (
+    
     <div className='category'>
       <h2>Добавление Категории</h2>
       <form onSubmit={handleSubmit}>
@@ -40,5 +42,7 @@ const [image_cat,setImage_cat] = useState("");
         <button className="adding_pr">Добавить category</button>
         </form>
     </div>
+   
+    
   )
 }

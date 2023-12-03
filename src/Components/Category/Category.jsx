@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import './Category.css'
 import { Link } from 'react-router-dom';
-import {categor} from'./Tocheck';
+// import {categor} from'./Tocheck';
+
 
 export const Category = () => {
   const[records,setRecords] = useState([]);
@@ -9,14 +10,14 @@ export const Category = () => {
   useEffect(()=>{
     fetch("http://localhost:3000/categor")
     .then((response) =>response.json())
-    .then((shategory)=>setRecords(shategory))
+    .then((records)=>setRecords(records))
     .catch((err) =>console.log(err));
   }, []);
 
   return (
     <section className='cat'>
-    {categor.map((cat_prod)=>(
-        <Link to='/catalogproducts'>
+    {records.map((cat_prod)=>(
+        <Link to={`/category/${cat_prod.nazv}`}>
         <div className="cards_cat">
       <div className="image_box_cat">
         <img src={cat_prod.image_cat} alt="" />

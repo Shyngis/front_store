@@ -9,6 +9,7 @@ import { CatalogProducts } from '../Catalog/CatalogProducts'
 import { Login } from '../Common/Login'
 import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
+import ProductDetails from '../Catalog/ProductDetails'
 
 export const Pages = () => {
   return (
@@ -17,15 +18,23 @@ export const Pages = () => {
     <Header />
     <Routes>
     <Route path ='/' element={<Main />} />
-    <Route path='/adminpage/addingcategory' element={<AddingCategory />} />
-    <Route path='/category' element={<Category />} />
-    <Route path='/adminpage/addingproducts' element={<AddingProducts />} />
-    <Route path='/catalogproducts' element={<CatalogProducts />} />
-    <Route path='/login' element={<Login />} />
-    <Route path='/adminpage' element={<AdminPage />} />
+   
+    <Route path='category' element={<Category />} />
+      <Route path='category/:id' element={<CatalogProducts />} />
+    
+    <Route path='catalogproducts' element={<CatalogProducts />} />
+      <Route path='catalogproducts/:id' element={<ProductDetails />} />
+    <Route path='login' element={<Login />} />
+   <Route path='adminpage' element={<AdminPage />} >    
+    <Route path='addingcategory' element={<AddingCategory />} />
+    <Route path='addingproducts' element={<AddingProducts />} />
+    </Route>
     </Routes>
-    <Footer />
-    </Router>
-    </>
-  )
-}
+          <Footer />
+          </Router>
+          </>
+          )
+        }
+        
+// <Route path='/adminpage/addingproducts' element={<AddingProducts />} />
+//  <Route path='/adminpage/addingcategory' element={<AddingCategory />} />

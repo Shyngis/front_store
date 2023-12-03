@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
+import { AdminpageHeader } from "./AdminpageHeader";
 
 const AddingProducts = () => {
   
   const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
-  const [image, setPhoto_pr] = useState("");
-  const [file_pr, setFiles_pr] = useState("");
+  const [image, setPhoto_pr] = useState([]);
+  const [file_pr, setFiles_pr] = useState([]);
   const [video_pr, setVideo_pr] = useState("");
   const [checkbox_pr, setCheckbox_pr] = useState("");
 
@@ -69,7 +70,6 @@ const AddingProducts = () => {
     const updatedData = [...artSizeData];
     updatedData[i][field] = value;
     setArtSizeData(updatedData);
-
     
   };
 
@@ -96,6 +96,7 @@ const AddingProducts = () => {
       file_pr,
       video_pr,
       checkbox_pr,
+      categoria,
     };
     // ... (other form data)
  
@@ -111,8 +112,21 @@ const AddingProducts = () => {
 
 
   console.log(artSizeData, "data-");
+
+  const [records, setRecords] = useState([]);
+  const [categoria, setCategoria] = useState ("")
+
+  useEffect(() => {
+    fetch("http://localhost:3000/categor")
+      .then((response) => response.json())
+      .then((categor) => setRecords(categor))
+      .catch((err) => console.log(err));
+  }, []);
+
+
   return (
-    <>
+   
+   <>
       <div className="create">
         <h2>Добавление товара</h2>
         <form onSubmit={handleSubmit}>
@@ -193,7 +207,19 @@ const AddingProducts = () => {
               onChange={(y) => setCheckbox_pr(y.target.value)}
             />
           </form>
+          <form>
+          <label for="cars">Выберите категорию:</label>
+          <select value={categoria} onChange={(y)=>setCategoria(y.target.value)}>
+          
 
+          {records.map((categor)=>( 
+  <option >
+    {categor.nazv}
+    </option>
+    ))} 
+ 
+  </select>
+</form>
           <button className="adding_pr">Добавить товар</button>
         </form>
       </div>

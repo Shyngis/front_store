@@ -1,24 +1,22 @@
 import React from 'react'
-import { Link, Route,BrowserRouter as Router, Routes } from 'react-router-dom'
 import AddingProducts from './AddingProducts'
 import { AddingCategory } from './AddingCategory'
-import { Main } from '../Category/Main'
+import { Main } from '../Category/Main';
+import './AdminPage.css'
+import { BrowserRouter as Router, Routes,Route, Link, Outlet } from 'react-router-dom'
+import { AdminpageHeader } from './AdminpageHeader';
 
 export const AdminPage = () => {
   return (
-   <>
-   <div>
-   
-   <ul>
-    <li><Link to='addingcategory'>Dov/categ</Link></li>
-    <li><Link to='addingproducts'>Dov/prod</Link></li>
+    <>
     
-   </ul>
+    <AdminpageHeader />
+ 
    
+</>
    
-   </div> 
+  
    
-   </>
    )
   }
   

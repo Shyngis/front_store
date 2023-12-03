@@ -1,198 +1,93 @@
 {
   "categor": [
     {
-      "id": 1,
-      "nazv": "json-server",
-      "image_cat": "typicode"
+      "nazv": "Cep telefonu",
+      "image_cat": "C:\\fakepath\\Tech tasks (Product Form) for Wyngys (1).pdf",
+      "id": 1
     },
     {
-      "nazv": "Kosyldy",
+      "nazv": "Termen",
       "image_cat": "",
       "id": 2
-    },
-    {
-      "nazv": "Alhamdullillah kosyldy how amnay hours i spent I am so happy",
-      "image_cat": "",
-      "id": 3
-    },
-    {
-      "nazv": "kos",
-      "image_cat": "",
-      "id": 4
-    },
-    {
-      "nazv": "qos",
-      "image_cat": "",
-      "id": 5
-    },
-    {
-      "nazv": "i hope works",
-      "image_cat": "",
-      "id": 6
-    },
-    {
-      "nazv": "i hope 999",
-      "image_cat": "",
-      "id": 7
-    },
-    {
-      "nazv": "kosyldy au dim",
-      "image_cat": "",
-      "id": 8
-    },
-    {
-      "nazv": "tez kosyld",
-      "image_cat": "",
-      "id": 9
-    },
-    {
-      "nazv": "show ",
-      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
-      "id": 10
-    },
-    {
-      "nazv": "show ",
-      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
-      "id": 11
-    },
-    {
-      "nazv": "qoooo",
-      "image_cat": "C:\\fakepath\\photo1699366322.jpeg",
-      "id": 12
-    },
-    {
-      "nazv": "kymyx ishtim",
-      "image_cat": "C:\\fakepath\\wave.png",
-      "id": 13
-    },
-    {
-      "nazv": "kos endi",
-      "image_cat": "",
-      "id": 14
-    },
-    {
-      "nazv": "kos endi",
-      "image_cat": "",
-      "id": 15
-    },
-    {
-      "nazv": "koser brat",
-      "image_cat": "",
-      "id": 16
-    },
-    {
-      "nazv": "jqdjwejfkw",
-      "image_cat": "",
-      "id": 17
-    },
-    {
-      "nazv": "suii",
-      "image_cat": "C:\\fakepath\\photo1694065244 (1).jpeg",
-      "id": 18
     }
   ],
   "posts": [
     {
-      "name": "kosylady inw",
-      "description": "fine",
+      "name": "Siaomi",
+      "description": "Ultra multra shultra",
+      "image": "C:\\fakepath\\photo1699366322.jpeg",
+      "artSizeData": [
+        {
+          "data_art": "shanmun",
+          "size_art": "23"
+        },
+        {
+          "data_art": "tanmun",
+          "size_art": "40"
+        }
+      ],
+      "file_pr": "C:\\fakepath\\Tech tasks (Product Form) for Wyngys (1).pdf",
+      "video_pr": "https://www.youtube.com/watch?v=L93hyPiltLA",
+      "checkbox_pr": "on",
+      "categoria": "Cep telefonu",
+      "id": 1
+    },
+    {
+      "name": "Newest",
+      "description": "welcome tur",
       "image": "C:\\fakepath\\gr.jpg",
       "artSizeData": [
         {
-          "data_art": "dede",
-          "size_art": "2"
+          "data_art": "fuone",
+          "size_art": "32"
+        },
+        {
+          "data_art": "resizing",
+          "size_art": "18"
         }
       ],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 15
+      "file_pr": "C:\\fakepath\\Tech tasks (Product Form) for Wyngys.pdf",
+      "video_pr": "https://www.youtube.com/watch?v=v-PoG1X8jig",
+      "checkbox_pr": "on",
+      "categoria": "Termen",
+      "id": 2
     },
     {
-      "name": "everything",
-      "description": "iiii",
-      "image": "",
-      "artSizeData": [],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 16
-    },
-    {
-      "name": "nege",
-      "description": "solai",
-      "image": "",
-      "artSizeData": [],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 17
-    },
-    {
-      "name": "woow",
-      "description": "describe",
-      "image": "",
-      "artSizeData": [],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 18
-    },
-    {
-      "name": "deed",
-      "description": "edde",
-      "image": "C:\\fakepath\\photo1699366322.jpeg",
-      "artSizeData": [],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 19
-    },
-    {
-      "name": "bhifbr",
-      "description": "jnadedn",
-      "image": "C:\\fakepath\\photo1699366322.jpeg",
-      "artSizeData": [],
-      "file_pr": "",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 20
-    },
-    {
-      "name": "qwertyu",
-      "description": "qwertyu",
-      "image": "",
-      "artSizeData": [],
-      "file_pr": "C:\\fakepath\\Shyngys cv (7).pdf",
-      "video_pr": "",
-      "checkbox_pr": "",
-      "id": 21
-    }
-  ],
-  "loginne": [
-    {
-      "id": 1,
-      "email": "user@example.com",
-      "password": "password123"
-    },
-    {
-      "id": 2,
-      "email": "anotheruser@example.com",
-      "password": "securepassword"
-    },
-    {
-      "email": "send@mail.ru",
-      "password": "whynotbroo",
+      "name": "Newest",
+      "description": "welcome tur",
+      "image": "C:\\fakepath\\gr.jpg",
+      "artSizeData": [
+        {
+          "data_art": "fuone",
+          "size_art": "32"
+        },
+        {
+          "data_art": "resizing",
+          "size_art": "18"
+        }
+      ],
+      "file_pr": "C:\\fakepath\\Tech tasks (Product Form) for Wyngys.pdf",
+      "video_pr": "https://www.youtube.com/watch?v=v-PoG1X8jig",
+      "checkbox_pr": "on",
+      "categoria": "",
       "id": 3
     },
     {
-      "email": "watchout@bk.ru",
-      "password": "outwatch",
+      "name": "Kendall",
+      "description": "somtehde",
+      "image": [],
+      "artSizeData": [
+        {
+          "data_art": "srwdfwt",
+          "size_art": "42"
+        }
+      ],
+      "file_pr": [],
+      "video_pr": "https://www.youtube.com/watch?v=wZ1P3QM9_p8",
+      "checkbox_pr": "on",
+      "categoria": "Termen",
       "id": 4
-    },
-    {
-      "email": "xfghjkl@mail.ru",
-      "password": "dfghj",
-      "id": 5
     }
-  ]
+  ],
+  "loginne": []
 }
