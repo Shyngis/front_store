@@ -8,21 +8,10 @@ import { AdminpageHeader } from './AdminpageHeader';
 
 export const AdminPage = () => {
   return (
-    <>
-    
+    <>    
     <AdminpageHeader />
  
-   
-</>
-   
-  
-   
-   )
+   </> )
   }
   
-  // <div className='add_pr'>
-  // <AddingCategory />
-  //  </div>
-  //  <div>
-  //    <AddingProducts />
-  //  </div>
+ 

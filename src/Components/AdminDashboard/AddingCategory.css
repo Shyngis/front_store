@@ -1,12 +1,17 @@
 
 
 .category {
-  max-width: 400px;
-  margin: 40px auto;
+  /* max-width: 80%; */
+  width: 100%;
+  margin: 40px 20%;
   text-align: center;
   font-weight: bold;
+  /* display: flex; */
+  /* column-gap: 10%; */
+ 
 
 }
+
 
 .category label {
   text-align: left;
@@ -46,4 +51,11 @@
   border-radius: 8px;
   cursor: pointer;
   margin-top: 5px;
+}
+
+.category .why {
+  
+  margin-top: 10%;
+  
+  
 }

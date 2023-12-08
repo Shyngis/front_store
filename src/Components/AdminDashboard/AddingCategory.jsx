@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './AddingCategory.css'
-import { AdminpageHeader } from './AdminpageHeader';
+import { CatListing } from './CrudCategory/CatListing';
 
 export const AddingCategory = () => {
 const [nazv, setNazv_cat] = useState("");
-const [image_cat,setImage_cat] = useState("");
+const [image_cat,setImage_cat] = useState();
+
+
   const handleSubmit = (y) =>{
     y.preventDefault();
   
     const category ={
-    nazv,
+    category,
     image_cat,
 
   };
 
-  fetch("http://localhost:3000/categor" ,{
+  fetch("http://161.97.144.45:8181/product" ,{
     method:"POST",
     headers: {"Content-type":"application/json"},
     body: JSON.stringify(category),
@@ -24,10 +26,11 @@ const [image_cat,setImage_cat] = useState("");
 
   }
   return (
-    
+    <>
+    <CatListing />
     <div className='category'>
-      <h2>Добавление Категории</h2>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+    <h2>Добавление Категории</h2>
         <label>Название Категории</label>
         <input type="text"
         value={nazv}
@@ -41,8 +44,11 @@ const [image_cat,setImage_cat] = useState("");
         />
         <button className="adding_pr">Добавить category</button>
         </form>
-    </div>
-   
-    
-  )
+        
+        <div className='why'>
+            
+        </div>
+        </div>
+        </>
+   )
 }

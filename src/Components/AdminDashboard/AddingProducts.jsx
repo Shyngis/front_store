@@ -7,8 +7,8 @@ const AddingProducts = () => {
   const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
-  const [image, setPhoto_pr] = useState([]);
-  const [file_pr, setFiles_pr] = useState([]);
+  const [image, setPhoto_pr] = useState();
+  const [file_pr, setFiles_pr] = useState();
   const [video_pr, setVideo_pr] = useState("");
   const [checkbox_pr, setCheckbox_pr] = useState("");
 
@@ -25,40 +25,43 @@ const AddingProducts = () => {
 
   }
 
-  function handleUpload() {
-    const container =  new FormData();
-    container.append("container", 1)
-    for(let i=0;i<files.length;i++){
-
-        container.append(`images`,files[i])
-    }
-    
-    fetch('http://161.97.144.45:8181/upload/images',{
-      method:'POST',
-      // headers: { "Content-type": "multipart/form-data" },
-      body:container
-    }).then(res=>res.json()).
-    then(data=>console.log(data)).
-    catch(err=>console.log(err));
-  }
-  
-  // function handleUpload1() {
-  //   const container1 =  new FormData();
-  //   container1.append("container1", 1)
+  // function handleUpload() {
+  //   const container =  new FormData();
+  //   container.append("container", 1)
   //   for(let i=0;i<files.length;i++){
 
-  //       container1.append(`files`,files[i])
+  //       container.append(`images`,files[i])
   //   }
     
-  //   fetch('http://161.97.144.45:8181/upload/docs',{
+  //   fetch('http://localhost:3000/posts',{
   //     method:'POST',
-  //     // headers: { "Content-type": "multipart/form-data" },
-  //     body:container1
+  //     headers: { "Content-type": "multipart/form-data" },
+  //     body:container
   //   }).then(res=>res.json()).
   //   then(data=>console.log(data)).
   //   catch(err=>console.log(err));
   // }
+  
+  function handleUpload() {
+    for(let i=0;i<files.length;i++){
+      const container1 =  new FormData();
+      container1.append("container", )
+      container1.append(`file`,files[i])
+        Send(container1);
+    }
+    
+  }
 
+
+  function Send(data){
+    fetch('http://161.97.144.45:8181/upload/image',{
+      method:'POST',
+      // headers: { "Content-type": "multipart/form-data" },
+      body:data
+    }).then(res=>res.json()).
+    then(data=>console.log(data)).
+    catch(err=>console.log(err));
+  }
   const handleAdd = () => {
     setArtSizeData([...artSizeData, { data_art: "", size_art: "" }]);
     
@@ -91,33 +94,41 @@ const AddingProducts = () => {
     const products = {
       name,
       description,
-      image,
-      artSizeData,
-      file_pr,
-      video_pr,
-      checkbox_pr,
-      categoria,
+      // image,
+      // artSizeData,
+      // file_pr,
+      // video_pr,
+      // checkbox_pr,
+      category,
     };
     // ... (other form data)
  
     
-    fetch("http://localhost:3000/posts", {
+    fetch("http://161.97.144.45:8181/product", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(products),
-    }).then(() => {
-      console.log("new product added");
-    });
+    })
+    .then(function(response) {
+ return response.json();
+})
+.then(function(data) {
+ console.log('container.id==product.id==',data.id);
+})
+
+    // .then(() => { 
+    //   console.log("new product added");
+    
   };
 
 
-  console.log(artSizeData, "data-");
+  // console.log(artSizeData, "data-");
 
   const [records, setRecords] = useState([]);
-  const [categoria, setCategoria] = useState ("")
+  const [category, setCategoria] = useState ("category")
 
   useEffect(() => {
-    fetch("http://localhost:3000/categor")
+    fetch("http://161.97.144.45:8181/product")
       .then((response) => response.json())
       .then((categor) => setRecords(categor))
       .catch((err) => console.log(err));
@@ -127,8 +138,10 @@ const AddingProducts = () => {
   return (
    
    <>
-      <div className="create">
-        <h2>Добавление товара</h2>
+
+   <div className="create">
+   <h2>Добавление товара</h2>
+   
         <form onSubmit={handleSubmit}>
         <label>Название товара:</label>
           <input
@@ -209,23 +222,31 @@ const AddingProducts = () => {
           </form>
           <form>
           <label for="cars">Выберите категорию:</label>
-          <select value={categoria} onChange={(y)=>setCategoria(y.target.value)}>
-          
-
-          {records.map((categor)=>( 
-  <option >
-    {categor.nazv}
-    </option>
-    ))} 
- 
-  </select>
-</form>
+          <input
+              type="text"
+              value={category}
+              onChange={(y) => setCategoria(y.target.value)}
+            />
+          </form>
           <button className="adding_pr">Добавить товар</button>
-        </form>
-      </div>
+          </form>
+          </div>
     </>
   );
           
 };
 
-    export default AddingProducts;
+export default AddingProducts;
+
+
+
+// <select value={category} onChange={(y)=>setCategoria(y.target.value)}>
+          
+
+//           </option>
+          
+//           </select>
+//         {records.map((categor)=>( 
+  // <option >
+  //   {categor.nazv}
+  // ))} 

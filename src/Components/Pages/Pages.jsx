@@ -11,6 +11,7 @@ import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
 import ProductDetails from '../Catalog/ProductDetails'
 
+
 export const Pages = () => {
   return (
     <>
@@ -21,13 +22,14 @@ export const Pages = () => {
    
     <Route path='category' element={<Category />} />
       <Route path='category/:id' element={<CatalogProducts />} />
-    
+      
     <Route path='catalogproducts' element={<CatalogProducts />} />
       <Route path='catalogproducts/:id' element={<ProductDetails />} />
     <Route path='login' element={<Login />} />
    <Route path='adminpage' element={<AdminPage />} >    
     <Route path='addingcategory' element={<AddingCategory />} />
     <Route path='addingproducts' element={<AddingProducts />} />
+    
     </Route>
     </Routes>
           <Footer />

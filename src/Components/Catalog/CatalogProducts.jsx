@@ -7,7 +7,7 @@ export const CatalogProducts = () => {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/posts")
+    fetch("http://161.97.144.45:8181/product")
       .then((response) => response.json())
       .then((records) => setRecords(records))
       .catch((err) => console.log(err));
@@ -20,8 +20,8 @@ export const CatalogProducts = () => {
    
 
     <section className="cat_prod">
-  
-      {records.filter(r =>r.categoria===params.id).map((posts)=>(
+  <>
+      {records.filter(r =>r.category===params.id).map((posts)=>(
         <Link to={`/catalogproducts/${posts.name}`}>
         <div className="cards">
       <div className="image_box">
@@ -34,7 +34,7 @@ export const CatalogProducts = () => {
     </div>
     </Link>
   ))}
- 
+ </>
     </section>
   );
 };
