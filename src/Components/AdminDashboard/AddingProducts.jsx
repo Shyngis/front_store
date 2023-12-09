@@ -3,7 +3,7 @@ import "./AddingProducts.css";
 import { AdminpageHeader } from "./AdminpageHeader";
 
 const AddingProducts = () => {
-  
+
   const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
@@ -12,59 +12,39 @@ const AddingProducts = () => {
   const [video_pr, setVideo_pr] = useState("");
   const [checkbox_pr, setCheckbox_pr] = useState("");
 
-  // const [size_art, setSize_art] = useState('');
-  // ... (other state variables)
+  const [images, setImages] = useState();
+  const [files, setFiles] = useState();
+  const [containerId, setContainerId] = useState();
 
-  const [images,setImages] =useState();
-  const [files, setFiles] =useState();
-  
-  const handleOzgert=(y)=>{
+  const handleOzgert = (y) => {
     setFiles(y.target.files);
-    // setImages(y.target.images);
     setPhoto_pr(y.target.value);
-
   }
 
-  // function handleUpload() {
-  //   const container =  new FormData();
-  //   container.append("container", 1)
-  //   for(let i=0;i<files.length;i++){
 
-  //       container.append(`images`,files[i])
-  //   }
-    
-  //   fetch('http://localhost:3000/posts',{
-  //     method:'POST',
-  //     headers: { "Content-type": "multipart/form-data" },
-  //     body:container
-  //   }).then(res=>res.json()).
-  //   then(data=>console.log(data)).
-  //   catch(err=>console.log(err));
-  // }
-  
   function handleUpload() {
-    for(let i=0;i<files.length;i++){
-      const container1 =  new FormData();
-      container1.append("container", )
-      container1.append(`file`,files[i])
-        Send(container1);
+    for (let i = 0; i < files.length; i++) {
+      const container1 = new FormData();
+      container1.append("container", containerId)
+      container1.append(`file`, files[i])
+      Send(container1);
+      console.log('container1',container1);
     }
-    
+
   }
 
 
-  function Send(data){
-    fetch('http://161.97.144.45:8181/upload/image',{
-      method:'POST',
+  function Send(data) {
+    fetch('http://161.97.144.45:8181/upload/image', {
+      method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
-      body:data
-    }).then(res=>res.json()).
-    then(data=>console.log(data)).
-    catch(err=>console.log(err));
+      body: data
+    }).then(res => res.json()).
+      then(data => console.log(data)).
+      catch(err => console.log(err));
   }
   const handleAdd = () => {
     setArtSizeData([...artSizeData, { data_art: "", size_art: "" }]);
-    
   };
 
 
@@ -73,13 +53,8 @@ const AddingProducts = () => {
     const updatedData = [...artSizeData];
     updatedData[i][field] = value;
     setArtSizeData(updatedData);
-    
+
   };
-
-  // const handleOzgert =(y) =>{
-  //   setPhoto_pr(y.target.value);
-  // }
-
 
   const handleDelete = (i) => {
     const updatedData = [...artSizeData];
@@ -102,30 +77,31 @@ const AddingProducts = () => {
       category,
     };
     // ... (other form data)
- 
-    
+
+
     fetch("http://161.97.144.45:8181/product", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(products),
     })
-    .then(function(response) {
- return response.json();
-})
-.then(function(data) {
- console.log('container.id==product.id==',data.id);
-})
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log('container.id==product.id==', data.id);
+        setContainerId(data.id);
+      })
 
     // .then(() => { 
     //   console.log("new product added");
-    
+
   };
 
 
   // console.log(artSizeData, "data-");
 
   const [records, setRecords] = useState([]);
-  const [category, setCategoria] = useState ("category")
+  const [category, setCategoria] = useState("category")
 
   useEffect(() => {
     fetch("http://161.97.144.45:8181/product")
@@ -136,14 +112,23 @@ const AddingProducts = () => {
 
 
   return (
-   
-   <>
 
-   <div className="create">
-   <h2>Добавление товара</h2>
-   
+    <>
+
+      <div className="create">
+        <h2>Добавление товара</h2>
+
         <form onSubmit={handleSubmit}>
-        <label>Название товара:</label>
+          <label>Название товара:</label>
+
+          <input
+            type="text"
+            value={containerId}
+            name="containerId"
+            // onChange={(y) => setContainerId(y.target.value)}
+            
+          />
+
           <input
             type="text"
             value={name}
@@ -165,7 +150,7 @@ const AddingProducts = () => {
             name="file"
             multiple
             value={image}
-            onChange={(y)=>handleOzgert(y)}
+            onChange={(y) => handleOzgert(y)}
           />
           <button onClick={handleUpload}>Upload</button>
 
@@ -221,19 +206,19 @@ const AddingProducts = () => {
             />
           </form>
           <form>
-          <label for="cars">Выберите категорию:</label>
-          <input
+            <label for="cars">Выберите категорию:</label>
+            <input
               type="text"
               value={category}
               onChange={(y) => setCategoria(y.target.value)}
             />
           </form>
           <button className="adding_pr">Добавить товар</button>
-          </form>
-          </div>
+        </form>
+      </div>
     </>
   );
-          
+
 };
 
 export default AddingProducts;
@@ -241,10 +226,10 @@ export default AddingProducts;
 
 
 // <select value={category} onChange={(y)=>setCategoria(y.target.value)}>
-          
+
 
 //           </option>
-          
+
 //           </select>
 //         {records.map((categor)=>( 
   // <option >
