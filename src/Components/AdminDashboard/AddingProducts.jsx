@@ -4,6 +4,7 @@ import { AdminpageHeader } from "./AdminpageHeader";
 
 const AddingProducts = () => {
 
+  const url = process.env.REACT_APP_API_URL;
   const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
@@ -35,7 +36,7 @@ const AddingProducts = () => {
 
 
   function Send(data) {
-    fetch('http://161.97.144.45:8181/upload/image', {
+    fetch(url + '/upload/image', {
       method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
       body: data
@@ -79,7 +80,7 @@ const AddingProducts = () => {
     // ... (other form data)
 
 
-    fetch("http://161.97.144.45:8181/product", {
+    fetch(url + "/product", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(products),
@@ -104,7 +105,7 @@ const AddingProducts = () => {
   const [category, setCategoria] = useState(1)
 
   useEffect(() => {
-    fetch("http://161.97.144.45:8181/product")
+    fetch(url + "/product")
       .then((response) => response.json())
       .then((categor) => setRecords(categor))
       .catch((err) => console.log(err));
