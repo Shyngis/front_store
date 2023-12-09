@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 
 export const Category = () => {
-  const[records,setRecords] = useState([]);
   
-
+  
+  const[records,setRecords] = useState([]);
   useEffect(()=>{
-    fetch("http://localhost:3000/categor")
+    fetch("http://161.97.144.45:8181/category/parent")
     .then((response) =>response.json())
     .then((records)=>setRecords(records))
     .catch((err) =>console.log(err));
@@ -30,7 +30,7 @@ export const Category = () => {
     <section className='cat'>
     <h2>Catalog</h2>
     {records.map((cat_prod)=>(
-        <Link to={`/category/${cat_prod.nazv}`}>
+        <Link to={`/category/${cat_prod.name}`}>
         <div className="cards_cat">
       <div className="image_box_cat">
         <img src={cat_prod.image_cat} alt="" />

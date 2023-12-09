@@ -3,7 +3,7 @@ import './AddingCategory.css'
 import { CatListing } from './CrudCategory/CatListing';
 
 export const AddingCategory = () => {
-const [nazv, setNazv_cat] = useState("");
+const [name, setNazv_cat] = useState("");
 const [image_cat,setImage_cat] = useState();
 
 
@@ -11,12 +11,11 @@ const [image_cat,setImage_cat] = useState();
     y.preventDefault();
   
     const category ={
-    category,
-    image_cat,
+    name 
 
   };
 
-  fetch("http://161.97.144.45:8181/product" ,{
+  fetch("http://161.97.144.45:8181/category" ,{
     method:"POST",
     headers: {"Content-type":"application/json"},
     body: JSON.stringify(category),
@@ -33,7 +32,7 @@ const [image_cat,setImage_cat] = useState();
     <h2>Добавление Категории</h2>
         <label>Название Категории</label>
         <input type="text"
-        value={nazv}
+        value={name}
         onChange={(y)=>setNazv_cat(y.target.value)}
         required />
         <label>Загрузить фото </label>

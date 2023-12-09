@@ -7,7 +7,7 @@ const AddingProducts = () => {
   const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
-  const [image, setPhoto_pr] = useState();
+  const [image, setPhoto_pr] = useState("");
   const [file_pr, setFiles_pr] = useState();
   const [video_pr, setVideo_pr] = useState("");
   const [checkbox_pr, setCheckbox_pr] = useState("");
@@ -101,7 +101,7 @@ const AddingProducts = () => {
   // console.log(artSizeData, "data-");
 
   const [records, setRecords] = useState([]);
-  const [category, setCategoria] = useState("category")
+  const [category, setCategoria] = useState(1)
 
   useEffect(() => {
     fetch("http://161.97.144.45:8181/product")
@@ -144,15 +144,7 @@ const AddingProducts = () => {
             onChange={(y) => setDesc_pr(y.target.value)}
           />
 
-          <label>Загрузить фото:</label>
-          <input
-            type="file"
-            name="file"
-            multiple
-            value={image}
-            onChange={(y) => handleOzgert(y)}
-          />
-          <button onClick={handleUpload}>Upload</button>
+          
 
           <div className="article_size">
             <label>Артикул и размер</label>
@@ -187,13 +179,7 @@ const AddingProducts = () => {
 
           {/* ... (other input fields) */}
 
-          <label>Загрузить файлы:</label>
-          <input
-            type="file"
-            onChange={(y) => setFiles_pr(y.target.value)}
-            multiple
-            accept="*/*"
-          />
+          
 
           <label>Ссылка для видео:</label>
           <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
@@ -215,6 +201,23 @@ const AddingProducts = () => {
           </form>
           <button className="adding_pr">Добавить товар</button>
         </form>
+        <label>Загрузить фото:</label>
+          <input
+            type="file"
+            name="file"
+            multiple
+            value={image}
+            onChange={(y) => handleOzgert(y)}
+          />
+              <label>Загрузить файлы:</label>
+          <input
+            type="file"
+            onChange={(y) => setFiles_pr(y.target.value)}
+            multiple
+            accept="*/*"
+          />
+
+          <button onClick={handleUpload}>Upload</button>
       </div>
     </>
   );
