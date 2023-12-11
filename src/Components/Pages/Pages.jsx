@@ -5,11 +5,12 @@ import { Main } from '../Category/Main'
 import { AddingCategory } from '../AdminDashboard/AddingCategory'
 import { Category } from '../Category/Category'
 import AddingProducts from '../AdminDashboard/AddingProducts';
-import { CatalogProducts } from '../Catalog/CatalogProducts'
 import { Login } from '../Common/Login'
 import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
 import ProductDetails from '../Catalog/ProductDetails'
+import { Category_1 } from '../Catalog/Category_1'
+import { Product } from '../Catalog/Product'
 
 
 export const Pages = () => {
@@ -21,10 +22,11 @@ export const Pages = () => {
     <Route path ='/' element={<Main />} />
    
     <Route path='category' element={<Category />} />
-      <Route path='category/:id' element={<CatalogProducts />} />
-      
-    <Route path='catalogproducts' element={<CatalogProducts />} />
-      <Route path='catalogproducts/:id' element={<ProductDetails />} />
+      <Route path='category/:id' element={<Category_1 />} />
+        
+    <Route path='category_1' element={<Category_1 />} />
+      <Route path='category_1/:id' element={<Product />} />
+        <Route path='category_1/:id/:id' element={<ProductDetails />} />
     <Route path='login' element={<Login />} />
    <Route path='adminpage' element={<AdminPage />} >    
     <Route path='addingcategory' element={<AddingCategory />} />

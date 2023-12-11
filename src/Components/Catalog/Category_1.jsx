@@ -3,7 +3,7 @@ import "./CatalogProducts.css";
 import { Link, useParams } from "react-router-dom";
 // import {records} from '../Common/ddata'
 
-export const CatalogProducts = () => {
+export const Category_1 = () => {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
@@ -13,8 +13,7 @@ export const CatalogProducts = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
- const params= useParams()
+ const params = useParams();
 
   return (
    
@@ -22,7 +21,7 @@ export const CatalogProducts = () => {
     <section className="cat_prod">
   <>
       {records.filter(r =>r.category===params.id).map((posts)=>(
-        <Link to={`/catalogproducts/${posts.name}`}>
+        <Link to={`/category_1/${posts.name}`}>
         <div className="cards">
       <div className="image_box">
         <img src={posts.image} alt="" />

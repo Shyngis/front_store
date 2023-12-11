@@ -10,7 +10,7 @@ const [image_cat,setImage_cat] = useState();
   const handleSubmit = (y) =>{
     y.preventDefault();
   
-    const category ={
+    const category = {
     name 
 
   };
@@ -19,8 +19,9 @@ const [image_cat,setImage_cat] = useState();
     method:"POST",
     headers: {"Content-type":"application/json"},
     body: JSON.stringify(category),
-  }).then(()=>{
-    console.log("new category added");
+  }).then((data)=>{
+    console.log("new category added",data);
+    alert("New category added bro")
   });
 
   }
