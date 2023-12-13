@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
-import { AdminpageHeader } from "./AdminpageHeader";
 import { URL } from "../Common/ddata";
 const AddingProducts = () => {
 
-  
-  const [artSizeData, setArtSizeData] = useState([]);
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
+  const [video, setVideo_pr] = useState("");
+  const [isNew, setCheckbox_pr] = useState(false);
+  const [artSizeData, setArtSizeData] = useState([]);
+  
+  
   const [image, setPhoto_pr] = useState();
-  const [file_pr, setFiles_pr] = useState();
-  const [video_pr, setVideo_pr] = useState("");
-  const [checkbox_pr, setCheckbox_pr] = useState("");
-
   const [files, setFiles] = useState();
   const [productId, setproductId] = useState();
+
+
+  
+  const [article,setArticle] =useState("");
+  const [size,setSize] =useState("");
+
 
   const handleOzgert = (y) => {
     setFiles(y.target.files);
@@ -30,10 +34,8 @@ const AddingProducts = () => {
       container1.append(`file`, files[i])
       Send(container1);
       console.log('container1',container1);
-    }   
+    }     
   }
-
-
   function Send(data) {
     fetch(URL + '/upload/image', {
       method: 'POST',
@@ -43,39 +45,25 @@ const AddingProducts = () => {
       then(data => console.log(data)).
       catch(err => console.log(err));
   }
+
   const handleAdd = () => {
-    setArtSizeData([...artSizeData, { data_art: "", size_art: "" }]);
+    setArtSizeData([...artSizeData, { article: "", size: "" }]);
+    
   };
-
-
-
-  const handleChange = (i, field, value) => {
-    const updatedData = [...artSizeData];
-    updatedData[i][field] = value;
-    setArtSizeData(updatedData);
-
-  };
-
-  const handleDelete = (i) => {
-    const updatedData = [...artSizeData];
-    updatedData.splice(i, 1);
-    setArtSizeData(updatedData);
-  };
-
-
 
   const handleSubmit = (y) => {
     y.preventDefault();
+
 
     const products = {
       name,
       description,
       image,
       // artSizeData,
-      // file_pr,
+      // file_pr1,
       files,
-      video_pr,
-      checkbox_pr,
+      video,
+      isNew,
       category,
       productId,
     };
@@ -99,7 +87,47 @@ const AddingProducts = () => {
         console.log('container.id==product.id==', product.id);
         setproductId(product.id);
         alert("New product added");
+      })  
+
+  };
+
+
+  const handleSubmit1 = (y) => {
+    
+    y.preventDefault();
+
+    // const firstArtSizeData = artSizeData[0] ||   {} ; 
+
+    const productsi = {
+     
+    //  article: firstArtSizeData.article || "", // Use the article from the first element or an empty string
+    // size: firstArtSizeData.size || "", 
+    article,
+    size
+     
+    };
+    // ... (other form data)
+
+
+    fetch(URL + "/product/size", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(productsi),
+    })
+      .then(function (response) {
+        return response.json();
       })
+      // .then(function (data) {
+      //   console.log('container.id==product.id==',);
+      //   setContainerId(data);
+      //   alert("New product added");
+      // })
+      .then((products) => {
+        console.log('container.id==product.id==', products.id);
+        setproductId(products.id);
+        alert("New product added");
+      })  
+
   };
 
   const [records, setRecords] = useState([]);
@@ -121,6 +149,25 @@ const AddingProducts = () => {
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>
+
+        <form>
+            <label for="cars">Выберите категорию:</label>
+             
+            <select  value={category} onChange={(y)=>setCategoria(y.target.value)}>
+                        {records.map((categor)=>(         
+              <option 
+              
+              name="option"
+              // key={categor.id} 
+              value={categor.id}>
+              {categor.name} 
+              </option>
+              
+              ))}  
+              </select>
+
+          </form>
+
           <label>Название товара:</label>
 
           <input
@@ -146,87 +193,71 @@ const AddingProducts = () => {
             onChange={(y) => setDesc_pr(y.target.value)}
           />
 
-          {/* ... (other input fields) */}
-
-          
-
-          <label>Ссылка для видео:</label>
-          <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
-
-          <form className="checkbox">
+           <form className="checkbox">
             <label>Новинка:</label>
             <input
               type="checkbox"
-              onChange={(y) => setCheckbox_pr(y.target.value)}
+              checked={isNew}
+              onChange={(event)=>setCheckbox_pr(event.target.checked)}
             />
           </form>
-          <form>
-            <label for="cars">Выберите категорию:</label>
-             
-            <select  value={category} onChange={(y)=>setCategoria(y.target.value)}>
-                        {records.map((categor)=>(         
-              <option 
-              
-              name="option"
-              // key={categor.id} 
-              value={categor.id}>
-              {categor.name} 
-              </option>
-              
-              ))}  
-              </select>
+          
+          <label>Ссылка для видео:</label>
+          <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
 
-          </form>
+          
           <button className="adding_pr">Добавить товар</button>
         </form>
 
+
         <div className="article_size">
             <label>Артикул и размер</label>
-            <button type="button" className="adding_pr" onClick={handleAdd}>
-              Добавить
-            </button>
-          </div>
+        </div>
 
-          {artSizeData.map((data, i) => (
-            <div key={i}>
+          
+            <div>
               <label>Артикул товара</label>
-              <input
+              <input 
                 type="text"
-                value={data.data_art}
-                onChange={(e) => handleChange(i, "data_art", e.target.value)}
+                value={article}
+                onChange={(y)=>setArticle(y.target.value)}
                 required
-              />
+              />  
+
 
               <label>Размер товара</label>
               <input
                 type="number"
-                value={data.size_art}
-                onChange={(e) => handleChange(i, "size_art", e.target.value)}
+                value={size}
+                onChange={(y) => setSize(y.target.value)}
                 required
               />
 
-              <button type="button" onClick={() => handleDelete(i)}>
-                Удалить
-              </button>
             </div>
-          ))}
+
+              <button onClick={handleSubmit1}>Upload1art</button>
+
+
         <label>Загрузить фото:</label>
           <input
             type="file"
             name="file"
             multiple
-            value={image}
+            value={files}
             onChange={handleOzgert}
           />
               <label>Загрузить файлы:</label>
           <input
             type="file"
-            onChange={(y) => setFiles_pr(y.target.value)}
+            name="file"
             multiple
-            accept="*/*"
+            // value={files}
+            onChange={handleOzgert}
+           
           />
 
           <button onClick={handleUpload}>Upload</button>
+         
       </div>
     </>
   );
@@ -234,15 +265,3 @@ const AddingProducts = () => {
 };
 
 export default AddingProducts;
-
-
-
-
-
-
-//           </option>
-
-//           </select>
-
- 
-  //   {categor.nazv}
