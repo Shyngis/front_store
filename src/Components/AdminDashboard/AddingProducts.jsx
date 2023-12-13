@@ -93,6 +93,7 @@ const AddingProducts = () => {
   };
 
 
+  const [productArticleAndSize, setProductArticleAndSize] = useState([]);
   const handleSubmit1 = (y) => {
     
     y.preventDefault();
@@ -118,15 +119,9 @@ const AddingProducts = () => {
       .then(function (response) {
         return response.json();
       })
-      // .then(function (data) {
-      //   console.log('container.id==product.id==',);
-      //   setContainerId(data);
-      //   alert("New product added");
-      // })
-      .then((products) => {
-        console.log('container.id==product.id==', products.id);
-        setproductId(products.id);
-        alert("New product added");
+      .then((product) => {
+        setproductId(product.id);
+        setProductArticleAndSize([...productArticleAndSize,  <div className='indent' key={product.id}>{product.article}  - {product.size}</div>])
       })  
 
   };
@@ -148,9 +143,7 @@ const AddingProducts = () => {
   console.log('rows', rowsss);
  
   // var rowsss = [];
-for (var i = 0; i < 10; i++) {
-  rowsss.push(<span className='indent' key={i}>{i}</span>);
-}
+
   return (
 
     <>
@@ -158,10 +151,7 @@ for (var i = 0; i < 10; i++) {
 
 
       <div className="create">
-      <div>
-      {rowsss}
-      helloe
-    </div>
+        {productArticleAndSize}
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>
@@ -225,6 +215,9 @@ for (var i = 0; i < 10; i++) {
           <button className="adding_pr">Добавить товар</button>
         </form>
 
+
+        <hr />
+        {productArticleAndSize}                    
 
         <div className="article_size">
             <label>Артикул и размер</label>
