@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
 import { URL } from "../Common/ddata";
+// import ObjectRow from ""
 const AddingProducts = () => {
 
   const [name, setName_pr] = useState("");
@@ -92,6 +93,7 @@ const AddingProducts = () => {
   };
 
 
+  const [productArticleAndSize, setProductArticleAndSize] = useState([]);
   const handleSubmit1 = (y) => {
     
     y.preventDefault();
@@ -117,15 +119,9 @@ const AddingProducts = () => {
       .then(function (response) {
         return response.json();
       })
-      // .then(function (data) {
-      //   console.log('container.id==product.id==',);
-      //   setContainerId(data);
-      //   alert("New product added");
-      // })
-      .then((products) => {
-        console.log('container.id==product.id==', products.id);
-        setproductId(products.id);
-        alert("New product added");
+      .then((product) => {
+        setproductId(product.id);
+        setProductArticleAndSize([...productArticleAndSize,  <div className='indent' key={product.id}>{product.article}  - {product.size}</div>])
       })  
 
   };
@@ -140,12 +136,22 @@ const AddingProducts = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  const rowsss = [];
+  for (let i = 0; i < 10; i++) {
+    // rowsss.push(<h1 key={i}></h1>);
+  }
+  console.log('rows', rowsss);
+ 
+  // var rowsss = [];
 
   return (
 
     <>
 
+
+
       <div className="create">
+        {productArticleAndSize}
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>
@@ -209,6 +215,9 @@ const AddingProducts = () => {
           <button className="adding_pr">Добавить товар</button>
         </form>
 
+
+        <hr />
+        {productArticleAndSize}                    
 
         <div className="article_size">
             <label>Артикул и размер</label>

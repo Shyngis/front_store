@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { URL } from '../Common/ddata';
 import './AddingCategory.css'
 import { CatListing } from './CrudCategory/CatListing';
 
@@ -6,23 +7,21 @@ export const AddingCategory = () => {
 const [name, setNazv_cat] = useState("");
 const [image_cat,setImage_cat] = useState();
 
+  // const url = process.env.REACT_APP_API_URL;
 
   const handleSubmit = (y) =>{
     y.preventDefault();
-  
     const category = {
     name 
-
   };
-
-  fetch("http://161.97.144.45:8181/category" ,{
+  
+  fetch(URL + "/category" ,{
     method:"POST",
     headers: {"Content-type":"application/json"},
     body: JSON.stringify(category),
-  }).then((data)=>{
-    console.log("new category added",data);
-    alert("New category added bro")
-  });
+  })
+  .then((data)=>{return data.json()})
+  .then((result)=>{alert(result)});
 
   }
   return (
