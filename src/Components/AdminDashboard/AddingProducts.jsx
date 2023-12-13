@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
 import { URL } from "../Common/ddata";
+// import ObjectRow from ""
 const AddingProducts = () => {
 
   const [name, setName_pr] = useState("");
@@ -140,12 +141,27 @@ const AddingProducts = () => {
       .catch((err) => console.log(err));
   }, []);
 
-
+  const rowsss = [];
+  for (let i = 0; i < 10; i++) {
+    // rowsss.push(<h1 key={i}></h1>);
+  }
+  console.log('rows', rowsss);
+ 
+  // var rowsss = [];
+for (var i = 0; i < 10; i++) {
+  rowsss.push(<span className='indent' key={i}>{i}</span>);
+}
   return (
 
     <>
 
+
+
       <div className="create">
+      <div>
+      {rowsss}
+      helloe
+    </div>
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>

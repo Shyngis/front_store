@@ -6,7 +6,7 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 
-export const URL = "http://161.97.144.45:8181";
+export const URL = process.env.REACT_APP_API_URL;
 
 export const navlink =[
   {
