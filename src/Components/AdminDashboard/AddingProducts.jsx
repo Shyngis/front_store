@@ -154,8 +154,6 @@ const AddingProducts = () => {
 
 
       <div className="create">
-        {productArticleAndSize}
-        
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>
