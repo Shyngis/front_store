@@ -19,7 +19,7 @@ export const Category = () => {
   }, []);
 
   const[checkbox,setCheckbox] = useState([])
-  const filteredRecords = checkbox.filter((nov_prod) => nov_prod.checkbox_pr === "on");
+  const filteredRecords = checkbox.filter((nov_prod) => nov_prod.checkbox_pr === true);
 
   useEffect(()=>{
     fetch("http://localhost:3000/posts")

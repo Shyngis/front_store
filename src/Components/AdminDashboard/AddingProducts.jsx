@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
 import { URL } from "../Common/ddata";
+import { AddingprDisplay } from "./AddingprDisplay";
 // import ObjectRow from ""
 const AddingProducts = () => {
 
@@ -9,7 +10,7 @@ const AddingProducts = () => {
   const [video, setVideo_pr] = useState("");
   const [isNew, setCheckbox_pr] = useState(false);
   const [artSizeData, setArtSizeData] = useState([]);
-  
+
   
   const [image, setPhoto_pr] = useState();
   const [files, setFiles] = useState();
@@ -59,7 +60,7 @@ const AddingProducts = () => {
     const products = {
       name,
       description,
-      image,
+      // image,
       // artSizeData,
       // file_pr1,
       files,
@@ -105,7 +106,8 @@ const AddingProducts = () => {
     //  article: firstArtSizeData.article || "", // Use the article from the first element or an empty string
     // size: firstArtSizeData.size || "", 
     article,
-    size
+    size,
+    
      
     };
     // ... (other form data)
@@ -122,12 +124,21 @@ const AddingProducts = () => {
       .then((product) => {
         setproductId(product.id);
         setProductArticleAndSize([...productArticleAndSize,  <div className='indent' key={product.id}>{product.article}  - {product.size}</div>])
+
+        alert("Added succesfully!")
       })  
 
+        const rowsss = [];
+  for (let i = 0; i < 10; i++) {
+    // rowsss.push(<h1 key={i}></h1>);
+  }
+  console.log('rows', rowsss);
+ 
+  // var rowsss = [];
   };
 
   const [records, setRecords] = useState([]);
-  const [category, setCategoria] = useState([]);
+  const [category, setCategoria] = useState();
 
   useEffect(() => {
     fetch(URL + "/category/parent/2")
@@ -136,13 +147,7 @@ const AddingProducts = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const rowsss = [];
-  for (let i = 0; i < 10; i++) {
-    // rowsss.push(<h1 key={i}></h1>);
-  }
-  console.log('rows', rowsss);
- 
-  // var rowsss = [];
+
 
   return (
 
@@ -156,29 +161,29 @@ const AddingProducts = () => {
 
         <form onSubmit={handleSubmit}>
 
-        <form>
-            <label for="cars">Выберите категорию:</label>
+        <div>
+            <label htmlFor="cars">Выберите категорию:</label>
              
             <select  value={category} onChange={(y)=>setCategoria(y.target.value)}>
                         {records.map((categor)=>(         
               <option 
               
               name="option"
-              // key={categor.id} 
-              value={categor.id}>
+              key={categor.id} 
+              value={categor.id || ''}>
               {categor.name} 
               </option>
               
               ))}  
               </select>
 
-          </form>
+          </div>
 
           <label>Название товара:</label>
 
           <input
             type="hidden"
-            value={productId}
+            value={productId || ''}
             name="productId"
             onChange={(y) => setproductId(y.target.value)}
             
@@ -186,7 +191,7 @@ const AddingProducts = () => {
 
           <input
             type="text"
-            value={name}
+            value={name || ''}
             onChange={(y) => setName_pr(y.target.value)}
             required
           />
@@ -195,18 +200,18 @@ const AddingProducts = () => {
           <textarea
             required
             name="description"
-            value={description}
+            value={description || ''}
             onChange={(y) => setDesc_pr(y.target.value)}
           />
 
-           <form className="checkbox">
+           <div className="checkbox">
             <label>Новинка:</label>
             <input
               type="checkbox"
-              checked={isNew}
+              checked={isNew || ''}
               onChange={(event)=>setCheckbox_pr(event.target.checked)}
             />
-          </form>
+          </div>
           
           <label>Ссылка для видео:</label>
           <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
@@ -228,7 +233,7 @@ const AddingProducts = () => {
               <label>Артикул товара</label>
               <input 
                 type="text"
-                value={article}
+                value={article || ''}
                 onChange={(y)=>setArticle(y.target.value)}
                 required
               />  
@@ -237,7 +242,7 @@ const AddingProducts = () => {
               <label>Размер товара</label>
               <input
                 type="number"
-                value={size}
+                value={size || ''}
                 onChange={(y) => setSize(y.target.value)}
                 required
               />
@@ -252,7 +257,7 @@ const AddingProducts = () => {
             type="file"
             name="file"
             multiple
-            value={files}
+            // value={files}
             onChange={handleOzgert}
           />
               <label>Загрузить файлы:</label>
@@ -266,7 +271,8 @@ const AddingProducts = () => {
           />
 
           <button onClick={handleUpload}>Upload</button>
-         
+          
+        <AddingprDisplay /> 
       </div>
     </>
   );

@@ -16,7 +16,7 @@ export const Header = () => {
           </form>
           </div>
           <div className='phone_numb'>
-          <i class="fa-solid fa-phone"></i>
+          <i className="fa-solid fa-phone"></i>
           <h3>8(700) 496-9087</h3>
           </div>
         <ul>

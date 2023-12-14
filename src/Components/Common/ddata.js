@@ -6,7 +6,8 @@ import TelegramIcon from '@mui/icons-material/Telegram';
 import InstagramIcon from '@mui/icons-material/Instagram';
 
 
-export const URL = process.env.REACT_APP_API_URL;
+// export const URL = process.env.REACT_APP_API_URL;
+export const URL = "http://161.97.144.45:8181";
 
 export const navlink =[
   {
@@ -116,15 +117,18 @@ export const portfolio = [
 
 export const social = [
   {
+    id:1,
     icon: <WhatsAppIcon />,
     hr:"https://wa.link/a0ba65"
   },
   {
+    id:2,
     icon: <TelegramIcon />,
     hr:"https://t.me/shyngysyerlanuly"
   },
  
   {
+    id:3,
     icon: <InstagramIcon />,
     hr:"https://instagram.com/u.busy21?igshid=MzMyNGUyNmU2YQ%3D%3D&utm_source=qr"
   },

@@ -34,7 +34,7 @@ export const Pages = () => {
     
     </Route>
     </Routes>
-          <Footer />
+          <Footer/>
           </Router>
           </>
           )
