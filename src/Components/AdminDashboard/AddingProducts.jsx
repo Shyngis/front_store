@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
 import { URL } from "../Common/ddata";
 import { AddingprDisplay } from "./AddingprDisplay";
+import { ProdCreate2 } from "./AddprodCrud/ProdCreate2";
 // import ObjectRow from ""
 const AddingProducts = () => {
 
@@ -10,16 +11,13 @@ const AddingProducts = () => {
   const [video, setVideo_pr] = useState("");
   const [isNew, setCheckbox_pr] = useState(false);
   const [artSizeData, setArtSizeData] = useState([]);
-
-  
+ 
   const [image, setPhoto_pr] = useState();
   const [files, setFiles] = useState();
   const [productId, setproductId] = useState();
 
-
-  
-  const [article,setArticle] =useState("");
-  const [size,setSize] =useState("");
+  const [article,setArticle] = useState("");
+  const [size,setSize] = useState("");
 
 
   const handleOzgert = (y) => {
@@ -157,6 +155,7 @@ const AddingProducts = () => {
 
       <div className="create">
         {productArticleAndSize}
+        
         <h2>Добавление товара</h2>
 
         <form onSubmit={handleSubmit}>
@@ -232,7 +231,7 @@ const AddingProducts = () => {
             <div>
               <label>Артикул товара</label>
               <input 
-                type="text"
+                type="text" 
                 value={article || ''}
                 onChange={(y)=>setArticle(y.target.value)}
                 required

@@ -65,3 +65,31 @@ const handleDelete = (i) => {
           ))}
 
               <button onClick={handleSubmit1}>Upload1art</button>
+
+
+
+              <div key={product.id}>
+      <table>
+        <thead>
+          <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Decription</td>
+             <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+        {product.map((product)=>(
+          <tr key={product.id}>
+            <td>{product.id}</td>
+            <td>{product.article}</td>
+            <td>{product.size}</td>
+           
+             <td>
+                <button>Edit</button>
+                <button>Remove</button>
+                <button>Details</button>
+              </td>
+          </tr>
+       ))} 
+          

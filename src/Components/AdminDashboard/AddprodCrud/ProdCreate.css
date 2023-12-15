@@ -1,0 +1,113 @@
+/* styles.css */
+
+.container {
+  /* max-width: 600px; */
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  height: 100vh;
+}
+
+.container input {
+  width: 100%;
+  padding: 6px 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}
+
+.container label {
+  text-align: left;
+  display: block;
+}
+
+.container h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 30px;
+}
+
+.container input {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+
+}
+
+.container textarea {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 2px solid #ddd;
+  box-sizing: border-box;
+  /* display: block; */
+}
+
+.container button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+
+
+.container .checkbox {
+  display: flex;
+  justify-content: end;
+
+}
+
+
+.form-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.submit-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-button {
+  
+  cursor: pointer;
+}
+
+.save-button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  /* margin-top: 10px; */
+}
+
+.back-button {
+  background: #dc3545;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.7rem;
+  padding: 10px;
+  margin-top: 7px;
+}
