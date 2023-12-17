@@ -46,11 +46,6 @@ const AddingProducts = () => {
       catch(err => console.log(err));
   }
 
-  const handleAdd = () => {
-    setArtSizeData([...artSizeData, { article: "", size: "" }]);
-    
-  };
-
   const handleSubmit = (y) => {
     y.preventDefault();
 

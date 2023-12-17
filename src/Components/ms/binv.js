@@ -11,7 +11,10 @@
 
 
 
-
+  const handleAdd = () => {
+    setArtSizeData([...artSizeData, { article: "", size: "" }]);
+    
+  };
 
 //  articul and size
 

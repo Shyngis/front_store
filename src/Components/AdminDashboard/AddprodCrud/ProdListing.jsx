@@ -4,7 +4,7 @@ import { URL } from '../../Common/ddata';
 import './ProdListing.css'
 
 export const ProdListing = () => {
-  const[empdata,empdatachange] = useState(null)
+  const[empdata,empdatachange] = useState()
 
   const navigate = useNavigate();
 
@@ -34,12 +34,12 @@ export const ProdListing = () => {
 
 
   useEffect(()=>{
-      fetch(URL + "/product/all")
+      fetch(URL + "/product/page?size=20")
       .then((res)=>{
         return res.json();
       })
       .then((resp) =>{
-        empdatachange(resp);
+        empdatachange(resp.products);
       })
       .catch((err) =>{
         console.log(err.message);

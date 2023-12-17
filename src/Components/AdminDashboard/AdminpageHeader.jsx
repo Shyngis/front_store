@@ -8,7 +8,7 @@ export const AdminpageHeader = () => {
       <ul className="admin-category">
         <li><Link to='/adminpage/category'>Категории</Link></li>
         <li><Link to='/adminpage/product'>Продукт</Link></li>
-        <li><Link to='/adminpage/category/hello'>Hello </Link></li>
+        <li><Link to='/adminpage/prodlisting'>Crud</Link></li>
       </ul>
       <div>
         <Outlet />

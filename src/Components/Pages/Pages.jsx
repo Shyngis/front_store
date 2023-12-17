@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header } from '../Common/Header'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes,Route } from 'react-router-dom'
 import { Main } from '../Category/Main'
 import { AddingCategory } from '../AdminDashboard/AddingCategory'
 import { Category } from '../Category/Category'
@@ -17,11 +17,6 @@ import { ProdEdit } from '../AdminDashboard/AddprodCrud/ProdEdit'
 import { ProdDetail } from '../AdminDashboard/AddprodCrud/ProdDetail'
 import { ProdCreate2 } from '../AdminDashboard/AddprodCrud/ProdCreate2'
 
-import { CategoryByLevelOne } from '../AdminDashboard/CategoryByLevel/CategoryByLevelOne'
-import { CategoryByLevelTwo } from '../AdminDashboard/CategoryByLevel/CategoryByLevelTwo'
-import { CategoryByMainLevel } from '../AdminDashboard/CategoryByLevel/CategoryByMainLevel'
-
-import { Hello } from '../AdminDashboard/Hello'
 
 export const Pages = () => {
   return (
@@ -44,8 +39,8 @@ export const Pages = () => {
     <Route path='prodlisting' element={<ProdListing />} />
     <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
     <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
-    <Route path='proddetail/:empid' element={<ProdDetail />} /> 
-    <Route path='prodedit/:empid' element={<ProdEdit />} />
+    <Route path='prodlisting/prodedit/:empid' element={<ProdEdit />} />
+    <Route path='prodlisting/prodcreate/proddetail/:empid' element={<ProdDetail />} /> 
     
 
 
@@ -54,5 +49,16 @@ export const Pages = () => {
     </Routes>
     </Router>
     </>
-  )
-}
+    )
+  }
+  
+  
+  // <Footer/>
+  // <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
+  // <Route path='adminpage/prodcreate2' element={<ProdCreate2 />} />
+  // <Route path='prodlisting/proddetail/:empid' element={<ProdDetail />} /> 
+  // <Route path='prodlisting/prodedit/:empid' element={<ProdEdit />} />
+
+  
+// <Route path='/adminpage/addingproducts' element={<AddingProducts />} />
+//  <Route path='/adminpage/addingcategory' element={<AddingCategory />} />
