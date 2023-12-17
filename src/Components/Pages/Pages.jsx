@@ -26,36 +26,33 @@ import { Hello } from '../AdminDashboard/Hello'
 export const Pages = () => {
   return (
     <>
+    <Router>
+    <Header />
+    <Routes>
+    <Route path ='/' element={<Main />} />
+   
+    <Route path='category' element={<Category />} />
+      <Route path='category/:id' element={<Category_1 />} />
+        
+    <Route path='category_1' element={<Category_1 />} />
+      <Route path='category_1/:id' element={<Product />} />
+        <Route path='category_1/:id/:id' element={<ProductDetails />} />
+    <Route path='login' element={<Login />} />
+   <Route path='/adminpage' element={<AdminPage />} >    
+    <Route path='addingcategory' element={<AddingCategory />} />
+    <Route path='addingproducts' element={<AddingProducts />} />
+    <Route path='prodlisting' element={<ProdListing />} />
+    <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
+    <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
+    <Route path='proddetail/:empid' element={<ProdDetail />} /> 
+    <Route path='prodedit/:empid' element={<ProdEdit />} />
+    
 
-      <Router>
-        <Header />
-        <Routes>
-          <Route path='/' element={<Main />} />
 
-          <Route path='category' element={<Category />} />
-          <Route path='category/:id' element={<Category_1 />} />
-
-          <Route path='category_1' element={<Category_1 />} />
-          <Route path='category_1/:id' element={<Product />} />
-          <Route path='category_1/:id/:id' element={<ProductDetails />} />
-          <Route path='login' element={<Login />} />
-
-          <Route path='/adminpage' element={<AdminPage />} >
-            <Route path='category' element={<AddingCategory />}>
-              <Route path='mainlevel' element={<AddingProducts />} />
-              <Route path='level-1' element={<CategoryByLevelOne />} />
-              <Route path='level-2' element={<CategoryByLevelTwo />} />
-            </Route>
-            <Route path='product' element={<AddingProducts />} />
-            <Route path='prodlisting' element={<ProdListing />} />
-            <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
-            <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
-            <Route path='proddetail/:empid' element={<ProdDetail />} />
-            <Route path='prodedit/:empid' element={<ProdEdit />} />
-
-          </Route>
-        </Routes>
-      </Router>
+    
+    </Route>
+    </Routes>
+    </Router>
     </>
   )
 }

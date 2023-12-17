@@ -1,11 +1,11 @@
 /* styles.css */
 
 .container {
-  /* max-width: 600px; */
-  margin: 0 auto;
+  /* width: 100%;
+  margin: 20px auto;
   display: flex;
-  align-items: center;
-  height: 100vh;
+  align-items: center; */
+ 
 }
 
 .container input {

@@ -7,16 +7,17 @@ export const ProdEdit = () => {
   // const [empdata, empdatachange] = useState({});
   
   useEffect(()=>{
-    fetch(URL + "/category/parent/2" + empid)
+    fetch(URL + "/product/id/"+empid)
       .then((res)=>{
         return res.json();
       })
       .then((resp) =>{
         idchange(resp.id);
+        categorychange(resp.category)
         namechange(resp.name)
-        emailchange(resp.email)
-        phonechange(resp.phone)
-        activechange(resp.isactive)
+        descriptionchange(resp.description)
+        isNewchange(resp.isNew);
+        console.log("see ");
       })
       .catch((err) =>{
         console.log(err.message);
@@ -26,9 +27,9 @@ export const ProdEdit = () => {
 
   const[id,idchange] = useState("");
   const[name,namechange] = useState("");
-  const[email,emailchange] = useState("");
-  const[phone,phonechange] = useState("");
-  const[isactive,activechange] = useState(true);
+  const[category,categorychange] = useState("");
+  const[description,descriptionchange] = useState("");
+  const[isNew,isNewchange] = useState(true);
   const [validation,valchange] = useState(false)
 
   const navigate = useNavigate();
@@ -39,17 +40,17 @@ export const ProdEdit = () => {
     // console.log({id,name,email,phone,active});
 
 
-    const empdata = {id,name,email,phone,isactive};
+    const empdata = {id,name,category,description,isNew};
     
 
-    fetch(URL + "/category/parent/2"+empid,{
+    fetch(URL + "/product/id/"+empid,{
       method: "PUT",
       headers:{"content-type":"application/json"},
       body:JSON.stringify(empdata)
     })
     .then((res)=>{
         alert("Saved Succesfully")
-        navigate('/')
+        navigate('/adminpage/prodlisting')
     }).catch((err) =>{
         console.log(err.message);
     })
@@ -64,7 +65,7 @@ export const ProdEdit = () => {
         <form className="container" onSubmit={handlesubmit}>
           <div className="card" style={{"textAlign":"left"}}>
             <div className="card-title">
-                <h2>Employee Edit</h2>
+                <h2>Редактирование</h2>
             </div>
               <div className="card-body">
                 <div className="row">
@@ -83,26 +84,26 @@ export const ProdEdit = () => {
                   </div>
                   <div className="col-lg-12">
                   <div className="form-group">
-                      <label htmlFor="">Email</label>
-                      <input value={email} onChange={e=>emailchange(e.target.value)} className='form-control' />
+                      <label htmlFor="">Category</label>
+                      <input value={category} onChange={e=>categorychange(e.target.value)} className='form-control' />
                     </div>
                   </div>
                   <div className="col-lg-12">
                   <div className="form-group">
-                      <label htmlFor="">Phone</label>
-                      <input value={phone} onChange={e=>phonechange(e.target.value)} className='form-control' />
+                      <label htmlFor="">Description</label>
+                      <input value={description} onChange={e=>descriptionchange(e.target.value)} className='form-control' />
                     </div>
                   </div>
                   <div className="col-lg-12">
                   <div className="form-check">
-                    <input checked={isactive} onChange={e=>activechange(e.target.checked)} type='checkbox' className='form-check-input' />
-                      <label className='form-check-label' htmlFor="">Is Active</label>
+                    <input checked={isNew} onChange={e=>isNewchange(e.target.checked)} type='checkbox' className='form-check-input' />
+                      <label className='form-check-label' htmlFor="">Новинка</label>
                     </div>
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <button className='btn btn-success' type='submit'>Save</button>
-                      <Link to='/' className='btn btn-danger' >Back</Link>
+                      <button className='btn btn-success' type='submit'>Сохранить</button>
+                      <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link>
                     </div>
                   </div>
                 </div>

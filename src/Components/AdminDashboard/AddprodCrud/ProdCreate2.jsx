@@ -29,6 +29,7 @@ export const ProdCreate2 = () => {
     // size: firstArtSizeData.size || "", 
     article,
     size,
+    productId
     
      
     };
@@ -45,13 +46,7 @@ export const ProdCreate2 = () => {
       })
       .then((product) => {
         setproductId(product.id);
-        setProductArticleAndSize([...productArticleAndSize, 
-          
-         product
-          
-          
-
-        ])
+        setProductArticleAndSize([...productArticleAndSize,product])
     
       })  
 
@@ -69,7 +64,7 @@ export const ProdCreate2 = () => {
 
   return (
     <>
-                         
+                  <div className='all'>       
 
         <div className="article_size">
             <label>Артикул и размер</label>
@@ -119,7 +114,7 @@ export const ProdCreate2 = () => {
         </table>
       )}
 
-           
+    </div>       
     </>
   )
 }

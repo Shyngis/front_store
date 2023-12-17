@@ -9,10 +9,10 @@ export const ProdListing = () => {
   const navigate = useNavigate();
 
   const LoadDetail=(id)=>{
-    navigate("/prodlisting/proddetail/"+id)
+    navigate("/adminpage/prodlisting/proddetail/"+id)
   }
   const LoadEdit=(id)=>{
-    navigate("/prodlisting/prodedit/"+id)
+    navigate("/adminpage/prodlisting/prodedit/"+id)
     
   }
   const Removefunction=(id)=>{
@@ -21,7 +21,7 @@ export const ProdListing = () => {
       method: "DELETE",
       // headers:{"content-type":"application/json"},
       // body:JSON.stringify(empdata)
-    })
+    })  
     .then((res)=>{
         alert("Removed Succesfully!")
         window.location.reload();
@@ -34,7 +34,7 @@ export const ProdListing = () => {
 
 
   useEffect(()=>{
-      fetch(URL + "/category/parent/2")
+      fetch(URL + "/product/all")
       .then((res)=>{
         return res.json();
       })
@@ -65,8 +65,9 @@ export const ProdListing = () => {
             <td>ID</td>
             <td>Категория</td>
             <td>Название</td>
+            <td>Описание</td>
             <td>Новинка</td>
-            <td>Ссылка на видео</td>
+           
             <td>Action</td>
             </tr>
             </thead>
@@ -76,10 +77,10 @@ export const ProdListing = () => {
               empdata.map((item)=>(
               <tr key={item.id}>
               <td>{item.id}</td>
+              <td>{item.category}</td>
               <td>{item.name}</td>
-              <td>{item.email}</td>
-              <td>{item.phone}</td>
-              <td>{item.phone}</td>
+              <td>{item.description}</td>
+              <td>{(item.isNew) ? "ДА" : "НЕТ"}</td>
               <td>
                 <a onClick={()=>{LoadEdit(item.id)}} className='btn btn-success'>Редакт.</a>
                 <a onClick={()=>{Removefunction(item.id)}} className='btn btn-danger'>Удалить</a>
@@ -92,6 +93,7 @@ export const ProdListing = () => {
             </tbody>
 
           </table>
+          <Outlet />
         </div>
       </div>
 

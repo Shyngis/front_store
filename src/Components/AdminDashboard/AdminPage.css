@@ -6,13 +6,16 @@
   align-items: start;
   /* height: 100vh; */
 }
+.sure ul {
 
-.admin-category {
+
   list-style-type: none;
   padding: 0;
   display: flex;
   flex-direction: column;
   width: fit-content;
+  margin-right: 40%;
+
 }
 
 .admin-category li {
