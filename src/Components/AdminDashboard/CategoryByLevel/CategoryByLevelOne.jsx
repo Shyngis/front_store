@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { URL } from '../Common/ddata';
-import './AddingCategory.css'
-import { TabButtons } from '../Category/TabButtons';
+import React, { useState } from 'react';
+import { URL } from '../../Common/ddata';
+import { TabButtons } from '../../Category/TabButtons';
 
-export const AddingCategory = () => {
+export const CategoryByLevelOne = () => {
+
   const [name, setNazv_cat] = useState("");
   const [image_cat, setImage_cat] = useState();
 
@@ -28,11 +28,6 @@ export const AddingCategory = () => {
     <>
 
     <br />
-
-    <TabButtons />
-
-
-{/* 
       <div className='category'>
 
         <form onSubmit={handleSubmit}>
@@ -54,7 +49,7 @@ export const AddingCategory = () => {
         <div className='why'>
 
         </div>
-      </div> */}
+      </div>
     </>
   )
 }

@@ -1,34 +1,28 @@
-.sure {
+.admin-category {
   display: flex;
- width: 50%;
+  width: 50%;
 
   justify-content: space-between;
   align-items: start;
   /* height: 100vh; */
-
-
-
 }
 
-.sure ul {
+.admin-category {
   list-style-type: none;
   padding: 0;
   display: flex;
   flex-direction: column;
-  width:fit-content;
+  width: fit-content;
 }
 
-.sure ul li {
+.admin-category li {
   margin-bottom: 10px;
   display: inline-block;
   margin: 10px;
   display: flex;
-  
-  
 }
 
-
-.sure ul li a {
+.admin-category li a {
   text-decoration: none;
   display: inline-block;
   padding: 10px;
@@ -41,6 +35,6 @@
   width: 100%;
 }
 
-.sure ul li a:hover {
+.admin-category li a:hover {
   background-color: #f0f0f0;
 }

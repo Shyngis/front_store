@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { URL } from '../Common/ddata';
-import './AddingCategory.css'
-import { TabButtons } from '../Category/TabButtons';
+import { URL } from '../../Common/ddata';
+import { TabButtons } from '../../Category/TabButtons';
 
-export const AddingCategory = () => {
+export const CategoryByMainLevel = () => {
+
   const [name, setNazv_cat] = useState("");
   const [image_cat, setImage_cat] = useState();
 
@@ -18,21 +18,15 @@ export const AddingCategory = () => {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(category),
     })
-      .then((data) => { return data.json() })
-      .then((result) => { 
-        alert(result) 
-      });
+    .then((data) => { return data.json() })
+    .then((result) => { 
+      alert(result) 
+    });
 
   }
   return (
     <>
-
     <br />
-
-    <TabButtons />
-
-
-{/* 
       <div className='category'>
 
         <form onSubmit={handleSubmit}>
@@ -54,7 +48,7 @@ export const AddingCategory = () => {
         <div className='why'>
 
         </div>
-      </div> */}
+      </div>
     </>
   )
 }
