@@ -5,10 +5,10 @@ export const AdminpageHeader = () => {
   return (
     <div className='sure'>
 
-      <ul>
+      <ul className="admin-category">
         <li><Link to='/adminpage/category'>Категории</Link></li>
         <li><Link to='/adminpage/product'>Продукт</Link></li>
-        {/* <li><Link to='/adminpage/addingproducts'>Dob/prod</Link></li> */}
+        <li><Link to='/adminpage/category/hello'>Hello </Link></li>
       </ul>
       <div>
         <Outlet />

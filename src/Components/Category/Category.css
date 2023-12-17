@@ -49,3 +49,29 @@
   font-weight: bold;
   color: grey;
 }
+
+.category-tab-buttons li { 
+  display: inline;
+}
+
+.category-tab-buttons li {
+  margin-bottom: 10px;
+  display: inline;
+  margin: 10px;
+}
+
+.category-tab-buttons li a {
+  text-decoration: none;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  text-align: center;
+  color: #333;
+  font-weight: bold;
+  /* flex-grow: 1; */
+  width: 100%;
+}
+
+.category-tab-buttons li a:hover {
+  background-color: #f0f0f0;
+}
