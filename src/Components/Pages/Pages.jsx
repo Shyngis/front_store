@@ -41,8 +41,6 @@ export const Pages = () => {
     <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
     <Route path='prodlisting/prodedit/:empid' element={<ProdEdit />} />
     <Route path='prodlisting/prodcreate/proddetail/:empid' element={<ProdDetail />} /> 
-    
-
 
     
     </Route>

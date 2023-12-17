@@ -20,6 +20,7 @@ export const ProdEdit = () => {
         namechange(resp.name)
         descriptionchange(resp.description)
         isNewchange(resp.isNew);
+        setproduct(resp.id);
         console.log("see ");
       })
       .catch((err) =>{
@@ -66,6 +67,8 @@ export const ProdEdit = () => {
   const [article,setArticle] = useState("");
   const [size,setSize] = useState("");
    const [productId, setproductId] = useState();
+   const [product, setproduct] = useState();
+   
 
   const [productArticleAndSize, setProductArticleAndSize] = useState([]);
 
@@ -76,13 +79,14 @@ export const ProdEdit = () => {
     toast.success("Успешно добавлено !", {
       position: toast.POSITION.TOP_RIGHT,
     })
+    window.location.reload(false);
 
     // const firstArtSizeData = artSizeData[0] ||   {} ; 
 
     const productsi = {
     article,
     size,
-    productId 
+    product
     };
   
 
@@ -96,12 +100,78 @@ export const ProdEdit = () => {
         return response.json();
       })
       .then((product) => {
-        setproductId(product.id);
+        // setproductId(product.id);
         setProductArticleAndSize([...productArticleAndSize,product])
     
       })  
 
   };
+
+  const[productsize,setProductsize] = useState([])
+
+  useEffect(()=>{
+    fetch(URL + "/product/size/"+empid)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((resp) =>{
+       setProductsize(resp);
+       console.log("seen");
+
+      })
+      .catch((err) =>{
+        console.log(err.message);
+      })
+
+  }, [])
+
+
+  const LoadEdit=(id)=>{
+    navigate("/adminpage/prodlisting/prodedit/"+id)
+    
+  }
+  const Removefunction=(id)=>{
+    if(window.confirm("Do you want to remove?")){
+       fetch(URL + "/product/size/" +id,{
+      method: "DELETE",
+      // headers:{"content-type":"application/json"},
+      // body:JSON.stringify(empdata)
+    })  
+    .then((res)=>{
+        alert("Removed Succesfully!")
+        window.location.reload();
+    }).catch((err) =>{
+        console.log(err.message);
+    })
+
+    }
+  }
+
+
+  const handlesubmit1 =(e)=>{
+    e.preventDefault();
+
+    // console.log({id,name,email,phone,active});
+
+
+    const empdata = {id,article,size};
+    
+
+    fetch(URL + "/product/size",{
+      method: "PUT",
+      headers:{"content-type":"application/json"},
+      body:JSON.stringify(empdata)
+    })
+    .then((res)=>{
+        alert("Saved Succesfully")
+        
+        // navigate('/adminpage/prodlisting')
+    }).catch((err) =>{
+        console.log(err.message);
+    })
+
+  }
+
 
   const [files, setFiles] = useState();
 
@@ -205,24 +275,35 @@ export const ProdEdit = () => {
             <ToastContainer />
             <button onClick={handleSubmit1}>Добавить</button>
             
-            {productArticleAndSize.length > 0 && (
-        <table>
+           
+
+                
+      <table>
         <thead>
               <tr>
                 <td>Артикул</td>
                 <td>Размер</td>
+                <td>Action</td>
               </tr>
         </thead>
           <tbody>
-            {productArticleAndSize.map((product) => (
-              <tr key={product.id}>
-                <td>{product.article}</td>
+            {productsize.map((product) => (
+             
+              <tr >
+                <td><input value={product.article} onChange={e=>setArticle(e.target.value)} className='form-control' /></td>
                 <td>{product.size}</td>
+                <td>
+                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
+                <a onClick={()=>{Removefunction(product.id)}} className='btn btn-danger'>Удалить</a>
+                <a onClick={handlesubmit1} className='btn btn-danger'>Save</a>
+                
+              </td>
               </tr>
+             
             ))}
           </tbody>
         </table>
-      )}
+   
 
     </div> 
 

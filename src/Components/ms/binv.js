@@ -96,3 +96,25 @@ const handleDelete = (i) => {
           </tr>
        ))} 
           
+
+
+
+
+       {productArticleAndSize.length > 0 && (
+        <table>
+        <thead>
+              <tr>
+                <td>Артикул</td>
+                <td>Размер</td>
+              </tr>
+        </thead>
+          <tbody>
+            {productArticleAndSize.map((product) => (
+              <tr key={product.id}>
+                <td>{product.article}</td>
+                <td>{product.size}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
