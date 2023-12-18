@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom'
 import { URL } from '../../Common/ddata';
 import './ProdListing.css'
 
@@ -7,6 +7,7 @@ export const ProdListing = () => {
   const[empdata,empdatachange] = useState()
 
   const navigate = useNavigate();
+  // const{sizeid} = useParams();
 
   const LoadDetail=(id)=>{
     navigate("/adminpage/prodlisting/proddetail/"+id)
@@ -40,12 +41,34 @@ export const ProdListing = () => {
       })
       .then((resp) =>{
         empdatachange(resp.products);
+        
+        
       })
       .catch((err) =>{
         console.log(err.message);
       })
 
   },[])
+
+
+  const[productsize,setProductsize] = useState([])
+  const [empid,setempid] = useState();
+  
+  useEffect(()=>{
+    fetch(URL + "/product/size/"+empid)
+      .then((res)=>{
+        return res.json();
+      })
+      .then((resp) =>{
+       setProductsize(resp);
+       console.log("seen");
+
+      })
+      .catch((err) =>{
+        console.log(err.message);
+      })
+
+  }, [])
 
   return (
     <>
@@ -67,6 +90,7 @@ export const ProdListing = () => {
             <td>Название</td>
             <td>Описание</td>
             <td>Новинка</td>
+            <td>Размеры</td>
            
             <td>Action</td>
             </tr>
@@ -81,6 +105,7 @@ export const ProdListing = () => {
               <td>{item.name}</td>
               <td>{item.description}</td>
               <td>{(item.isNew) ? "ДА" : "НЕТ"}</td>
+              <td> </td>
               <td>
                 <a onClick={()=>{LoadEdit(item.id)}} className='btn btn-success'>Редакт.</a>
                 <a onClick={()=>{Removefunction(item.id)}} className='btn btn-danger'>Удалить</a>

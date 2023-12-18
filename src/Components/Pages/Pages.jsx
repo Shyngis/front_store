@@ -16,6 +16,7 @@ import { ProdCreate } from '../AdminDashboard/AddprodCrud/ProdCreate'
 import { ProdEdit } from '../AdminDashboard/AddprodCrud/ProdEdit'
 import { ProdDetail } from '../AdminDashboard/AddprodCrud/ProdDetail'
 import { ProdCreate2 } from '../AdminDashboard/AddprodCrud/ProdCreate2'
+import { SizeEdit } from '../AdminDashboard/AddprodCrud/SizeEdit'
 
 
 export const Pages = () => {
@@ -40,6 +41,7 @@ export const Pages = () => {
     <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
     <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
     <Route path='prodlisting/prodedit/:empid' element={<ProdEdit />} />
+    <Route path='prodlisting/prodedit/:empid/:sizeid' element={<SizeEdit />} />
     <Route path='prodlisting/prodcreate/proddetail/:empid' element={<ProdDetail />} /> 
 
     

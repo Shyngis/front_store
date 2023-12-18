@@ -127,7 +127,8 @@ export const ProdEdit = () => {
 
 
   const LoadEdit=(id)=>{
-    navigate("/adminpage/prodlisting/prodedit/"+id)
+    navigate("/adminpage/prodlisting/prodedit/"+empid+"/"+id);
+    console.log("loadedit");
     
   }
   const Removefunction=(id)=>{
@@ -148,29 +149,7 @@ export const ProdEdit = () => {
   }
 
 
-  const handlesubmit1 =(e)=>{
-    e.preventDefault();
-
-    // console.log({id,name,email,phone,active});
-
-
-    const empdata = {id,article,size};
-    
-
-    fetch(URL + "/product/size",{
-      method: "PUT",
-      headers:{"content-type":"application/json"},
-      body:JSON.stringify(empdata)
-    })
-    .then((res)=>{
-        alert("Saved Succesfully")
-        
-        // navigate('/adminpage/prodlisting')
-    }).catch((err) =>{
-        console.log(err.message);
-    })
-
-  }
+ 
 
 
   const [files, setFiles] = useState();
@@ -289,13 +268,13 @@ export const ProdEdit = () => {
           <tbody>
             {productsize.map((product) => (
              
-              <tr >
-                <td><input value={product.article} onChange={e=>setArticle(e.target.value)} className='form-control' /></td>
+              <tr key={product.id} >
+                <td>{product.article}</td>
                 <td>{product.size}</td>
                 <td>
                 <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
                 <a onClick={()=>{Removefunction(product.id)}} className='btn btn-danger'>Удалить</a>
-                <a onClick={handlesubmit1} className='btn btn-danger'>Save</a>
+                
                 
               </td>
               </tr>
