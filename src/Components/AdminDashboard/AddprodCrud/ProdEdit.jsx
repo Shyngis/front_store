@@ -7,10 +7,20 @@ import CategoryService from '../../services/CategoryService';
 
 export const ProdEdit = () => {
   const { empid } = useParams();
+  const [firstLevelCategory, setFirstLevelCategory] = useState();
+  const [secondLevelCategory, setSecondLevelCategory] = useState();
+
+  const [mainCategory, setMainCategory] = useState("");
+  const [mainCategories, setMainCategories] = useState([]);
+  const [firstLevelCategories, setFirstLevelCategories] = useState([]);
+  const [secondLevelCategories, setSecondLevelCategories] = useState([]);
+
+
 
   // const [empdata, empdatachange] = useState({});
 
   useEffect(() => {
+
     fetch(URL + "/product/id/" + empid)
       .then((res) => {
         return res.json();
@@ -22,7 +32,25 @@ export const ProdEdit = () => {
         descriptionchange(resp.description)
         isNewchange(resp.isNew);
         setproduct(resp.id);
-        console.log("see ");
+
+        CategoryService.findLevelCategoriesById(resp.category)
+          .then((result) => {
+            if (result) {
+
+              const firstItem = result[0];
+              setSecondLevelCategories(result);
+              setSecondLevelCategory(resp.category);
+
+              CategoryService.findFirstLevelRowsByChildId(resp.category)
+                .then((result) => {
+                  setFirstLevelCategories(result);
+                  setFirstLevelCategory(firstItem.parent);
+                  const firstLevelCateogryItem = result.filter(i => i.id === firstItem.parent);
+                  // console.log('firstLevelCateogryItem', firstLevelCateogryItem);
+                  setMainCategory(firstLevelCateogryItem.parent);
+                });
+            }
+          });
       })
       .catch((err) => {
         console.log(err.message);
@@ -65,14 +93,6 @@ export const ProdEdit = () => {
   const [size, setSize] = useState("");
   const [productId, setproductId] = useState();
   const [product, setproduct] = useState();
-  const [firstLevelCategory, setFirstLevelCategory] = useState();
-  const [secondLevelCategory, setSecondLevelCategory] = useState();
-
-  const [mainCategory, setMainCategory] = useState("");
-  const [mainCategories, setMainCategories] = useState([]);
-  const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-  const [secondLevelCategories, setSecondLevelCategories] = useState([]);
-
 
   const [productArticleAndSize, setProductArticleAndSize] = useState([]);
 
@@ -199,15 +219,10 @@ export const ProdEdit = () => {
         setMainCategories(result);
       });
 
-    CategoryService.findByParentId(1)
-      .then((result) => {
-        setMainCategories(result);
-      });
-
-    CategoryService.findByParentId(1)
-      .then((result) => {
-        setMainCategories(result);
-      });
+    // CategoryService.findByParentId(1)
+    //   .then((result) => {
+    //     setMainCategories(result);
+    //   });
 
   }, []);
 
@@ -286,7 +301,7 @@ export const ProdEdit = () => {
                       <label htmlFor="cars">Выберите категорию уровень 2:</label>
 
                       <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-                        {secondLevelCategories.map((categor) => (
+                        {secondLevelCategories && secondLevelCategories.map((categor) => (
                           <option
 
                             name="option"
@@ -314,7 +329,7 @@ export const ProdEdit = () => {
                       {name.length === 0 && validation && <span className='text-danger'>Enter the name</span>}
                     </div>
                   </div>
-                  
+
                   <div className="col-lg-12">
                     <div className="form-group">
                       <label htmlFor="">Description</label>

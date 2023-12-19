@@ -40,7 +40,7 @@ export const ProdCreate = () => {
 
       video,
       isNew,
-      category,
+      category: secondLevelCategory,
       productId,
     };
 
