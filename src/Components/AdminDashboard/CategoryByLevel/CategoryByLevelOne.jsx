@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { URL } from '../../Common/ddata';
-import { TabButtons } from '../../Category/TabButtons';
 import CategoryService from '../../services/CategoryService';
 
 
@@ -25,7 +23,8 @@ export const CategoryByLevelOne = () => {
     y.preventDefault();
     const category = {
       name,
-      parent: mainCategory
+      parent: mainCategory,
+      level: 1
     };
     CategoryService.create(category)
       .then((result) => {

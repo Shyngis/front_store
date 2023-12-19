@@ -37,12 +37,12 @@ export const CategoryByMainLevel = () => {
             value={name}
             onChange={(y) => setNazv_cat(y.target.value)}
             required />
-          <label>Загрузить фото </label>
+          {/* <label>Загрузить фото </label>
           <input type="file"
             value={image_cat}
             multiple
             onChange={(y) => setImage_cat(y.target.value)}
-          />
+          /> */}
           <button className="adding_pr">Добавить</button>
         </form>
 
