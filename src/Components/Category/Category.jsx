@@ -9,10 +9,9 @@ export const Category = () => {
 
   const [records, setRecords] = useState([]);
   useEffect(() => {
-    fetch(URL + "/category/parent/2")
+    fetch(URL + "/category/parent/1")
       .then((response) => response.json())
       .then((records) => {
-        console.log(records);
         setRecords(records);
       })
       .catch((err) => console.log(err));
@@ -31,12 +30,12 @@ export const Category = () => {
   return (
     <>
       <section className='cat'>
-        <h2>Catalog</h2>
         {records.map((cat_prod) => (
           <Link to={`/category/${cat_prod.id}`}>
             <div className="cards_cat">
               <div className="image_box_cat">
-                <img src={cat_prod.image_cat} alt="" />
+                {/* <img src={cat_prod.image_cat} alt="" /> */}
+                <img src="https://valtec.ru/image/groups/1.jpg" alt="" />
               </div>
               <div className="details_cat">
                 <p>{cat_prod.name}</p>

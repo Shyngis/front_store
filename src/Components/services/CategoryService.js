@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { URL } from '../Common/ddata';
 
 const CategoryService = {
@@ -29,7 +28,5 @@ const CategoryService = {
     }
     
 };
-
-
 
 export default CategoryService;

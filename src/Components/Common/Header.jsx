@@ -10,16 +10,12 @@ export const Header = () => {
           <input type="checkbox" name='' id='chk1' />
           <div className='logo'>
             {/* <h1>Сантехпласт</h1> */}
-            </div>
+          </div>
           <div className="search-box">
             <form action="">
               <input type="text" name='search' id='srch' placeholder='Поиск' />
               <button type='submit'><i className='fa fa-search'></i></button>
             </form>
-          </div>
-          <div className='phone_numb'>
-            <i className="fa-solid fa-phone"></i>
-            <h4>8(700) 496-9087</h4>
           </div>
           <ul class="navbar">
 
@@ -37,6 +33,10 @@ export const Header = () => {
             <li><a href="">Контакты</a></li>
             <li><Link to='/adminpage'>Admin Page</Link></li>
             <li><Link to='/login'>Вход</Link></li>
+            <li>
+              <i className="fa-solid fa-phone"></i>
+              8(700) 496-9087
+            </li>
 
           </ul>
           <div className="menu">

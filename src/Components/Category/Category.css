@@ -1,21 +1,20 @@
 
  .cat {
-  width: 90%;
-  
+
   margin: auto;
   margin-top: 5%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
-
   
+  text-align: center;
 }
 
 .cat .cards_cat {
   width: 80%;
   height: 50vh;
-  padding: 10px;
-  margin: 10px 20px;
+  padding: 5px;
+  margin: 5px 5px;
   
 }
 
@@ -25,9 +24,9 @@
 }
 
 .image_box_cat img {
-  width: 80%;
-  height: 40vh;
-  margin: 5px 20px;
+  width: 150px;
+  height: 150px;
+  margin: 10px auto 0px auto;
 }
 
 
@@ -55,14 +54,14 @@
 }
 
 .category-tab-buttons li {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   display: inline;
-  margin: 10px;
+  margin: 5px;
 }
 
 .category-tab-buttons li a {
   text-decoration: none;
-  padding: 10px;
+  padding: 5px;
   border: 1px solid #333;
   border-radius: 5px;
   text-align: center;
@@ -75,4 +74,5 @@
 
 .category-tab-buttons li a:hover {
   background-color: #f0f0f0;
+  color:black;
 }
