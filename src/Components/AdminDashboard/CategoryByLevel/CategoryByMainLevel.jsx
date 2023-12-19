@@ -10,7 +10,8 @@ export const CategoryByMainLevel = () => {
   const handleSubmit = (y) => {
     y.preventDefault();
     const category = {
-      name
+      name,
+      parent: 1
     };
 
     fetch(URL + "/category", {
@@ -42,7 +43,7 @@ export const CategoryByMainLevel = () => {
             multiple
             onChange={(y) => setImage_cat(y.target.value)}
           />
-          <button className="adding_pr">Добавить category</button>
+          <button className="adding_pr">Добавить</button>
         </form>
 
         <div className='why'>

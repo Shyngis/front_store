@@ -1,54 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { URL } from '../../Common/ddata';
 import { TabButtons } from '../../Category/TabButtons';
+import CategoryService from '../../services/CategoryService';
+
+
 
 export const CategoryByLevelOne = () => {
 
-  const [name, setNazv_cat] = useState("");
+  const [name, setName] = useState("");
+  const [mainCategory, setMainCategory] = useState("");
   const [image_cat, setImage_cat] = useState();
+  const [mainCategories, setMainCategories] = useState([]);
 
-  const handleSubmit = (y) => {
-    y.preventDefault();
-    const category = {
-      name
-    };
+  useEffect(() => {
 
-    fetch(URL + "/category", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(category),
-    })
-      .then((data) => { return data.json() })
-      .then((result) => { 
-        alert(result) 
+    CategoryService.findByParentId(1)
+      .then((result) => {
+        setMainCategories(result);
       });
 
+  }, []);
+
+  const saveCategory = (y) => {
+    y.preventDefault();
+    const category = {
+      name,
+      parent: mainCategory
+    };
+    CategoryService.create(category)
+      .then((result) => {
+        alert(result)
+      });
   }
+
+
+
   return (
     <>
-
-    <br />
+      <br />
       <div className='category'>
+        <form onSubmit={saveCategory}>
 
-        <form onSubmit={handleSubmit}>
+          <label htmlFor="cars">Выберите основную категорию:</label>
+          <select className="category-select" value={mainCategory} onChange={(y) => setMainCategory(y.target.value)}>
+            {mainCategories.map((category) => (
+              <option
+                name="option"
+                key={category.id}
+                value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+
           {/* <h2>Добавление Категории</h2> */}
           <label>Наименование</label>
           <input type="text"
             value={name}
-            onChange={(y) => setNazv_cat(y.target.value)}
+            onChange={(y) => setName(y.target.value)}
             required />
-          <label>Загрузить фото </label>
-          <input type="file"
+          {/* <label>Загрузить фото </label> */}
+          {/* <input type="file"
             value={image_cat}
             multiple
             onChange={(y) => setImage_cat(y.target.value)}
-          />
-          <button className="adding_pr">Добавить category</button>
+          /> */}
+          <button className="adding_pr">Добавить</button>
         </form>
-
-        <div className='why'>
-
-        </div>
       </div>
     </>
   )
