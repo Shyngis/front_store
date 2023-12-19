@@ -194,12 +194,12 @@ export const ProdEdit = () => {
 
   const handleOzgert = (y) => {
     setFiles(y.target.files);
-    
+
     // setPhoto_pr(y.target.value);
     // setPhoto_pr(y.target.image);
   }
 
-  const[imageDisplay,setimageDisplay] =useState([]);
+  const [imageDisplay, setimageDisplay] = useState([]);
 
   function handleUpload() {
     for (let i = 0; i < files.length; i++) {
@@ -207,25 +207,20 @@ export const ProdEdit = () => {
       container1.append("container", productId)
       container1.append(`file`, files[i])
       Send(container1);
-
-      console.log('container1', container1);
     }
-
-      console.log('container1',container1);
-    }   
-
   }
+
   function Send(data) {
     fetch(URL + '/upload/image', {
       method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
       body: data
     }).then(res => res.json()).
-      then(data =>{
-        console.log("Our files",data.filename);
+      then(data => {
+        console.log("Our files", data.filename);
         setimageDisplay([...imageDisplay, data])
 
-      } ).
+      }).
       catch(err => console.log(err));
   }
 
@@ -265,326 +260,216 @@ export const ProdEdit = () => {
 
   return (
     <>
-    <div>
-      <div className='row'>
-        <div className="">
-          <form className="container" onSubmit={handlesubmit}>
-            <div className="card" style={{ "textAlign": "left" }}>
-              <div className="card-title">
-                <h2>Редактирование</h2>
-              </div>
-              <div className="card-body">
-                <div className="row">
+      <div>
+        <div className='row'>
+          <div className="">
+            <form className="container" onSubmit={handlesubmit}>
+              <div className="card" style={{ "textAlign": "left" }}>
+                <div className="card-title">
+                  <h2>Редактирование</h2>
+                </div>
+                <div className="card-body">
+                  <div className="row">
 
-                  <div className="col-lg-12">
-                    <input type='hidden' value={id} disabled="disabled" className='form-control' />
-                    <div className="form-group">
-                      <label htmlFor="main">Выберите основную категорию:</label>
-                      <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
-                        {mainCategories.map((category) => (
-                          <option
-                            name="option-main"
-                            key={category.id}
-                            value={category.id}>
-                            {category.name}
-                          </option>
-                        ))}
-                      </select>
+                    <div className="col-lg-12">
+                      <input type='hidden' value={id} disabled="disabled" className='form-control' />
+                      <div className="form-group">
+                        <label htmlFor="main">Выберите основную категорию:</label>
+                        <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
+                          {mainCategories.map((category) => (
+                            <option
+                              name="option-main"
+                              key={category.id}
+                              value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
 
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="form-group">
-
-
-                      <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
-                      <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
-                        {firstLevelCategories.map((category) => (
-                          <option
-                            name="option"
-                            key={category.id}
-                            value={category.id}>
-                            {category.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="form-group">
-
-                      <label htmlFor="cars">Выберите категорию уровень 2:</label>
-
-                      <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-                        {secondLevelCategories && secondLevelCategories.map((categor) => (
-                          <option
-
-                            name="option"
-                            key={categor.id}
-                            value={categor.id || ''}>
-                            {categor.name}
-                          </option>
-
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label htmlFor="">ID</label>
-                      <input value={id} disabled="disabled" className='form-control' />
-
-                    </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label htmlFor="">Name</label>
-                      <input required value={name} onMouseDown={e => valchange(true)} onChange={e => namechange(e.target.value)} className='form-control' />
-                      {name.length === 0 && validation && <span className='text-danger'>Enter the name</span>}
-                    </div>
-                  </div>
-
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label htmlFor="">Description</label>
-                      <input value={description} onChange={e => descriptionchange(e.target.value)} className='form-control' />
-                    </div>
-                  </div>
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <label className='form-check-label' htmlFor="">Новинка</label>
-                      <input checked={isNew} onChange={e => isNewchange(e.target.checked)} type='checkbox' />
-                    </div>
-                  </div>
-                  <label>Ссылка для видео:</label>
-
-                  <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
-
-                  <div className='all'>
-
-                    <div className="article_size">
-                      <label>Артикул и размер</label>
+                      </div>
                     </div>
 
-
-                    <div>
-                      <label>Артикул товара</label>
-                      <input
-                        type="text"
-                        value={article || ''}
-                        onChange={(y) => setArticle(y.target.value)}
-                        required
-                      />
+                    <div className="col-lg-12">
+                      <div className="form-group">
 
 
-                      <label>Размер товара</label>
-                      <input
-                        type="number"
-                        value={size || ''}
-                        onChange={(y) => setSize(y.target.value)}
-                        required
-                      />
+                        <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
+                        <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
+                          {firstLevelCategories.map((category) => (
+                            <option
+                              name="option"
+                              key={category.id}
+                              value={category.id}>
+                              {category.name}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="form-group">
+
+                        <label htmlFor="cars">Выберите категорию уровень 2:</label>
+
+                        <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
+                          {secondLevelCategories && secondLevelCategories.map((categor) => (
+                            <option
+
+                              name="option"
+                              key={categor.id}
+                              value={categor.id || ''}>
+                              {categor.name}
+                            </option>
+
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <label htmlFor="">ID</label>
+                        <input value={id} disabled="disabled" className='form-control' />
+
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <label htmlFor="">Name</label>
+                        <input required value={name} onMouseDown={e => valchange(true)} onChange={e => namechange(e.target.value)} className='form-control' />
+                        {name.length === 0 && validation && <span className='text-danger'>Enter the name</span>}
+                      </div>
+                    </div>
+
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <label htmlFor="">Description</label>
+                        <input value={description} onChange={e => descriptionchange(e.target.value)} className='form-control' />
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <label className='form-check-label' htmlFor="">Новинка</label>
+                        <input checked={isNew} onChange={e => isNewchange(e.target.checked)} type='checkbox' />
+                      </div>
+                    </div>
+                    <label>Ссылка для видео:</label>
+
+                    <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
+
+                    <div className='all'>
+
+                      <div className="article_size">
+                        <label>Артикул и размер</label>
+                      </div>
+
+
+                      <div>
+                        <label>Артикул товара</label>
+                        <input
+                          type="text"
+                          value={article || ''}
+                          onChange={(y) => setArticle(y.target.value)}
+                          required
+                        />
+
+
+                        <label>Размер товара</label>
+                        <input
+                          type="number"
+                          value={size || ''}
+                          onChange={(y) => setSize(y.target.value)}
+                          required
+                        />
+
+                      </div>
+
+
+                      <ToastContainer />
+                      <button onClick={handleSubmit1}>Добавить</button>
+
+
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>Артикул</td>
+                            <td>Размер</td>
+                            <td>Action</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+
+                          {productArticleAndSize.map((product) => {
+
+
+                            return (
+                              product.isRemoved == false &&
+
+                              <tr key={product.id} >
+                                <td>{product.article}</td>
+                                <td>{product.size}</td>
+                                <td>
+                                  <a onClick={() => { LoadEdit(product.id) }} className='btn btn-success'>Редакт.</a>
+                                  <a onClick={() => { Removefunction(product) }} className='btn btn-danger'>Удалить</a>
+
+
+                                </td>
+                              </tr>
+
+                            )
+                          })}
+                        </tbody>
+                      </table>
+
 
                     </div>
 
+                    <label>Загрузить фото:</label>
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      // value={files}
+                      onChange={handleOzgert}
+                    />
+                    <label>Загрузить файлы:</label>
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      // value={files}
+                      onChange={handleOzgert}
 
-                    <ToastContainer />
-                    <button onClick={handleSubmit1}>Добавить</button>
+                    />
 
+                    {/* <button onClick={handleUpload}>Загрузить</button> */}
 
-                    <table>
-                      <thead>
-                        <tr>
-                          <td>Артикул</td>
-                          <td>Размер</td>
-                          <td>Action</td>
-                        </tr>
-                      </thead>
-                      <tbody>
-
-                        {productArticleAndSize.map((product) => {
-
-
-                          return (
-                            product.isRemoved == false &&
-
-                            <tr key={product.id} >
-                              <td>{product.article}</td>
-                              <td>{product.size}</td>
-                              <td>
-                                <a onClick={() => { LoadEdit(product.id) }} className='btn btn-success'>Редакт.</a>
-                                <a onClick={() => { Removefunction(product) }} className='btn btn-danger'>Удалить</a>
-
-
-                              </td>
-                            </tr>
-
-                          )
-                        })}
-                      </tbody>
-                    </table>
-
-
-                  </div>
-
-                  <label>Загрузить фото:</label>
-                  <input
-                    type="file"
-                    name="file"
-                    multiple
-                    // value={files}
-                    onChange={handleOzgert}
-                  />
-                  <label>Загрузить файлы:</label>
-                  <input
-                    type="file"
-                    name="file"
-                    multiple
-                    // value={files}
-                    onChange={handleOzgert}
-
-                  />
-
-                  {/* <button onClick={handleUpload}>Загрузить</button> */}
-
-          <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
-
-                  <div className='all'>       
-
-        <div className="article_size">
-            <label>Артикул и размер</label>
-        </div>
-
-          
-            <div>
-              <label>Артикул товара</label>
-              <input 
-                type="text" 
-                value={article || ''}
-                onChange={(y)=>setArticle(y.target.value)}
-                required
-              />  
-
-
-              <label>Размер товара</label>
-              <input
-                type="number"
-                value={size || ''}
-                onChange={(y) => setSize(y.target.value)}
-                required
-              />
-
-            </div>
-           
-
-            <ToastContainer />
-            <button onClick={handleSubmit1}>Добавить</button>
-            
-                
-      <table>
-        <thead>
-              <tr>
-                <td>Артикул</td>
-                <td>Размер</td>
-                <td>Action</td>
-              </tr>
-        </thead>
-          <tbody>
-          
-            {productArticleAndSize.map((product) => {
-             
-                
-              return (
-                 product.isRemoved == false &&
-
-             <tr key={product.id} >
-                <td>{product.article}</td>
-                <td>{product.size}</td>
-                <td>
-                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
-                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
-                
-                
-              </td>
-              </tr>
-                
-              )
-             })}
-          </tbody>
-        </table>
-   
-
-    </div> 
-
-              <label>Загрузить фото:</label>
-          <input
-            type="file"
-            name="file"
-            multiple
-            // value={files}
-            onChange={handleOzgert}
-          />
-<table>
-             <tbody>
-          {imageDisplay.map((product) => {
-             
-                
-              return (
-                 
-
-             <tr key={product.id} >
-                <td>{product.filename}</td>
-                <td>{product.id}</td>
-                <td>
-                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
-                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
-                
-                
-              </td>
-              </tr>
-                
-              )
-             })}
-          </tbody>
-        </table>
-              <label>Загрузить файлы:</label>
-          <input
-            type="file"
-            name="file"
-            multiple
-            // value={files}
-            onChange={handleOzgert}
-           
-          />
-
-          <button onClick={handleUpload}>Загрузить</button>
-
-                  <div className="col-lg-12">
-                    <div className="form-group">
-                      <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
-                      <button className='btn btn-success' type='submit'>Сохранить</button>
-                      {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
+                    <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
+                        <button className='btn btn-success' type='submit'>Сохранить</button>
+                        {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
+                      </div>
                     </div>
-                  </div>
+                  </div >
+
                 </div >
               </div >
-            </div >
 
 
 
-          </form >
+            </form >
+          </div >
         </div >
       </div >
-    </div >
 
-        </form>
+      {/* </form>
       </div>
     </div>
     </div>
     </>
-
-  )
-}
+ */}
+    </>
+  )}
