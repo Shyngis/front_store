@@ -49,29 +49,14 @@ import { URL } from '../../Common/ddata';
         })
 
     },[])
+const [records, setRecords] = useState([]);
 
-
- 
-    const[productsize,setProductsize] = useState([])
-    const [idpr,setIdpr] = useState()
-    useEffect(()=>{
-       {
-      fetch(URL+"/product/size/"+idpr)
-        .then((res)=>{
-          return res.json();
-        })
-        .then((resp) =>{
-        setProductsize(resp);
-        console.log("seen");
-        console.log(idpr);
-
-
-        })
-        .catch((err) =>{
-          console.log(err.message);
-        })
-}
-    }, [])
+  useEffect(() => {
+    fetch(URL + "/category/parent/2")
+      .then((response) => response.json())
+      .then((categor) => setRecords(categor))
+      .catch((err) => console.log(err));
+  }, []);
 
     return (
       <>
@@ -106,7 +91,9 @@ import { URL } from '../../Common/ddata';
                 <tr key={item.id}>
                 
                 <td>{item.id}</td>
-                <td>{item.category}</td>
+                <td>{records.filter(cat=>cat.id === item.category)
+                  .map((cat) => cat.name)}
+              </td>
                 <td>{item.name}</td>
                 <td>{item.description}</td>
                 <td>{(item.isNew) ? "ДА" : "НЕТ"}</td>

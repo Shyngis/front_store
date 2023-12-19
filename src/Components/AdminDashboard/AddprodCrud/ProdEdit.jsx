@@ -205,8 +205,8 @@ export const ProdEdit = () => {
                 <div className="row">
                 <div className="col-lg-12">
                 <div className="form-group">
-                      <label htmlFor="">ID</label>
-                      <input value={id} disabled="disabled" className='form-control' />
+                      
+                      <input type='hidden' value={id} disabled="disabled" className='form-control' />
                     </div>
                   </div>
                   <div className="col-lg-12">
