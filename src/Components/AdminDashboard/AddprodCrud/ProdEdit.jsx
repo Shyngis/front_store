@@ -199,12 +199,12 @@ export const ProdEdit = () => {
         setMainCategories(result);
       });
 
-      CategoryService.findByParentId(1)
+    CategoryService.findByParentId(1)
       .then((result) => {
         setMainCategories(result);
       });
 
-      CategoryService.findByParentId(1)
+    CategoryService.findByParentId(1)
       .then((result) => {
         setMainCategories(result);
       });
@@ -245,95 +245,76 @@ export const ProdEdit = () => {
                 <div className="row">
 
                   <div className="col-lg-12">
-                  <input type='hidden' value={id} disabled="disabled" className='form-control' />
-        <div className="form-group">
-          <label htmlFor="main">Выберите основную категорию:</label>
-          <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
-            {mainCategories.map((category) => (
-              <option
-                name="option-main"
-                key={category.id}
-                value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+                    <input type='hidden' value={id} disabled="disabled" className='form-control' />
+                    <div className="form-group">
+                      <label htmlFor="main">Выберите основную категорию:</label>
+                      <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
+                        {mainCategories.map((category) => (
+                          <option
+                            name="option-main"
+                            key={category.id}
+                            value={category.id}>
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
 
-        </div>
-      </div>
+                    </div>
+                  </div>
 
-      <div className="col-lg-12">
-        <div className="form-group">
-
-
-          <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
-          <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
-            {firstLevelCategories.map((category) => (
-              <option
-                name="option"
-                key={category.id}
-                value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="col-lg-12">
-        <div className="form-group">
-
-          <label htmlFor="cars">Выберите категорию уровень 2:</label>
-
-          <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-            {secondLevelCategories.map((categor) => (
-              <option
-
-                name="option"
-                key={categor.id}
-                value={categor.id || ''}>
-                {categor.name}
-              </option>
-
-            ))}
-          </select>
-        </div>
-      </div>
-
-      <div className="col-lg-12">
-        <div className="form-group">
-          <label htmlFor="">ID</label>
-          <input value={id} disabled="disabled" className='form-control' />
-
-        </div>
-      </div>
-      <div className="col-lg-12">
-        <div className="form-group">
-          <label htmlFor="">Name</label>
-          <input required value={name} onMouseDown={e => valchange(true)} onChange={e => namechange(e.target.value)} className='form-control' />
-          {name.length === 0 && validation && <span className='text-danger'>Enter the name</span>}
-        </div>
-      </div>
-      <div className="col-lg-12">
-        <div className="form-group">
-          <label htmlFor="">Category</label>
-                      <input type='hidden' value={category} onChange={e=>categorychange(e.target.value)} className='form-control' />
+                  <div className="col-lg-12">
+                    <div className="form-group">
 
 
-                       <select  value={category} onChange={(e)=>categorychange(e.target.value)}>
-                        {records.map((categor)=>(         
-              <option 
-              
-              name="option"
-              key={categor.id} 
-              value={categor.id || ''}>
-              {categor.name} 
-              </option>
-              
-              ))}  
-              </select>
-                    </div >
-                  </div >
+                      <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
+                      <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
+                        {firstLevelCategories.map((category) => (
+                          <option
+                            name="option"
+                            key={category.id}
+                            value={category.id}>
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+
+                      <label htmlFor="cars">Выберите категорию уровень 2:</label>
+
+                      <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
+                        {secondLevelCategories.map((categor) => (
+                          <option
+
+                            name="option"
+                            key={categor.id}
+                            value={categor.id || ''}>
+                            {categor.name}
+                          </option>
+
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label htmlFor="">ID</label>
+                      <input value={id} disabled="disabled" className='form-control' />
+
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label htmlFor="">Name</label>
+                      <input required value={name} onMouseDown={e => valchange(true)} onChange={e => namechange(e.target.value)} className='form-control' />
+                      {name.length === 0 && validation && <span className='text-danger'>Enter the name</span>}
+                    </div>
+                  </div>
+                  
                   <div className="col-lg-12">
                     <div className="form-group">
                       <label htmlFor="">Description</label>
@@ -434,14 +415,14 @@ export const ProdEdit = () => {
 
                   />
 
-{/* <button onClick={handleUpload}>Загрузить</button> */ }
-<div className="col-lg-12">
-  <div className="form-group">
-    <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
-    <button className='btn btn-success' type='submit'>Сохранить</button>
-    {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
-  </div>
-</div>
+                  {/* <button onClick={handleUpload}>Загрузить</button> */}
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
+                      <button className='btn btn-success' type='submit'>Сохранить</button>
+                      {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
+                    </div>
+                  </div>
                 </div >
               </div >
             </div >
