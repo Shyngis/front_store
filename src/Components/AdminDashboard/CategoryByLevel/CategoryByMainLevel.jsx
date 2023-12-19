@@ -30,8 +30,8 @@ export const CategoryByMainLevel = () => {
       <div className='category'>
 
         <form onSubmit={handleSubmit}>
-          <h2>Добавление Категории</h2>
-          <label>Название Категории</label>
+          {/* <h2>Добавление Категории</h2> */}
+          <label>Наименование</label>
           <input type="text"
             value={name}
             onChange={(y) => setNazv_cat(y.target.value)}

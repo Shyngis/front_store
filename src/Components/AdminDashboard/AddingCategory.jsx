@@ -31,7 +31,6 @@ export const AddingCategory = () => {
 
     <TabButtons />
 
-
 {/* 
       <div className='category'>
 
