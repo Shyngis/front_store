@@ -37,11 +37,12 @@ export const Pages = () => {
    <Route path='/adminpage' element={<AdminPage />} >    
     <Route path='addingcategory' element={<AddingCategory />} />
     <Route path='addingproducts' element={<AddingProducts />} />
-    <Route path='prodlisting' element={<ProdListing />} />
+    <Route path='prodlisting/' element={<ProdListing />} />
     <Route path='prodlisting/prodcreate' element={<ProdCreate />} />
     <Route path='prodlisting/prodcreate/prodcreate2' element={<ProdCreate2 />} />
     <Route path='prodlisting/prodedit/:empid' element={<ProdEdit />} />
-    <Route path='prodlisting/prodedit/:empid/:sizeid' element={<SizeEdit />} />
+    
+    <Route path='prodlisting/prodedit/:empid/:empid' element={<SizeEdit />} />
     <Route path='prodlisting/prodcreate/proddetail/:empid' element={<ProdDetail />} /> 
 
     

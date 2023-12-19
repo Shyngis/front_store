@@ -34,6 +34,7 @@ export const ProdEdit = () => {
   const[category,categorychange] = useState("");
   const[description,descriptionchange] = useState("");
   const[isNew,isNewchange] = useState(true);
+  const[video,setVideo_pr] =useState("")
   const [validation,valchange] = useState(false)
 
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ export const ProdEdit = () => {
     // console.log({id,name,email,phone,active});
 
 
-    const empdata = {id,name,category,description,isNew};
+    const empdata = {id,name,category,description,isNew,video};
     
 
     fetch(URL + "/product",{
@@ -79,7 +80,7 @@ export const ProdEdit = () => {
     toast.success("Успешно добавлено !", {
       position: toast.POSITION.TOP_RIGHT,
     })
-    window.location.reload(false);
+    // window.location.reload(false);
 
     // const firstArtSizeData = artSizeData[0] ||   {} ; 
 
@@ -107,7 +108,7 @@ export const ProdEdit = () => {
 
   };
 
-  const[productsize,setProductsize] = useState([])
+  // const[productsize,setProductsize] = useState([])
 
   useEffect(()=>{
     fetch(URL + "/product/size/"+empid)
@@ -115,7 +116,8 @@ export const ProdEdit = () => {
         return res.json();
       })
       .then((resp) =>{
-       setProductsize(resp);
+      //  setProductsize(resp);
+      setProductArticleAndSize(resp)
        console.log("seen");
 
       })
@@ -131,16 +133,30 @@ export const ProdEdit = () => {
     console.log("loadedit");
     
   }
-  const Removefunction=(id)=>{
+
+  const removeArticleAndSize = (id) => {
+  const newProductArticleAndSize = productArticleAndSize.map((paz) => {
+    if (paz === id) {
+      return {...paz, isRemoved: true};
+    }
+    return paz;
+  });
+
+  setProductArticleAndSize(newProductArticleAndSize);
+};
+  const Removefunction=(product)=>{
     if(window.confirm("Do you want to remove?")){
-       fetch(URL + "/product/size/" +id,{
+       fetch(URL + "/product/size/" + product.id,{
       method: "DELETE",
       // headers:{"content-type":"application/json"},
       // body:JSON.stringify(empdata)
     })  
     .then((res)=>{
-        alert("Removed Succesfully!")
-        window.location.reload();
+        // alert("Removed Succesfully!")
+        product.isRemoved = true;
+        removeArticleAndSize(product.id);
+        console.log(productArticleAndSize);
+        // window.location.reload();
     }).catch((err) =>{
         console.log(err.message);
     })
@@ -222,6 +238,8 @@ export const ProdEdit = () => {
                       <label className='form-check-label' htmlFor="">Новинка</label>
                     </div>
                   </div>
+                  <label>Ссылка для видео:</label>
+          <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
 
                   <div className='all'>       
 
@@ -254,8 +272,6 @@ export const ProdEdit = () => {
             <ToastContainer />
             <button onClick={handleSubmit1}>Добавить</button>
             
-           
-
                 
       <table>
         <thead>
@@ -266,20 +282,26 @@ export const ProdEdit = () => {
               </tr>
         </thead>
           <tbody>
-            {productsize.map((product) => (
+          
+            {productArticleAndSize.map((product) => {
              
-              <tr key={product.id} >
+                
+              return (
+                 product.isRemoved == false &&
+
+             <tr key={product.id} >
                 <td>{product.article}</td>
                 <td>{product.size}</td>
                 <td>
                 <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
-                <a onClick={()=>{Removefunction(product.id)}} className='btn btn-danger'>Удалить</a>
+                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
                 
                 
               </td>
               </tr>
-             
-            ))}
+                
+              )
+             })}
           </tbody>
         </table>
    

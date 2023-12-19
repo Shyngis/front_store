@@ -118,3 +118,22 @@ const handleDelete = (i) => {
           </tbody>
         </table>
       )}
+
+
+      useEffect(()=>{
+       {
+      fetch(URL+"/product/size/"+idpr)
+        .then((res)=>{
+          return res.json();
+        })
+        .then((resp) =>{
+        setProductsize(resp);
+        console.log("seen");
+        console.log(idpr);
+
+        })
+        .catch((err) =>{
+          console.log(err.message);
+        })
+}
+    }, [])

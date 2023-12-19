@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { URL } from '../../Common/ddata';
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import "./ProdCreate.css";
+import { URL } from '../../Common/ddata';
 
 
 
 export const ProdCreate = () => {
+  const{empid} =useParams();
   const [category, setCategoria] = useState();
   const [name, setName_pr] = useState("");
   const [description, setDesc_pr] = useState("");
   const [video, setVideo_pr] = useState("");
   const [isNew, setCheckbox_pr] = useState(false);
 
-  const [productId, setproductId] = useState();
+  const [productId, setproductId] = useState("");
   const [validation,valchange] = useState(false)
 
   const navigate = useNavigate();
@@ -43,9 +44,13 @@ export const ProdCreate = () => {
     })
     .then((product)=>{
         alert("Saved Succesfully")
-        navigate('prodcreate2')
-        console.log('container.id==product.id==', product.id);
-        setproductId(product.id);
+        product.json().then((data)=>{
+          console.log(data,"jsondata");
+          setproductId(data.id);
+          navigate('/adminpage/prodlisting/prodedit/'+data.id)
+        })
+        // navigate("/adminpage/prodlisting/prodedit/"+product.id)
+        
     }).catch((err) =>{
         console.log(err.message);
     })
