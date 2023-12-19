@@ -42,12 +42,8 @@ export const ProdEdit = () => {
   const handlesubmit =(e)=>{
     e.preventDefault();
 
-    // console.log({id,name,email,phone,active});
-
-
     const empdata = {id,name,category,description,isNew,video};
     
-
     fetch(URL + "/product",{
       method: "PUT",
       headers:{"content-type":"application/json"},
@@ -63,8 +59,6 @@ export const ProdEdit = () => {
 
   }
 
-
-
   const [article,setArticle] = useState("");
   const [size,setSize] = useState("");
    const [productId, setproductId] = useState();
@@ -73,23 +67,18 @@ export const ProdEdit = () => {
 
   const [productArticleAndSize, setProductArticleAndSize] = useState([]);
 
-  
   const handleSubmit1 = (y) => {
     
     y.preventDefault();
     toast.success("Успешно добавлено !", {
       position: toast.POSITION.TOP_RIGHT,
     })
-    // window.location.reload(false);
-
-    // const firstArtSizeData = artSizeData[0] ||   {} ; 
 
     const productsi = {
     article,
     size,
     product
     };
-  
 
 
     fetch(URL + "/product/size", {
@@ -145,29 +134,26 @@ export const ProdEdit = () => {
   setProductArticleAndSize(newProductArticleAndSize);
 };
   const Removefunction=(product)=>{
-    if(window.confirm("Do you want to remove?")){
+    
        fetch(URL + "/product/size/" + product.id,{
       method: "DELETE",
       // headers:{"content-type":"application/json"},
       // body:JSON.stringify(empdata)
     })  
     .then((res)=>{
-        // alert("Removed Succesfully!")
         product.isRemoved = true;
         removeArticleAndSize(product.id);
         console.log(productArticleAndSize);
-        // window.location.reload();
+        toast.error("Успешно удалено !", {
+      position: toast.POSITION.TOP_RIGHT,
+    })
+        
     }).catch((err) =>{
         console.log(err.message);
     })
 
-    }
+    
   }
-
-
- 
-
-
   const [files, setFiles] = useState();
 
    const handleOzgert = (y) => {
@@ -196,6 +182,16 @@ export const ProdEdit = () => {
       catch(err => console.log(err));
   }
 
+
+  const [records, setRecords] = useState([]);
+
+  useEffect(() => {
+    fetch(URL + "/category/parent/2")
+      .then((response) => response.json())
+      .then((categor) => setRecords(categor))
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <div>
     <div className='row'>
@@ -223,7 +219,21 @@ export const ProdEdit = () => {
                   <div className="col-lg-12">
                   <div className="form-group">
                       <label htmlFor="">Category</label>
-                      <input value={category} onChange={e=>categorychange(e.target.value)} className='form-control' />
+                      <input type='hidden' value={category} onChange={e=>categorychange(e.target.value)} className='form-control' />
+
+
+                       <select  value={category} onChange={(e)=>categorychange(e.target.value)}>
+                        {records.map((categor)=>(         
+              <option 
+              
+              name="option"
+              key={categor.id} 
+              value={categor.id || ''}>
+              {categor.name} 
+              </option>
+              
+              ))}  
+              </select>
                     </div>
                   </div>
                   <div className="col-lg-12">
