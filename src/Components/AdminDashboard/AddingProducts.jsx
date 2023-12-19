@@ -14,7 +14,7 @@ const AddingProducts = () => {
  
   const [image, setPhoto_pr] = useState();
   const [files, setFiles] = useState();
-  const [productId, setproductId] = useState();
+  const [containerId, setproductId] = useState();
 
   const [article,setArticle] = useState("");
   const [size,setSize] = useState("");
@@ -30,7 +30,7 @@ const AddingProducts = () => {
   function handleUpload() {
     for (let i = 0; i < files.length; i++) {
       const container1 = new FormData();
-      container1.append("container", productId)
+      container1.append("container", containerId)
       container1.append(`file`, files[i])
       Send(container1);
       console.log('container1',container1);
@@ -60,7 +60,7 @@ const AddingProducts = () => {
       video,
       isNew,
       category,
-      productId,
+      // container,
     };
     // ... (other form data)
 
@@ -175,7 +175,7 @@ const AddingProducts = () => {
 
           <input
             type="hidden"
-            value={productId || ''}
+            value={containerId || ''}
             name="productId"
             onChange={(y) => setproductId(y.target.value)}
             
@@ -258,7 +258,7 @@ const AddingProducts = () => {
             name="file"
             multiple
             // value={files}
-            onChange={handleOzgert}
+            // onChange={handleOzgert}
            
           />
 

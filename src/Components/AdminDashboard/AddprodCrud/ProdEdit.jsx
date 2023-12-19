@@ -33,6 +33,7 @@ export const ProdEdit = () => {
         isNewchange(resp.isNew);
         setproduct(resp.id);
 
+
         CategoryService.findLevelCategoriesById(resp.category)
           .then((result) => {
             if (result) {
@@ -51,6 +52,10 @@ export const ProdEdit = () => {
                 });
             }
           });
+
+        setproductId(resp.id)
+        console.log("Product fetched from server ");
+
       })
       .catch((err) => {
         console.log(err.message);
@@ -189,10 +194,12 @@ export const ProdEdit = () => {
 
   const handleOzgert = (y) => {
     setFiles(y.target.files);
+    
     // setPhoto_pr(y.target.value);
     // setPhoto_pr(y.target.image);
   }
 
+  const[imageDisplay,setimageDisplay] =useState([]);
 
   function handleUpload() {
     for (let i = 0; i < files.length; i++) {
@@ -200,8 +207,13 @@ export const ProdEdit = () => {
       container1.append("container", productId)
       container1.append(`file`, files[i])
       Send(container1);
+
       console.log('container1', container1);
     }
+
+      console.log('container1',container1);
+    }   
+
   }
   function Send(data) {
     fetch(URL + '/upload/image', {
@@ -209,7 +221,11 @@ export const ProdEdit = () => {
       // headers: { "Content-type": "multipart/form-data" },
       body: data
     }).then(res => res.json()).
-      then(data => console.log(data)).
+      then(data =>{
+        console.log("Our files",data.filename);
+        setimageDisplay([...imageDisplay, data])
+
+      } ).
       catch(err => console.log(err));
   }
 
@@ -248,6 +264,7 @@ export const ProdEdit = () => {
   }
 
   return (
+    <>
     <div>
       <div className='row'>
         <div className="">
@@ -343,6 +360,7 @@ export const ProdEdit = () => {
                     </div>
                   </div>
                   <label>Ссылка для видео:</label>
+
                   <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
 
                   <div className='all'>
@@ -431,6 +449,119 @@ export const ProdEdit = () => {
                   />
 
                   {/* <button onClick={handleUpload}>Загрузить</button> */}
+
+          <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
+
+                  <div className='all'>       
+
+        <div className="article_size">
+            <label>Артикул и размер</label>
+        </div>
+
+          
+            <div>
+              <label>Артикул товара</label>
+              <input 
+                type="text" 
+                value={article || ''}
+                onChange={(y)=>setArticle(y.target.value)}
+                required
+              />  
+
+
+              <label>Размер товара</label>
+              <input
+                type="number"
+                value={size || ''}
+                onChange={(y) => setSize(y.target.value)}
+                required
+              />
+
+            </div>
+           
+
+            <ToastContainer />
+            <button onClick={handleSubmit1}>Добавить</button>
+            
+                
+      <table>
+        <thead>
+              <tr>
+                <td>Артикул</td>
+                <td>Размер</td>
+                <td>Action</td>
+              </tr>
+        </thead>
+          <tbody>
+          
+            {productArticleAndSize.map((product) => {
+             
+                
+              return (
+                 product.isRemoved == false &&
+
+             <tr key={product.id} >
+                <td>{product.article}</td>
+                <td>{product.size}</td>
+                <td>
+                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
+                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
+                
+                
+              </td>
+              </tr>
+                
+              )
+             })}
+          </tbody>
+        </table>
+   
+
+    </div> 
+
+              <label>Загрузить фото:</label>
+          <input
+            type="file"
+            name="file"
+            multiple
+            // value={files}
+            onChange={handleOzgert}
+          />
+<table>
+             <tbody>
+          {imageDisplay.map((product) => {
+             
+                
+              return (
+                 
+
+             <tr key={product.id} >
+                <td>{product.filename}</td>
+                <td>{product.id}</td>
+                <td>
+                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
+                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
+                
+                
+              </td>
+              </tr>
+                
+              )
+             })}
+          </tbody>
+        </table>
+              <label>Загрузить файлы:</label>
+          <input
+            type="file"
+            name="file"
+            multiple
+            // value={files}
+            onChange={handleOzgert}
+           
+          />
+
+          <button onClick={handleUpload}>Загрузить</button>
+
                   <div className="col-lg-12">
                     <div className="form-group">
                       <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
@@ -443,9 +574,17 @@ export const ProdEdit = () => {
             </div >
 
 
+
           </form >
         </div >
       </div >
     </div >
+
+        </form>
+      </div>
+    </div>
+    </div>
+    </>
+
   )
 }
