@@ -21,23 +21,20 @@ export const CategoryByLevelTwo = () => {
 
 
   const getFirstLevelCategoryByParent = (y) => {
-    
     y.preventDefault();
     const parentId = y.target.value;
     setMainCategory(parentId);
-
     CategoryService.findByParentId(parentId)
       .then((result) => {
         setFirstLevelCategories(result);
       });
-
   }
 
 
   const saveCategory = (y) => {
     y.preventDefault();
-    console.log('firstLevelCategory', firstLevelCategory);
-    console.log('mainCategory', mainCategory);
+    // console.log('firstLevelCategory', firstLevelCategory);
+    // console.log('mainCategory', mainCategory);
     const category = {
       name,
       parent: firstLevelCategory,
@@ -81,18 +78,11 @@ export const CategoryByLevelTwo = () => {
 
 
         <form onSubmit={saveCategory}>
-          {/* <h2>Добавление Категории</h2> */}
           <label>Наименование</label>
           <input type="text"
             value={name}
             onChange={(y) => setNazv_cat(y.target.value)}
             required />
-          {/* <label>Загрузить фото </label>
-          <input type="file"
-            value={image_cat}
-            multiple
-            onChange={(y) => setImage_cat(y.target.value)}
-          /> */}
           <button className="adding_pr">Добавить</button>
         </form>
 
