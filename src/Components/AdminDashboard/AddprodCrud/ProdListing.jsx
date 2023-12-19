@@ -17,16 +17,17 @@ import { URL } from '../../Common/ddata';
     const LoadEdit=(id)=>{
       navigate("/adminpage/prodlisting/prodedit/"+id)
     }
-    const Removefunction=(id)=>{
-      if(window.confirm("Do you want to remove?")){
-        fetch(URL + "/category/parent/2" +id,{
+    const Removefunction=(item)=>{
+      {
+        fetch(URL + "/product/id/" +item.id,{
         method: "DELETE",
         // headers:{"content-type":"application/json"},
         // body:JSON.stringify(empdata)
       })  
-      .then((res)=>{
-          alert("Removed Succesfully!")
-          window.location.reload();
+      .then((item)=>{
+        console.log(item.id);
+          // alert("Removed Succesfully!")
+          // window.location.reload();
       }).catch((err) =>{
           console.log(err.message);
       })
@@ -99,7 +100,7 @@ const [records, setRecords] = useState([]);
                 <td>{(item.isNew) ? "ДА" : "НЕТ"}</td>
                 <td>
                   <a onClick={()=>{LoadEdit(item.id)}} className='btn btn-success'>Редакт.</a>
-                  <a onClick={()=>{Removefunction(item.id)}} className='btn btn-danger'>Удалить</a>
+                  <a onClick={()=>{Removefunction(item)}} className='btn btn-danger'>Удалить</a>
                   <a onClick={()=>{LoadDetail(item.id)}} className='btn btn-primary'>Подр.</a>
                 </td>
                 </tr>

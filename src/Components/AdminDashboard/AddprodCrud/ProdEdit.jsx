@@ -21,7 +21,8 @@ export const ProdEdit = () => {
         descriptionchange(resp.description)
         isNewchange(resp.isNew);
         setproduct(resp.id);
-        console.log("see ");
+        setproductId(resp.id)
+        console.log("Product fetched from server ");
       })
       .catch((err) =>{
         console.log(err.message);
@@ -158,10 +159,12 @@ export const ProdEdit = () => {
 
    const handleOzgert = (y) => {
     setFiles(y.target.files);
+    
     // setPhoto_pr(y.target.value);
     // setPhoto_pr(y.target.image);
   }
 
+  const[imageDisplay,setimageDisplay] =useState([]);
 
   function handleUpload() {
     for (let i = 0; i < files.length; i++) {
@@ -170,7 +173,7 @@ export const ProdEdit = () => {
       container1.append(`file`, files[i])
       Send(container1);
       console.log('container1',container1);
-    }     
+    }   
   }
   function Send(data) {
     fetch(URL + '/upload/image', {
@@ -178,7 +181,11 @@ export const ProdEdit = () => {
       // headers: { "Content-type": "multipart/form-data" },
       body: data
     }).then(res => res.json()).
-      then(data => console.log(data)).
+      then(data =>{
+        console.log("Our files",data.filename);
+        setimageDisplay([...imageDisplay, data])
+
+      } ).
       catch(err => console.log(err));
   }
 
@@ -193,6 +200,7 @@ export const ProdEdit = () => {
   }, []);
 
   return (
+    <>
     <div>
     <div className='row'>
       <div className="offset-lg-3 col-lg-6">
@@ -326,6 +334,29 @@ export const ProdEdit = () => {
             // value={files}
             onChange={handleOzgert}
           />
+<table>
+             <tbody>
+          {imageDisplay.map((product) => {
+             
+                
+              return (
+                 
+
+             <tr key={product.id} >
+                <td>{product.filename}</td>
+                <td>{product.id}</td>
+                <td>
+                <a onClick={()=>{LoadEdit(product.id)}} className='btn btn-success'>Редакт.</a>
+                <a onClick={()=>{Removefunction(product)}} className='btn btn-danger'>Удалить</a>
+                
+                
+              </td>
+              </tr>
+                
+              )
+             })}
+          </tbody>
+        </table>
               <label>Загрузить файлы:</label>
           <input
             type="file"
@@ -352,5 +383,6 @@ export const ProdEdit = () => {
       </div>
     </div>
     </div>
+    </>
   )
 }
