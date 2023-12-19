@@ -1,12 +1,3 @@
-/* styles.css */
-
-.container {
-  /* width: 100%;
-  margin: 20px auto;
-  display: flex;
-  align-items: center; */
- 
-}
 
 .container input {
   width: 100%;
@@ -16,6 +7,17 @@
     box-sizing: border-box;
     display: block;
 }
+
+
+.container select {
+  width: 100%;
+  padding: 6px 10px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+}
+
 
 .container label {
   text-align: left;

@@ -10,7 +10,8 @@ export const CategoryByMainLevel = () => {
   const handleSubmit = (y) => {
     y.preventDefault();
     const category = {
-      name
+      name,
+      parent: 1
     };
 
     fetch(URL + "/category", {
@@ -30,8 +31,8 @@ export const CategoryByMainLevel = () => {
       <div className='category'>
 
         <form onSubmit={handleSubmit}>
-          <h2>Добавление Категории</h2>
-          <label>Название Категории</label>
+          {/* <h2>Добавление Категории</h2> */}
+          <label>Наименование</label>
           <input type="text"
             value={name}
             onChange={(y) => setNazv_cat(y.target.value)}
@@ -42,7 +43,7 @@ export const CategoryByMainLevel = () => {
             multiple
             onChange={(y) => setImage_cat(y.target.value)}
           />
-          <button className="adding_pr">Добавить category</button>
+          <button className="adding_pr">Добавить</button>
         </form>
 
         <div className='why'>

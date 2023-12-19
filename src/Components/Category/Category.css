@@ -70,6 +70,7 @@
   font-weight: bold;
   /* flex-grow: 1; */
   width: 100%;
+  color:black;
 }
 
 .category-tab-buttons li a:hover {
