@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { URL } from '../../Common/ddata';
+import { URL, imgURL } from '../../Common/ddata';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from '../../services/CategoryService';
@@ -54,6 +54,15 @@ export const ProdEdit = () => {
           });
 
         setproductId(resp.id)
+        fetch(URL + "/upload/image/"+resp.id)
+      .then((response) => response.json())
+      .then((data) => {
+      setImgRealDisplay(data);
+        console.log(data);
+        
+      })
+      .catch((err) => console.log(err));
+
         console.log("Product fetched from server ");
 
       })
@@ -205,6 +214,7 @@ export const ProdEdit = () => {
 
   async function handleUpload() {
     const images = [];
+    
     for (let i = 0; i < files.length; i++) {
 
       const container1 = new FormData();
@@ -216,6 +226,7 @@ export const ProdEdit = () => {
       
     }
     setimageDisplay(images);
+    
   }
 
   function Send(data) {
@@ -223,20 +234,18 @@ export const ProdEdit = () => {
       method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
       body: data
-    });
+    })
+    ;
 
   }
-
+  const[imgRealDisplay,setImgRealDisplay]=useState([])
   useEffect(() => {
+    
+
     CategoryService.findByParentId(1)
       .then((result) => {
         setMainCategories(result);
       });
-
-    // CategoryService.findByParentId(1)
-    //   .then((result) => {
-    //     setMainCategories(result);
-    //   });
 
   }, []);
 
@@ -261,6 +270,8 @@ export const ProdEdit = () => {
       });
   }
 
+
+  
   return (
     <>
       <div>
@@ -439,9 +450,32 @@ export const ProdEdit = () => {
                     -{imageDisplay.length}-
                     {imageDisplay.map((product) => {
                       return (
-                        <div>{product.filename}</div>
+                        <div >{product.filename}
+                          <img src={imgURL+"/images/thumbnail-"+product.filename} alt="Filepath" />
+                          
+                        </div>
+                        
                       )
                     })}
+                       
+                       
+                    
+                    {imgRealDisplay.filter(s => s.filename.startsWith('thumbnail-')).map((product) => {
+                      return (
+                        <div className="img-thumbnail"><p>
+                       {product.filename}
+                        </p>
+                          <img
+                           src={imgURL+"/images/"+product.filename} alt="Filepath"
+                             className="img-thumbnail"
+                           />
+                         
+                        </div>
+                        
+                      )
+                    })}
+
+                    
 
                     <label>Загрузить файлы:</label>
                     <input

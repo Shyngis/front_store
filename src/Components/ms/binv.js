@@ -137,3 +137,28 @@ const handleDelete = (i) => {
         })
 }
     }, [])
+
+
+
+
+
+
+
+
+
+
+
+     {imgRealDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail"><p>
+                        {product.filename}
+                        </p>
+                          <img
+                           src={imgURL+"/images/thumbnail-"+product.filename} alt="Filepath"
+                             className="img-thumbnail"
+                           />
+                         
+                        </div>
+                        
+                      )
+                    })}
