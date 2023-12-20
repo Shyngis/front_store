@@ -8,12 +8,10 @@ import CategoryService from '../../services/CategoryService';
 export const ProdEdit = () => {
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
-  const [secondLevelCategory, setSecondLevelCategory] = useState();
 
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-  const [secondLevelCategories, setSecondLevelCategories] = useState([]);
 
 
 
@@ -39,8 +37,6 @@ export const ProdEdit = () => {
             if (result) {
 
               const firstItem = result[0];
-              setSecondLevelCategories(result);
-              setSecondLevelCategory(resp.category);
 
               CategoryService.findFirstLevelRowsByChildId(resp.category)
                 .then((result) => {
@@ -85,7 +81,7 @@ export const ProdEdit = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
 
-    const empdata = { id, name, category, description, isNew, video };
+    const empdata = { id, name, firstLevelCategories, description, isNew, video };
     fetch(URL + "/product", {
       method: "PUT",
       headers: { "content-type": "application/json" },
@@ -223,7 +219,7 @@ export const ProdEdit = () => {
       const sendImage = await  Send(container1)
       const sendImageResponse = await sendImage.json();
       images.push(sendImageResponse);
-      
+
     }
     setimageDisplay(images);
     
@@ -263,11 +259,6 @@ export const ProdEdit = () => {
     y.preventDefault();
     const parentId = y.target.value;
     setFirstLevelCategory(parentId);
-
-    CategoryService.findByParentId(parentId)
-      .then((result) => {
-        setSecondLevelCategories(result);
-      });
   }
 
 
@@ -307,7 +298,7 @@ export const ProdEdit = () => {
                       <div className="form-group">
 
 
-                        <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
+                        <label htmlFor="uroven1">Выберите под категорию:</label>
                         <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
                           {firstLevelCategories.map((category) => (
                             <option
@@ -321,25 +312,6 @@ export const ProdEdit = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-12">
-                      <div className="form-group">
-
-                        <label htmlFor="cars">Выберите категорию уровень 2:</label>
-
-                        <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-                          {secondLevelCategories && secondLevelCategories.map((categor) => (
-                            <option
-
-                              name="option"
-                              key={categor.id}
-                              value={categor.id || ''}>
-                              {categor.name}
-                            </option>
-
-                          ))}
-                        </select>
-                      </div>
-                    </div>
 
                     <div className="col-lg-12">
                       <div className="form-group">

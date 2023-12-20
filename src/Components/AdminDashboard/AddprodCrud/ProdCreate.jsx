@@ -17,12 +17,9 @@ export const ProdCreate = () => {
   const [validation, valchange] = useState(false)
 
   const [firstLevelCategory, setFirstLevelCategory] = useState();
-  const [secondLevelCategory, setSecondLevelCategory] = useState();
-
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-  const [secondLevelCategories, setSecondLevelCategories] = useState([]);
 
   const navigate = useNavigate();
 
@@ -40,7 +37,7 @@ export const ProdCreate = () => {
 
       video,
       isNew,
-      category: secondLevelCategory,
+      category: firstLevelCategory,
       productId,
     };
 
@@ -96,12 +93,6 @@ export const ProdCreate = () => {
     y.preventDefault();
     const parentId = y.target.value;
     setFirstLevelCategory(parentId);
-
-    CategoryService.findByParentId(parentId)
-    .then((result) => {
-      setSecondLevelCategories(result);
-    });
-
   }
 
 
@@ -123,7 +114,7 @@ export const ProdCreate = () => {
             ))}
           </select>
 
-          <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
+          <label htmlFor="uroven1">Выберите под категорию:</label>
           <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
             {firstLevelCategories.map((category) => (
               <option
@@ -134,22 +125,6 @@ export const ProdCreate = () => {
               </option>
             ))}
           </select>
-
-          <label htmlFor="cars">Выберите категорию:</label>
-
-          <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-            {secondLevelCategories.map((categor) => (
-              <option
-
-                name="option"
-                key={categor.id}
-                value={categor.id || ''}>
-                {categor.name}
-              </option>
-
-            ))}
-          </select>
-
         </div>
 
         <label>Название товара:</label>
