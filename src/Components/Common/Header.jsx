@@ -19,7 +19,7 @@ export const Header = () => {
           </div>
           <ul class="navbar">
 
-            <li><Link to='/category'>Главная</Link></li>
+            <li><Link to='/catalog'>Главная</Link></li>
             {/* <li>
               <a href="#">Техподдержка</a>
               <ul className='dropdown'>

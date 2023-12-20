@@ -1,5 +1,5 @@
 import React from 'react'
-import './Category.css'
+import '../Catalog/Category.css';
 import { Link, Outlet } from 'react-router-dom';
 
 export const TabButtons = () => {

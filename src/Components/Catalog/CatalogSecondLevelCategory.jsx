@@ -6,13 +6,13 @@ import CategoryService from "../services/CategoryService";
 
 
 
-export const FirstLevelCategory = () => {
+export const CatalogSecondLevelCategory = () => {
   
   const [records, setRecords] = useState([]);
   const params = useParams();
 
   useEffect(() => {
-    CategoryService.findByParentId(params.id).then(result => {
+    CategoryService.findByParentId(params.secondLevelId).then(result => {
       setRecords(result)
     });
   }, []);
@@ -24,7 +24,7 @@ export const FirstLevelCategory = () => {
     <section className="cat_prod">
       <>
         {records.map((record) => (
-          <Link to={ `first-level/${record.name}`}>
+          <Link to={ `second-level/${record.name}`}>
             <div className="cards">
               <div className="image_box">
                 <img src={record.image} alt="" />
