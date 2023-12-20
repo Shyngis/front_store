@@ -11,8 +11,7 @@ import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
 import ProductDetails from '../Catalog/ProductDetails'
 import { CatalogFirstLevelCategory } from '../Catalog/CatalogFirstLevelCategory'
-import { CatalogSecondLevelCategory } from '../Catalog/CatalogSecondLevelCategory'
-import { Product } from '../Catalog/Product'
+import { CatalogProduct } from '../Catalog/CatalogProduct'
 import { ProdListing } from '../AdminDashboard/AddprodCrud/ProdListing'
 import { ProdCreate } from '../AdminDashboard/AddprodCrud/ProdCreate'
 import { ProdEdit } from '../AdminDashboard/AddprodCrud/ProdEdit'
@@ -21,7 +20,6 @@ import { ProdCreate2 } from '../AdminDashboard/AddprodCrud/ProdCreate2'
 import { SizeEdit } from '../AdminDashboard/AddprodCrud/SizeEdit'
 import { CategoryByMainLevel } from '../AdminDashboard/CategoryByLevel/CategoryByMainLevel';
 import { CategoryByLevelOne } from '../AdminDashboard/CategoryByLevel/CategoryByLevelOne';
-import { CategoryByLevelTwo } from '../AdminDashboard/CategoryByLevel/CategoryByLevelTwo';
 
 
 export const Pages = () => {
@@ -34,7 +32,8 @@ export const Pages = () => {
 
           <Route path='catalog' element={<Catalog />} />
           <Route path='catalog/first-level/:id' element={<CatalogFirstLevelCategory />} />          
-          <Route path='catalog/first-level/:id/second-level/:secondLevelId' element={<CatalogSecondLevelCategory />} />
+          <Route path='catalog/first-level/:id/products/:categoryId' element={<CatalogProduct />} />          
+          <Route path='catalog/first-level/:id/products/:categoryId/product/:productId' element={<ProductDetails />} />          
           {/* <Route path='category/:id' element={<Product />} /> */}
 
           {/* <Route path='category_1/:id/:id' element={<ProductDetails />} /> */}
@@ -45,7 +44,6 @@ export const Pages = () => {
 
               <Route path='mainlevel' element={<CategoryByMainLevel />} />
               <Route path='level-1' element={<CategoryByLevelOne />} />
-              <Route path='level-2' element={<CategoryByLevelTwo />} />
 
             </Route>
 

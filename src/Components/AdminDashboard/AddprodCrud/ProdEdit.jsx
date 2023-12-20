@@ -6,17 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import CategoryService from '../../services/CategoryService';
 
 export const ProdEdit = () => {
+
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
-  const [secondLevelCategory, setSecondLevelCategory] = useState();
-
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-  const [secondLevelCategories, setSecondLevelCategories] = useState([]);
-
-
-
   // const [empdata, empdatachange] = useState({});
 
   useEffect(() => {
@@ -38,18 +33,12 @@ export const ProdEdit = () => {
           .then((result) => {
             if (result) {
 
-              const firstItem = result[0];
-              setSecondLevelCategories(result);
-              setSecondLevelCategory(resp.category);
+              setFirstLevelCategory(resp.category);
+              setFirstLevelCategories(result);
 
-              CategoryService.findFirstLevelRowsByChildId(resp.category)
-                .then((result) => {
-                  setFirstLevelCategories(result);
-                  setFirstLevelCategory(firstItem.parent);
-                  const firstLevelCateogryItem = result.filter(i => i.id === firstItem.parent);
-                  // console.log('firstLevelCateogryItem', firstLevelCateogryItem);
-                  setMainCategory(firstLevelCateogryItem.parent);
-                });
+              const firstItem = result[0];
+              setMainCategory(firstItem.parent);
+              
             }
           });
 
@@ -84,8 +73,8 @@ export const ProdEdit = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    const empdata = { id, name, category:firstLevelCategory, description, isNew, video };
 
-    const empdata = { id, name, category, description, isNew, video };
     fetch(URL + "/product", {
       method: "PUT",
       headers: { "content-type": "application/json" },
@@ -93,8 +82,7 @@ export const ProdEdit = () => {
     })
       .then((res) => {
         alert("Saved Succesfully")
-
-        navigate('/adminpage/prodlisting')
+//        navigate('/adminpage/prodlisting')
       }).catch((err) => {
         console.log(err.message);
       })
@@ -223,7 +211,7 @@ export const ProdEdit = () => {
       const sendImage = await  Send(container1)
       const sendImageResponse = await sendImage.json();
       images.push(sendImageResponse);
-      
+
     }
     setimageDisplay(images);
     
@@ -263,11 +251,6 @@ export const ProdEdit = () => {
     y.preventDefault();
     const parentId = y.target.value;
     setFirstLevelCategory(parentId);
-
-    CategoryService.findByParentId(parentId)
-      .then((result) => {
-        setSecondLevelCategories(result);
-      });
   }
 
 
@@ -307,7 +290,7 @@ export const ProdEdit = () => {
                       <div className="form-group">
 
 
-                        <label htmlFor="uroven1">Выберите категорию уровень 1:</label>
+                        <label htmlFor="uroven1">Выберите под категорию:</label>
                         <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
                           {firstLevelCategories.map((category) => (
                             <option
@@ -321,25 +304,6 @@ export const ProdEdit = () => {
                       </div>
                     </div>
 
-                    <div className="col-lg-12">
-                      <div className="form-group">
-
-                        <label htmlFor="cars">Выберите категорию уровень 2:</label>
-
-                        <select value={secondLevelCategory} onChange={(y) => setSecondLevelCategory(y.target.value)}>
-                          {secondLevelCategories && secondLevelCategories.map((categor) => (
-                            <option
-
-                              name="option"
-                              key={categor.id}
-                              value={categor.id || ''}>
-                              {categor.name}
-                            </option>
-
-                          ))}
-                        </select>
-                      </div>
-                    </div>
 
                     <div className="col-lg-12">
                       <div className="form-group">
@@ -385,7 +349,7 @@ export const ProdEdit = () => {
                           type="text"
                           value={article || ''}
                           onChange={(y) => setArticle(y.target.value)}
-                          required
+                          
                         />
 
 
@@ -394,7 +358,7 @@ export const ProdEdit = () => {
                           type="number"
                           value={size || ''}
                           onChange={(y) => setSize(y.target.value)}
-                          required
+                          
                         />
 
                       </div>
