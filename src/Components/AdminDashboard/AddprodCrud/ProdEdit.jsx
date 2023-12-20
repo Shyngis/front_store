@@ -200,28 +200,31 @@ export const ProdEdit = () => {
   }
 
   const [imageDisplay, setimageDisplay] = useState([]);
+  const images = []
 
-  function handleUpload() {
+
+  async function handleUpload() {
+    const images = [];
     for (let i = 0; i < files.length; i++) {
+
       const container1 = new FormData();
       container1.append("container", productId)
       container1.append(`file`, files[i])
-      Send(container1);
+      const sendImage = await  Send(container1)
+      const sendImageResponse = await sendImage.json();
+      images.push(sendImageResponse);
+      
     }
+    setimageDisplay(images);
   }
 
   function Send(data) {
-    fetch(URL + '/upload/image', {
+    return fetch(URL + '/upload/image', {
       method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
       body: data
-    }).then(res => res.json()).
-      then(data => {
-        console.log("Our files", data.filename);
-        setimageDisplay([...imageDisplay, data])
+    });
 
-      }).
-      catch(err => console.log(err));
   }
 
   useEffect(() => {
@@ -433,6 +436,13 @@ export const ProdEdit = () => {
                       // value={files}
                       onChange={handleOzgert}
                     />
+                    -{imageDisplay.length}-
+                    {imageDisplay.map((product) => {
+                      return (
+                        <div>{product.filename}</div>
+                      )
+                    })}
+
                     <label>Загрузить файлы:</label>
                     <input
                       type="file"
@@ -472,4 +482,5 @@ export const ProdEdit = () => {
     </>
  */}
     </>
-  )}
+  )
+}
