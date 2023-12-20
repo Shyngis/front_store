@@ -11,7 +11,7 @@ import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
 import ProductDetails from '../Catalog/ProductDetails'
 import { CatalogFirstLevelCategory } from '../Catalog/CatalogFirstLevelCategory'
-import { Product } from '../Catalog/Product'
+import { CatalogProduct } from '../Catalog/CatalogProduct'
 import { ProdListing } from '../AdminDashboard/AddprodCrud/ProdListing'
 import { ProdCreate } from '../AdminDashboard/AddprodCrud/ProdCreate'
 import { ProdEdit } from '../AdminDashboard/AddprodCrud/ProdEdit'
@@ -32,6 +32,8 @@ export const Pages = () => {
 
           <Route path='catalog' element={<Catalog />} />
           <Route path='catalog/first-level/:id' element={<CatalogFirstLevelCategory />} />          
+          <Route path='catalog/first-level/:id/products/:categoryId' element={<CatalogProduct />} />          
+          <Route path='catalog/first-level/:id/products/:categoryId/product/:productId' element={<ProductDetails />} />          
           {/* <Route path='category/:id' element={<Product />} /> */}
 
           {/* <Route path='category_1/:id/:id' element={<ProductDetails />} /> */}

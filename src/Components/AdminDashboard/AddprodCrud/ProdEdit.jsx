@@ -6,15 +6,12 @@ import "react-toastify/dist/ReactToastify.css";
 import CategoryService from '../../services/CategoryService';
 
 export const ProdEdit = () => {
+
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
-
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-
-
-
   // const [empdata, empdatachange] = useState({});
 
   useEffect(() => {
@@ -36,16 +33,12 @@ export const ProdEdit = () => {
           .then((result) => {
             if (result) {
 
-              const firstItem = result[0];
+              setFirstLevelCategory(resp.category);
+              setFirstLevelCategories(result);
 
-              CategoryService.findFirstLevelRowsByChildId(resp.category)
-                .then((result) => {
-                  setFirstLevelCategories(result);
-                  setFirstLevelCategory(firstItem.parent);
-                  const firstLevelCateogryItem = result.filter(i => i.id === firstItem.parent);
-                  // console.log('firstLevelCateogryItem', firstLevelCateogryItem);
-                  setMainCategory(firstLevelCateogryItem.parent);
-                });
+              const firstItem = result[0];
+              setMainCategory(firstItem.parent);
+              
             }
           });
 
@@ -80,8 +73,8 @@ export const ProdEdit = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
+    const empdata = { id, name, category:firstLevelCategory, description, isNew, video };
 
-    const empdata = { id, name, firstLevelCategories, description, isNew, video };
     fetch(URL + "/product", {
       method: "PUT",
       headers: { "content-type": "application/json" },
@@ -89,8 +82,7 @@ export const ProdEdit = () => {
     })
       .then((res) => {
         alert("Saved Succesfully")
-
-        navigate('/adminpage/prodlisting')
+//        navigate('/adminpage/prodlisting')
       }).catch((err) => {
         console.log(err.message);
       })
@@ -357,7 +349,7 @@ export const ProdEdit = () => {
                           type="text"
                           value={article || ''}
                           onChange={(y) => setArticle(y.target.value)}
-                          required
+                          
                         />
 
 
@@ -366,7 +358,7 @@ export const ProdEdit = () => {
                           type="number"
                           value={size || ''}
                           onChange={(y) => setSize(y.target.value)}
-                          required
+                          
                         />
 
                       </div>

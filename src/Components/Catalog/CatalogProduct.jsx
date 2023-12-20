@@ -2,18 +2,20 @@ import React, { useEffect, useState } from "react";
 import "./CatalogProducts.css";
 import { Link, useParams, Outlet } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
+import ProductService from "../services/ProductService";
 
 
 
 
-export const CatalogFirstLevelCategory = () => {
+export const CatalogProduct = () => {
   
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
   const params = useParams();
+  const category = params.categoryId;
 
   useEffect(() => {
-    CategoryService.findByParentId(params.id).then(categories => {
-      setCategories(categories)
+    ProductService.findByCategory(category).then(products => {
+      setProducts(products)
     });
   }, []);
 
@@ -21,15 +23,15 @@ export const CatalogFirstLevelCategory = () => {
 
     <section className="cat_prod">
       <>
-        {categories.map((category) => (
-          <Link to={ `products/${category.id}`}>
+        {products.map((product) => (
+          <Link to={ `product/${product.id}`}>
             <div className="cards">
               <div className="image_box">
-                <img src={category.image} alt="" />
+                <img src={product.image} alt="" />
               </div>
               <div className="details">
-                <p>{category.name}</p>
-                <p>{category.description}</p>
+                <p>{product.name}</p>
+                <p>{product.description}</p>
               </div>
             </div>
           </Link>
