@@ -450,8 +450,12 @@ export const ProdEdit = () => {
                     -{imageDisplay.length}-
                     {imageDisplay.map((product) => {
                       return (
-                        <div >{product.filename}
-                          <img src={imgURL+"/images/thumbnail-"+product.filename} alt="Filepath" />
+                        <div className="img-thumbnail">{product.filename}
+                        <br/>
+                          <img 
+                          src={imgURL+"/images/"+product.filename} alt="Filepath"
+                          className="img-thumbnail"
+                           />
                           
                         </div>
                         
