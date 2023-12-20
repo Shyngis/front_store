@@ -3,14 +3,15 @@ import { Header } from '../Common/Header'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Main } from '../Category/Main'
 import { AddingCategory } from '../AdminDashboard/AddingCategory'
-import { Category } from '../Category/Category'
+import { Catalog } from '../Catalog/Catalog'
+
 import AddingProducts from '../AdminDashboard/AddingProducts';
 import { Login } from '../Common/Login'
 import { AdminPage } from '../AdminDashboard/AdminPage'
 import { Footer } from '../Common/Footer'
 import ProductDetails from '../Catalog/ProductDetails'
-import { FirstLevelCategory } from '../Catalog/FirstLevelCategory'
-import { SecondLevelCategory } from '../Catalog/SecondLevelCategory'
+import { CatalogFirstLevelCategory } from '../Catalog/CatalogFirstLevelCategory'
+import { CatalogSecondLevelCategory } from '../Catalog/CatalogSecondLevelCategory'
 import { Product } from '../Catalog/Product'
 import { ProdListing } from '../AdminDashboard/AddprodCrud/ProdListing'
 import { ProdCreate } from '../AdminDashboard/AddprodCrud/ProdCreate'
@@ -31,14 +32,12 @@ export const Pages = () => {
         <Routes>
           <Route path='/' element={<Main />} />
 
-          <Route path='category' element={<Category />}>
-            <Route path=':id' element={<FirstLevelCategory />} />
-            {/* <Route path=':id/second-level/' element={<SecondLevelCategory />} /> */}
-          </Route>
-          
+          <Route path='catalog' element={<Catalog />} />
+          <Route path='catalog/first-level/:id' element={<CatalogFirstLevelCategory />} />          
+          <Route path='catalog/first-level/:id/second-level/:secondLevelId' element={<CatalogSecondLevelCategory />} />
           {/* <Route path='category/:id' element={<Product />} /> */}
 
-          <Route path='category_1/:id/:id' element={<ProductDetails />} />
+          {/* <Route path='category_1/:id/:id' element={<ProductDetails />} /> */}
           <Route path='login' element={<Login />} />
           <Route path='/adminpage' element={<AdminPage />} >
 

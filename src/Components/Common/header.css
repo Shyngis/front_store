@@ -19,7 +19,7 @@ body{
   align-items: center;
   /* position: fixed; */
   z-index: 99;
-  box-shadow: 0 0 10px;
+  box-shadow: 0 0 1px;
   /* background: rgba(0, 0, 0, 0.5);log */
 }
 
