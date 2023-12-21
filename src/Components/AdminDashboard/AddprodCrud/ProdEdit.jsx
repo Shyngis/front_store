@@ -24,36 +24,39 @@ export const ProdEdit = () => {
       })
       .then((resp) => {
         idchange(resp.id);
-        categorychange(resp.category)
+        setFirstLevelCategory(resp.category)
         namechange(resp.name)
         descriptionchange(resp.description)
         isNewchange(resp.isNew);
         setVideo_pr(resp.video)
         setproduct(resp.id);
 
+        if (resp.category) {
+          CategoryService.findLevelCategoriesById(resp.category)
+            .then((result) => {
+              if (result) {
+                console.log('result in resp.category', result, resp.category);
+                if (resp.category) {
+                  setFirstLevelCategory(resp.category);
+                }
+                setFirstLevelCategories(result);
 
-        CategoryService.findLevelCategoriesById(resp.category)
-          .then((result) => {
-            if (result) {
+                const firstItem = result[0];
+                setMainCategory(firstItem.parent);
 
-              setFirstLevelCategory(resp.category);
-              setFirstLevelCategories(result);
-
-              const firstItem = result[0];
-              setMainCategory(firstItem.parent);
-              
-            }
-          });
+              }
+            });
+        }
 
         setproductId(resp.id)
-        fetch(URL + "/upload/image/"+resp.id)
-      .then((response) => response.json())
-      .then((data) => {
-      setImgRealDisplay(data);
-        console.log(data);
-        
-      })
-      .catch((err) => console.log(err));
+        fetch(URL + "/upload/image/" + resp.id)
+          .then((response) => response.json())
+          .then((data) => {
+            setImgRealDisplay(data);
+            console.log(data);
+
+          })
+          .catch((err) => console.log(err));
 
         console.log("Product fetched from server ");
 
@@ -66,7 +69,6 @@ export const ProdEdit = () => {
 
   const [id, idchange] = useState("");
   const [name, namechange] = useState("");
-  const [category, categorychange] = useState("");
   const [description, descriptionchange] = useState("");
   const [isNew, isNewchange] = useState(true);
   const [video, setVideo_pr] = useState("")
@@ -74,9 +76,9 @@ export const ProdEdit = () => {
 
   const navigate = useNavigate();
 
-  const handlesubmit = (e) => {
+  const saveProduct = (e) => {
     e.preventDefault();
-    const empdata = { id, name, category:firstLevelCategory, description, isNew, video };
+    const empdata = { id, name, category: firstLevelCategory, description, isNew, video };
 
     fetch(URL + "/product", {
       method: "PUT",
@@ -85,8 +87,8 @@ export const ProdEdit = () => {
     })
       .then((res) => {
         toast.success("Успешно сохранено !", {
-      position: toast.POSITION.TOP_RIGHT,
-    })
+          position: toast.POSITION.TOP_RIGHT,
+        })
       }).catch((err) => {
         console.log(err.message);
       })
@@ -206,19 +208,19 @@ export const ProdEdit = () => {
 
   async function handleUpload() {
     const images = [];
-    
+
     for (let i = 0; i < files.length; i++) {
 
       const container1 = new FormData();
       container1.append("container", productId)
       container1.append(`file`, files[i])
-      const sendImage = await  Send(container1)
+      const sendImage = await Send(container1)
       const sendImageResponse = await sendImage.json();
       images.push(sendImageResponse);
 
     }
     setimageDisplay(images);
-    
+
   }
 
   function Send(data) {
@@ -229,7 +231,7 @@ export const ProdEdit = () => {
     });
 
   }
-  const[imgRealDisplay,setImgRealDisplay]=useState([])
+  const [imgRealDisplay, setImgRealDisplay] = useState([])
   useEffect(() => {
     CategoryService.findByParentId(1)
       .then((result) => {
@@ -239,7 +241,7 @@ export const ProdEdit = () => {
   }, []);
 
 
-  function handleFile(){
+  function handleFile() {
     "wdw"
   }
 
@@ -260,13 +262,13 @@ export const ProdEdit = () => {
   }
 
 
-  
+
   return (
     <>
       <div>
         <div className='row'>
           <div className="">
-            <form className="container" onSubmit={handlesubmit}>
+            <form className="container" onSubmit={saveProduct}>
               <div className="card" style={{ "textAlign": "left" }}>
                 <div className="card-title">
                   <h2>Редактирование</h2>
@@ -278,7 +280,8 @@ export const ProdEdit = () => {
                       <input type='hidden' value={id} disabled="disabled" className='form-control' />
                       <div className="form-group">
                         <label htmlFor="main">Выберите основную категорию:</label>
-                        <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
+                        <select required className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
+                          <option value="">--</option>
                           {mainCategories.map((category) => (
                             <option
                               name="option-main"
@@ -297,7 +300,8 @@ export const ProdEdit = () => {
 
 
                         <label htmlFor="uroven1">Выберите под категорию:</label>
-                        <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
+                        <select required className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
+                          <option value="">--</option>
                           {firstLevelCategories.map((category) => (
                             <option
                               name="option"
@@ -342,14 +346,14 @@ export const ProdEdit = () => {
 
                     <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
                     <div className='d-inline-block' >
-                            <ReactPlayer
-                                className="img-thumbnail"
-                                url={video}
-                                controls
-                                width="200px" 
-                                height="150px"                                
-                                 />
-                      </div>
+                      <ReactPlayer
+                        className="img-thumbnail"
+                        url={video}
+                        controls
+                        width="200px"
+                        height="150px"
+                      />
+                    </div>
                     <div className='all'>
 
                       <div className="article_size">
@@ -363,7 +367,7 @@ export const ProdEdit = () => {
                           type="text"
                           value={article || ''}
                           onChange={(y) => setArticle(y.target.value)}
-                          
+
                         />
 
 
@@ -372,7 +376,7 @@ export const ProdEdit = () => {
                           type="number"
                           value={size || ''}
                           onChange={(y) => setSize(y.target.value)}
-                          
+
                         />
 
                       </div>
@@ -429,45 +433,45 @@ export const ProdEdit = () => {
                     {imageDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">{product.filename}
-                        <br/>
-                          <img 
-                          src={imgURL+"/images/"+product.filename} alt="Filepath"
-                          className="img-thumbnail"
-                           />
-                          
+                          <br />
+                          <img
+                            src={imgURL + "/images/" + product.filename} alt="Filepath"
+                            className="img-thumbnail"
+                          />
+
                         </div>
-                        
+
                       )
                     })}
-                       
-  <div className="container">
-    <div className="row">
-      {imgRealDisplay
-      .filter((s) => s.filename.startsWith('thumbnail-'))
-      .map((product) => (
-        <div className="col-md-4 mb-3" key={product.filename}>
-          <div className="img-thumbnail">
-            <p>{product.filename}</p>
-            <img
-              src={imgURL + "/images/" + product.filename}
-              alt="Filepath"
-              className="img-thumbnail"
-            />
-            <div className="col-12 mt-2">
-              <button
-                type="button"
-                className="btn btn-danger"
-                
-              >
-                Удалить
-              </button>
-            </div>
-          </div>
-        </div>
-      ))}
-  </div>
-</div>   
-                    
+
+                    <div className="container">
+                      <div className="row">
+                        {imgRealDisplay
+                          .filter((s) => s.filename.startsWith('thumbnail-'))
+                          .map((product) => (
+                            <div className="col-md-4 mb-3" key={product.filename}>
+                              <div className="img-thumbnail">
+                                <p>{product.filename}</p>
+                                <img
+                                  src={imgURL + "/images/" + product.filename}
+                                  alt="Filepath"
+                                  className="img-thumbnail"
+                                />
+                                <div className="col-12 mt-2">
+                                  <button
+                                    type="button"
+                                    className="btn btn-danger"
+
+                                  >
+                                    Удалить
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+
                     <label>Загрузить файлы:</label>
                     <input
                       type="file"
@@ -480,7 +484,7 @@ export const ProdEdit = () => {
 
                     {/* <button onClick={handleUpload}>Загрузить</button> */}
 
-                    
+
                     <div className="col-lg-12">
                       <div className="form-group">
                         <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>

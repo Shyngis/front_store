@@ -10,9 +10,10 @@ const ProductDetails = () => {
 
   // const IMAGE_URL = "http://161.97.144.45:8182/images/";
   const IMAGE_URL = "http://161.97.144.45:8182/images/";
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState("");
   const [images, setImages] = useState([]);
   const [productSizes, setProductSizes] = useState([]);
+  const [activeImg, setActiveImage] = useState()
 
   const params = useParams()
   const id = params.productId;
@@ -25,8 +26,12 @@ const ProductDetails = () => {
 
     FileService.findImagesByContainerId(id).then(result => {
       const thumbs = result.filter(i => i.containerClass == 'Thumbnail');
-      setImages(thumbs);
-      console.log(images);
+      if(thumbs && thumbs.length > 0) {
+        
+        setImages(thumbs);
+        setActiveImage(IMAGE_URL + thumbs[0].filename);
+      }
+
     });
 
     ProductSizeService.findAllByProductId(id).then(result => {
@@ -35,7 +40,21 @@ const ProductDetails = () => {
 
   }, []);
 
-  const [activeImg, setActiveImage] = useState(images.img1)
+  function getImageFilename(filename) {
+    console.log('fielname', filename);
+    if(filename) {
+      return filename.replace('thumbnail-', '');
+    }
+    return filename;
+  }
+
+  function activateThumbnail(thumbnailFilename) {
+    // thumbnailFilename.preventDefault();
+    // event.preventDefault();
+    // const thumbnailFilename = event.target.value;
+    // console.log('onclick', thumbnailFilename);
+    setActiveImage(IMAGE_URL + getImageFilename(thumbnailFilename));
+  } 
 
   return (
 
@@ -46,7 +65,7 @@ const ProductDetails = () => {
         <img src={activeImg} alt="" className='product-image' />
         <div className='thumbnail-container'>
           {images.map((image) => (
-            <img src={IMAGE_URL + image.filename} alt="" className='thumbnail' onClick={() => setActiveImage(images.img1)} />
+            <img src={IMAGE_URL + image.filename} alt="" className='thumbnail' onClick={ (event) => activateThumbnail(image.filename)} />
           ))}
         </div>
 

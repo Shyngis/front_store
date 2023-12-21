@@ -31,7 +31,7 @@ export const Header = () => {
             </li> */}
             <li><a href="">О нас</a></li>
             <li><a href="">Контакты</a></li>
-            <li><Link to='/adminpage'>Admin Page</Link></li>
+            <li><Link to='/adminpage'>Управление</Link></li>
             <li><Link to='/login'>Вход</Link></li>
             <li>
               <i className="fa-solid fa-phone"></i>
