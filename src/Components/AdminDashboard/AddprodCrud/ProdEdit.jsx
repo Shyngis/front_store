@@ -4,6 +4,8 @@ import { URL, imgURL } from '../../Common/ddata';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from '../../services/CategoryService';
+import ReactPlayer from 'react-player';
+
 
 export const ProdEdit = () => {
 
@@ -26,6 +28,7 @@ export const ProdEdit = () => {
         namechange(resp.name)
         descriptionchange(resp.description)
         isNewchange(resp.isNew);
+        setVideo_pr(resp.video)
         setproduct(resp.id);
 
 
@@ -81,8 +84,9 @@ export const ProdEdit = () => {
       body: JSON.stringify(empdata)
     })
       .then((res) => {
-        alert("Saved Succesfully")
-//        navigate('/adminpage/prodlisting')
+        toast.success("Успешно сохранено !", {
+      position: toast.POSITION.TOP_RIGHT,
+    })
       }).catch((err) => {
         console.log(err.message);
       })
@@ -189,7 +193,7 @@ export const ProdEdit = () => {
   }
   const [files, setFiles] = useState();
 
-  const handleOzgert = (y) => {
+  const handleImage = (y) => {
     setFiles(y.target.files);
 
     // setPhoto_pr(y.target.value);
@@ -222,20 +226,22 @@ export const ProdEdit = () => {
       method: 'POST',
       // headers: { "Content-type": "multipart/form-data" },
       body: data
-    })
-    ;
+    });
 
   }
   const[imgRealDisplay,setImgRealDisplay]=useState([])
   useEffect(() => {
-    
-
     CategoryService.findByParentId(1)
       .then((result) => {
         setMainCategories(result);
       });
 
   }, []);
+
+
+  function handleFile(){
+    "wdw"
+  }
 
   const getFirstLevelCategoryByParent = (y) => {
     y.preventDefault();
@@ -335,7 +341,15 @@ export const ProdEdit = () => {
                     <label>Ссылка для видео:</label>
 
                     <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
-
+                    <div className='d-inline-block' >
+                            <ReactPlayer
+                                className="img-thumbnail"
+                                url={video}
+                                controls
+                                width="200px" 
+                                height="150px"                                
+                                 />
+                      </div>
                     <div className='all'>
 
                       <div className="article_size">
@@ -409,7 +423,7 @@ export const ProdEdit = () => {
                       name="file"
                       multiple
                       // value={files}
-                      onChange={handleOzgert}
+                      onChange={handleImage}
                     />
                     -{imageDisplay.length}-
                     {imageDisplay.map((product) => {
@@ -426,38 +440,47 @@ export const ProdEdit = () => {
                       )
                     })}
                        
-                       
+  <div className="container">
+    <div className="row">
+      {imgRealDisplay
+      .filter((s) => s.filename.startsWith('thumbnail-'))
+      .map((product) => (
+        <div className="col-md-4 mb-3" key={product.filename}>
+          <div className="img-thumbnail">
+            <p>{product.filename}</p>
+            <img
+              src={imgURL + "/images/" + product.filename}
+              alt="Filepath"
+              className="img-thumbnail"
+            />
+            <div className="col-12 mt-2">
+              <button
+                type="button"
+                className="btn btn-danger"
+                
+              >
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+  </div>
+</div>   
                     
-                    {imgRealDisplay.filter(s => s.filename.startsWith('thumbnail-')).map((product) => {
-                      return (
-                        <div className="img-thumbnail"><p>
-                       {product.filename}
-                        </p>
-                          <img
-                           src={imgURL+"/images/"+product.filename} alt="Filepath"
-                             className="img-thumbnail"
-                           />
-                         
-                        </div>
-                        
-                      )
-                    })}
-
-                    
-
                     <label>Загрузить файлы:</label>
                     <input
                       type="file"
                       name="file"
                       multiple
                       // value={files}
-                      onChange={handleOzgert}
+                      onChange={handleFile}
 
                     />
 
                     {/* <button onClick={handleUpload}>Загрузить</button> */}
 
-                    <input type="url" value={video} onChange={e => setVideo_pr(e.target.value)} />
+                    
                     <div className="col-lg-12">
                       <div className="form-group">
                         <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
