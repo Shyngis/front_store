@@ -54,6 +54,7 @@ export const ProdEdit = () => {
           .then((data) => {
             setImgRealDisplay(data);
             console.log(data);
+            setFileRealDisplay(data);
 
           })
           .catch((err) => console.log(err));
@@ -241,9 +242,50 @@ export const ProdEdit = () => {
   }, []);
 
 
-  function handleFile() {
-    "wdw"
+   const [files2, setFiles2] = useState();
+
+
+ const handleFile = (y) => {
+    setFiles2(y.target.files2);
+
   }
+
+  const [fileDisplay, setFileDisplay] = useState([]);
+
+  async function handleUploadFile() {
+    const files1 = [];
+    
+    for (let i = 0; i < files2.length; i++) {
+
+      const container1 = new FormData();
+      container1.append("container", productId)
+      container1.append(`file`, files2[i])
+      const sendFile = await  Send(container1)
+      const sendFileResponse = await sendFile.json();
+      files1.push(sendFileResponse);
+
+    }
+    setFileDisplay(files1);
+    
+  }
+
+  function Send(data) {
+    return fetch(URL + '/upload/image', {
+      method: 'POST',
+      // headers: { "Content-type": "multipart/form-data" },
+      body: data
+    });
+
+  }
+  const[fileRealDisplay,setFileRealDisplay]=useState([])
+  useEffect(() => {
+    CategoryService.findByParentId(1)
+      .then((result) => {
+        setMainCategories(result);
+      });
+
+  }, []);
+
 
   const getFirstLevelCategoryByParent = (y) => {
     y.preventDefault();
@@ -482,7 +524,56 @@ export const ProdEdit = () => {
 
                     />
 
-                    {/* <button onClick={handleUpload}>Загрузить</button> */}
+              -{fileDisplay.length}-
+                    {fileDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail">{product.filename}
+                        <br/>
+                          <img 
+                          src={imgURL+"/images/"+product.filename} alt="Filepath"
+                          className="img-thumbnail"
+                           />
+                          
+                        </div>
+                        
+                      )
+                    })}
+
+                    <div className="container">
+    <div className="row">
+      {fileRealDisplay
+      .filter((s) => s.filename.startsWith('thumbnail-'))
+      .map((product) => (
+        <div className="col-md-4 mb-3" key={product.filename}>
+          <div className="img-thumbnail">
+            <p>{product.filename}</p>
+            <img
+              src={imgURL + "/images/" + product.filename}
+              alt="Filepath"
+              className="img-thumbnail"
+            />
+            <div className="col-12 mt-2">
+              <button
+                type="button"
+                className="btn btn-danger"
+                
+              >
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+  </div>
+</div>  
+
+
+
+                   <div className="col-lg-12">
+                      <div className="form-group">
+                        <button className='btn btn-primary' onClick={handleUploadFile}>Загрузить файлы</button>
+                      </div>
+                    </div>
 
 
                     <div className="col-lg-12">

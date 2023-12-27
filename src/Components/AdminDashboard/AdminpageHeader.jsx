@@ -1,19 +1,26 @@
-import React from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import React from "react";
+import { Link, Outlet } from "react-router-dom";
 
 export const AdminpageHeader = () => {
   return (
-    <div className='container'>
-
-      <ul className="admin-category">
-        <li><Link to='/adminpage/addingcategory'>Категории</Link></li>
-        <li><Link to='/adminpage/prodlisting'>Продукты</Link></li>
-        {/* <li><Link to='/adminpage/prodlisting'>Crud</Link></li> */}
-      </ul>
-      <div>
+    <div className="container">
+      <div className="row">
+        <ul className="admin-category">
+          <div className="col-md-4 col-lg-2">
+            <li>
+              <Link to="/adminpage/addingcategory">Категории</Link>
+            </li>
+          </div>
+          <div className="col-md-4 col-lg-2">
+            <li>
+              <Link to="/adminpage/prodlisting">Продукты</Link>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div className="row">
         <Outlet />
-
       </div>
     </div>
-  )
-}
+  );
+};

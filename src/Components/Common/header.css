@@ -104,10 +104,10 @@ i{
 
 .jogargysy header ul  li a {
   color: black;
-  /* text-decoration: none;
+  text-decoration: none;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 10px 15px; */
+  padding: 10px 15px;
 }
 
 .jogargysy header ul li a:hover{
@@ -128,8 +128,7 @@ i{
     position: fixed;
     top: 100px;
     right: -100%;
-    /* background: rgba(0, 0, 0, 0.5); */
-    /* background-color: none; */
+    
     height: calc(50vh - 50px);
     width: 40%;
     flex-direction: column;

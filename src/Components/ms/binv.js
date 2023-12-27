@@ -162,3 +162,80 @@ const handleDelete = (i) => {
                         
                       )
                     })}
+
+
+
+
+
+
+
+
+
+
+
+
+                    <div className="jogargysy">
+        <header>
+          <input type="checkbox" name="" id="chk1" />
+          <div className="logo"></div>
+          <div className="search-box">
+            <form action="">
+              <input type="text" name="search" id="srch" placeholder="Поиск" />
+              <button type="submit">
+                <i className="fa fa-search"></i>
+              </button>
+            </form>
+          </div>
+          <ul class="navbar">
+            <li>
+              <Link to="/catalog">Главная</Link>
+            </li>
+            {/* <li>
+              <a href="#">Техподдержка</a>
+              <ul className='dropdown'>
+                <li><a href="">Что-то новое</a></li>
+                <li><a href="">Агент</a></li>
+                <li><a href="">Месс</a></li>
+                <li><a href="">Дуо</a></li>
+              </ul>
+            </li> */}
+            <li>
+              <a href="">О нас</a>
+            </li>
+            <li>
+              <a href="">Контакты</a>
+            </li>
+            <li>
+              <Link to="/adminpage">Управление</Link>
+            </li>
+            <li>
+              <Link to="/login">Вход</Link>
+            </li>
+            <li>
+              <i className="fa-solid fa-phone"></i>
+              8(700) 496-9087
+            </li>
+          </ul>
+          <div className="menu">
+            <label htmlFor="chk1">
+              <i className="fa fa-bars"></i>
+            </label>
+          </div>
+        </header>
+      </div>
+
+
+      <section className="cat">
+        {mainCategories.map((category) => (
+          <Link to={`/catalog/first-level/${category.id}`}>
+            <div className="cards_cat">
+              <div className="image_box_cat">
+                {/* <img src={category.image_cat} alt="" /> */}
+                <img src="https://valtec.ru/image/groups/1.jpg" alt="" />
+              </div>
+              <div className="details_cat">
+                <p>{category.name}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
