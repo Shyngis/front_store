@@ -97,7 +97,8 @@ export const ProdListing = () => {
                           }}
                           className="btn btn-success"
                         >
-                          Редакт.
+                          {/* Редакт. */}
+                          <i class="fa fa-edit"></i>
                         </a>
                         <a
                           onClick={() => {
@@ -105,7 +106,8 @@ export const ProdListing = () => {
                           }}
                           className="btn btn-danger"
                         >
-                          Удалить
+                          {/* Удалить */}
+                          <i class="fa fa-trash"></i>
                         </a>
                         <a
                           onClick={() => {
@@ -113,7 +115,8 @@ export const ProdListing = () => {
                           }}
                           className="btn btn-primary"
                         >
-                          Подр.
+                          {/* Подр. */}
+                          <i class="fa fa-eye"></i>
                         </a>
                       </td>
                     </tr>
