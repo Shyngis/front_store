@@ -328,3 +328,187 @@ const handleDelete = (i) => {
           ))}
         </div>
       </div>
+
+
+
+
+
+
+
+      <Navbar key={size} expand={size} className="bg-body-tertiary mb-3">
+        <Container fluid>
+          <Form className="d-flex m-6">
+            <Navbar.Brand href="#">SantehPlast</Navbar.Brand>
+            <Form.Control
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+              style={{ padding: "5px", margin: "20px" }}
+            />
+            <Button
+              variant="outline-success"
+              className="me-5"
+              style={{ padding: "5px", margin: "20px" }}
+            >
+              Поиск
+            </Button>
+            <div className="ms-auto">
+              <Navbar.Toggle
+                // className="ms-2"
+                aria-controls={`offcanvasNavbar-expand-${size}`}
+              />
+            </div>
+          </Form>
+
+          <Navbar.Offcanvas
+            id={`offcanvasNavbar-expand-${size}`}
+            aria-labelledby={`offcanvasNavbarLabel-expand-${size}`}
+            placement="end"
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${size}`}>
+                Santehplast
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link>
+                  <Link className="nav-link " to="/catalog">
+                    Главная
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className="nav-link" to="/catalog">
+                    О нас
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className="nav-link" to="/catalog">
+                    Контакты
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className="nav-link" to="/adminpage">
+                    Управление
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link className="nav-link" to="/login">
+                    Вход
+                  </Link>
+                </Nav.Link>
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Container>
+      </Navbar>
+
+
+
+
+
+
+
+       const [files2, setFiles2] = useState();
+
+  const handleFile = (y) => {
+    setFiles2(y.target.files2);
+  };
+
+  const [fileDisplay, setFileDisplay] = useState([]);
+
+  async function handleUploadFile() {
+    const files1 = [];
+
+    for (let i = 0; i < files2.length; i++) {
+      const container1 = new FormData();
+      container1.append("container", productId);
+      container1.append(`file`, files2[i]);
+      const sendFile = await SendFile(container1);
+      const sendFileResponse = await sendFile.json();
+      files1.push(sendFileResponse);
+    }
+    setFileDisplay(files1);
+  }
+
+
+
+
+
+  function SendFile(data) {
+    return fetch(URL + "/upload/document", {
+      method: "POST",
+      // headers: { "Content-type": "multipart/form-data" },
+      body: data,
+    });
+  }
+
+  const [fileRealDisplay, setFileRealDisplay] = useState([]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  -{fileDisplay.length}-
+                    {fileDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail">
+                          {product.filename}
+                          <br />
+                          <img
+                            src={imgURL + "/images/" + product.filename}
+                            alt="Filepath"
+                            className="img-thumbnail"
+                          />
+                        </div>
+                      );
+                    })}
+                    <div className="container">
+                      <div className="row">
+                        {fileRealDisplay
+                          .filter((s) => s.filename.startsWith("thumbnail-"))
+                          .map((product) => (
+                            <div
+                              className="col-md-4 mb-3"
+                              key={product.filename}
+                            >
+                              <div className="img-thumbnail">
+                                <p>{product.filename}</p>
+                                <img
+                                  src={imgURL + "/images/" + product.filename}
+                                  alt="Filepath"
+                                  className="img-thumbnail"
+                                />
+                                <div className="col-12 mt-2">
+                                  <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                  >
+                                    Удалить
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <button
+                          className="btn btn-primary"
+                          onClick={handleUploadFile}
+                        >
+                          Загрузить файлы
+                        </button>
+                      </div>
+                    </div>
