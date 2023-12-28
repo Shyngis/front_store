@@ -5,7 +5,10 @@ import { Pages } from "./Components/Pages/Pages";
 function App() {
   return (
     <>
-      <Pages />
+    <div className="container">
+
+    <Pages />
+    </div>
     </>
   );
 }
