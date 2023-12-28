@@ -94,8 +94,12 @@ const ProductDetails = () => {
             <ReactPlayer
               className="video-player"
               url={product.video}
+<<<<<<< Updated upstream
               controls
             />
+=======
+              controls />
+>>>>>>> Stashed changes
           </div>
 
           <div id="fileDisplayArea">{product.file_pr}</div>

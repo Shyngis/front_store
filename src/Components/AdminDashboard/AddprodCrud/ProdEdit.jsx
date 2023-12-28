@@ -21,7 +21,7 @@ export const ProdEdit = () => {
     fetch(URL + "/product/id/" + empid)
       .then((res) => {
         return res.json();
-      })
+      })  
       .then((resp) => {
         idchange(resp.id);
         setFirstLevelCategory(resp.category)
@@ -49,6 +49,7 @@ export const ProdEdit = () => {
         }
 
         setproductId(resp.id)
+<<<<<<< Updated upstream
         fetch(URL + "/upload/image/" + resp.id)
           .then((response) => response.json())
           .then((data) => {
@@ -58,6 +59,18 @@ export const ProdEdit = () => {
 
           })
           .catch((err) => console.log(err));
+=======
+        fetch(URL + "/upload/image/"+resp.id)
+      .then((response) => response.json())
+      .then((data) => {
+      setImgRealDisplay(data);
+      setFileRealDisplay(data);
+      
+        console.log(data);
+        
+      })
+      .catch((err) => console.log(err));
+>>>>>>> Stashed changes
 
         console.log("Product fetched from server ");
 
@@ -97,14 +110,12 @@ export const ProdEdit = () => {
   }
 
 
-
   const [article, setArticle] = useState("");
   const [size, setSize] = useState("");
   const [productId, setproductId] = useState();
   const [product, setproduct] = useState();
 
   const [productArticleAndSize, setProductArticleAndSize] = useState([]);
-
 
   const handleSubmit1 = (y) => {
 
@@ -190,17 +201,12 @@ export const ProdEdit = () => {
       }).catch((err) => {
         console.log(err.message);
       })
-
-
-
   }
+  
   const [files, setFiles] = useState();
 
   const handleImage = (y) => {
     setFiles(y.target.files);
-
-    // setPhoto_pr(y.target.value);
-    // setPhoto_pr(y.target.image);
   }
 
   const [imageDisplay, setimageDisplay] = useState([]);
@@ -287,6 +293,55 @@ export const ProdEdit = () => {
   }, []);
 
 
+<<<<<<< Updated upstream
+=======
+ 
+ const [files2, setFiles2] = useState();
+
+
+ const handleFile = (y) => {
+    setFiles2(y.target.files2);
+
+  }
+
+  const [fileDisplay, setFileDisplay] = useState([]);
+
+  async function handleUploadFile() {
+    const files1 = [];
+    
+    for (let i = 0; i < files2.length; i++) {
+
+      const container1 = new FormData();
+      container1.append("container", productId)
+      container1.append(`file`, files2[i])
+      const sendFile = await  Send(container1)
+      const sendFileResponse = await sendFile.json();
+      files1.push(sendFileResponse);
+
+    }
+    setFileDisplay(files1);
+    
+  }
+
+  function Send(data) {
+    return fetch(URL + '/upload/image', {
+      method: 'POST',
+      // headers: { "Content-type": "multipart/form-data" },
+      body: data
+    });
+
+  }
+  const[fileRealDisplay,setFileRealDisplay]=useState([])
+  useEffect(() => {
+    CategoryService.findByParentId(1)
+      .then((result) => {
+        setMainCategories(result);
+      });
+
+  }, []);
+
+
+>>>>>>> Stashed changes
   const getFirstLevelCategoryByParent = (y) => {
     y.preventDefault();
     const parentId = y.target.value;
@@ -565,6 +620,78 @@ export const ProdEdit = () => {
         </div>
       ))}
   </div>
+<<<<<<< Updated upstream
+</div>  
+=======
+</div>   
+                    <div className="col-lg-12">
+                      <div className="form-group">
+                        <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
+                        
+                      </div>
+                    </div>
+                    
+                    <label>Загрузить файлы:</label>
+                    <input
+                      type="file"
+                      name="file"
+                      multiple
+                      // value={files}
+                      onChange={handleFile}
+>>>>>>> Stashed changes
+
+
+<<<<<<< Updated upstream
+
+                   <div className="col-lg-12">
+                      <div className="form-group">
+                        <button className='btn btn-primary' onClick={handleUploadFile}>Загрузить файлы</button>
+                      </div>
+                    </div>
+
+
+=======
+                    -{fileDisplay.length}-
+                    {fileDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail">{product.filename}
+                        <br/>
+                          <img 
+                          src={imgURL+"/images/"+product.filename} alt="Filepath"
+                          className="img-thumbnail"
+                           />
+                          
+                        </div>
+                        
+                      )
+                    })}
+
+                    <div className="container">
+    <div className="row">
+      {fileRealDisplay
+      .filter((s) => s.filename.startsWith('thumbnail-'))
+      .map((product) => (
+        <div className="col-md-4 mb-3" key={product.filename}>
+          <div className="img-thumbnail">
+            <p>{product.filename}</p>
+            <img
+              src={imgURL + "/images/" + product.filename}
+              alt="Filepath"
+              className="img-thumbnail"
+            />
+            <div className="col-12 mt-2">
+              <button
+                type="button"
+                className="btn btn-danger"
+                
+              >
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+  </div>
 </div>  
 
 
@@ -575,10 +702,10 @@ export const ProdEdit = () => {
                       </div>
                     </div>
 
-
+>>>>>>> Stashed changes
                     <div className="col-lg-12">
                       <div className="form-group">
-                        <button className='btn btn-primary' onClick={handleUpload}>Загрузить</button>
+                        
                         <button className='btn btn-success' type='submit'>Сохранить</button>
                         {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
                       </div>
