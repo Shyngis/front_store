@@ -26,7 +26,8 @@ const ProductDetails = () => {
       const thumbs = result.filter((i) => i.containerClass == "Thumbnail");
       if (thumbs && thumbs.length > 0) {
         setImages(thumbs);
-        setActiveImage(IMAGE_URL + thumbs[0].filename);
+        const originalFilename = getImageFilename(thumbs[0].filename);
+        setActiveImage(IMAGE_URL + originalFilename);
       }
     });
 
