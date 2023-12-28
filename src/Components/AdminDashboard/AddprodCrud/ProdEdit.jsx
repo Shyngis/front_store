@@ -294,7 +294,10 @@ export const ProdEdit = () => {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
  
  const [files2, setFiles2] = useState();
 
@@ -341,6 +344,9 @@ export const ProdEdit = () => {
   }, []);
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
   const getFirstLevelCategoryByParent = (y) => {
     y.preventDefault();
@@ -642,6 +648,7 @@ export const ProdEdit = () => {
 
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
                    <div className="col-lg-12">
                       <div className="form-group">
@@ -650,6 +657,59 @@ export const ProdEdit = () => {
                     </div>
 
 
+=======
+                    -{fileDisplay.length}-
+                    {fileDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail">{product.filename}
+                        <br/>
+                          <img 
+                          src={imgURL+"/images/"+product.filename} alt="Filepath"
+                          className="img-thumbnail"
+                           />
+                          
+                        </div>
+                        
+                      )
+                    })}
+
+                    <div className="container">
+    <div className="row">
+      {fileRealDisplay
+      .filter((s) => s.filename.startsWith('thumbnail-'))
+      .map((product) => (
+        <div className="col-md-4 mb-3" key={product.filename}>
+          <div className="img-thumbnail">
+            <p>{product.filename}</p>
+            <img
+              src={imgURL + "/images/" + product.filename}
+              alt="Filepath"
+              className="img-thumbnail"
+            />
+            <div className="col-12 mt-2">
+              <button
+                type="button"
+                className="btn btn-danger"
+                
+              >
+                Удалить
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+  </div>
+</div>  
+
+
+
+                   <div className="col-lg-12">
+                      <div className="form-group">
+                        <button className='btn btn-primary' onClick={handleUploadFile}>Загрузить файлы</button>
+                      </div>
+                    </div>
+
+>>>>>>> Stashed changes
 =======
                     -{fileDisplay.length}-
                     {fileDisplay.map((product) => {

@@ -95,9 +95,12 @@ const ProductDetails = () => {
               className="video-player"
               url={product.video}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
               controls
             />
 =======
+=======
+>>>>>>> Stashed changes
               controls />
 >>>>>>> Stashed changes
           </div>
