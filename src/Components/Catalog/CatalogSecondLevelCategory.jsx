@@ -3,29 +3,22 @@ import "./CatalogProducts.css";
 import { Link, useParams } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
 
-
-
-
 export const CatalogSecondLevelCategory = () => {
-  
   const [records, setRecords] = useState([]);
   const params = useParams();
 
   useEffect(() => {
-    CategoryService.findByParentId(params.secondLevelId).then(result => {
-      setRecords(result)
+    CategoryService.findByParentId(params.secondLevelId).then((result) => {
+      setRecords(result);
     });
   }, []);
 
-
   return (
-
-
-    <section className="cat_prod">
+    <section className="row">
       <>
         {records.map((record) => (
-          <Link to={ `second-level/${record.name}`}>
-            <div className="cards">
+          <Link to={`second-level/${record.name}`}>
+            <div className="col">
               <div className="image_box">
                 <img src={record.image} alt="" />
               </div>
@@ -40,4 +33,3 @@ export const CatalogSecondLevelCategory = () => {
     </section>
   );
 };
-

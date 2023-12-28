@@ -239,3 +239,92 @@ const handleDelete = (i) => {
             </div>
           </Link>
         ))}
+
+
+
+         <section className="cat_prod">
+      <>
+        {categories.map((category) => (
+          <Link to={`products/${category.id}`}>
+            <div className="cards">
+              <div className="image_box">
+                <img src={category.image} alt="" />
+              </div>
+              <div className="details">
+                <p>{category.name}</p>
+                <p>{category.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </>
+    </section>
+
+
+
+
+
+     <div className="container-fluid my-4">
+        <div className="row justify-content-center">
+          {mainCategories.map((category) => (
+            <div
+              key={category.id}
+              className="col-6 col-sm-4 col-md-3 col-lg-2 my-3"
+            >
+              <Card style={{ width: "10rem" }}>
+                <Link
+                  to={`/catalog/first-level/${category.id}`}
+                  className="card-link d-block h-100"
+                >
+                  <Card.Img
+                    variant="top"
+                    src="https://valtec.ru/image/groups/1.jpg"
+                  />
+                  <Card.Body style={{ width: "10rem" }}>
+                    <Card.Title>{category.name}</Card.Title>
+                    <Card.Text className="overflow-hidden text-ellipsis">
+                      This is an example React card
+                    </Card.Text>
+                  </Card.Body>
+                </Link>
+              </Card>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
+
+
+      <div class="row row-cols-2 row-cols-xs-2  row-cols-md-6 row-cols-sm-4 ">
+        <div class="col" style={{ width: "200px", height: "300px" }}>
+          {mainCategories.map((category) => (
+            <Link
+              to={`/catalog/first-level/${category.id}`}
+              className="card-link d-block h-100"
+            >
+              <div class="card h-10" key={category.id}>
+                <div class="card-body">
+                  <img
+                    src="https://valtec.ru/image/groups/1.jpg"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <h5
+                    class="card-title"
+                    style={{
+                      maxHeight: "60px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {category.name}
+                  </h5>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>

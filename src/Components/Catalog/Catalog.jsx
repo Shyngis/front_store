@@ -16,25 +16,35 @@ export const Catalog = () => {
 
   return (
     <>
-      <div className="row">
+      <div className="row" style={{ paddingLeft: "90px", paddingTop: "20px" }}>
         {mainCategories.map((category) => (
           <div
             key={category.id}
             className="col-6 col-xs-12 col-sm-4 col-md-3 col-lg-2 my-3"
+            style={{ width: "220px", height: "25  0px" }}
           >
-            <Card>
-              <Link to={`/catalog/first-level/${category.id}`}>
-                <Card.Img
-                  variant="top"
-                  src="https://valtec.ru/image/groups/1.jpg"
-                />
+            <Link to={`/catalog/first-level/${category.id}`}>
+              <Card>
                 <Card.Body>
-                  <Card.Title>{category.name}</Card.Title>
-                  <Card.Text>This is an example React card</Card.Text>
-                  <Button variant="primary">Example Button</Button>
+                  <Card.Img
+                    variant="top"
+                    src="https://valtec.ru/image/groups/1.jpg"
+                    style={{
+                      width: "150px",
+                      height: "140px",
+                      padding: "10px",
+
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  />
+                  <Card.Title style={{ height: "10px" }}>
+                    {category.name}
+                  </Card.Title>
                 </Card.Body>
-              </Link>
-            </Card>
+              </Card>
+            </Link>
           </div>
         ))}
       </div>

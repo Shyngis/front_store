@@ -48,7 +48,7 @@ export const Header = () => {
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
                 <Nav.Link>
-                  <Link className="nav-link" to="/catalog">
+                  <Link className="nav-link " to="/catalog">
                     Главная
                   </Link>
                 </Nav.Link>
