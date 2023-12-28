@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 
 export const AdminpageHeader = () => {
   return (
-    <div className="container">
+    <div>
       <div className="row">
         <ul className="admin-category">
           <div className="col-md-4 col-lg-2">

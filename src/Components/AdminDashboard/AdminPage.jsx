@@ -5,7 +5,9 @@ import { AdminpageHeader } from './AdminpageHeader';
 export const AdminPage = () => {
   return (
     <>
-      <AdminpageHeader />
+    {/* <div className="container"> */}
+    <AdminpageHeader />
+    {/* </div> */}
     </>)
 }
 
