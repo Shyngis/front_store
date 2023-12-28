@@ -16,27 +16,35 @@ export const CatalogFirstLevelCategory = () => {
 
   return (
     <>
-      <div className="container-fluid my-4">
-        <div className="row justify-content-center">
+      <div className="container">
+        <div className="row">
           {categories.map((category) => (
-            <div
-              key={category.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-2 my-3"
-            >
-              <Card style={{ width: "10rem" }}>
-                <Link
-                  to={`products/${category.id}`}
-                  className="card-link d-block h-100"
+            <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
+              <Link to={`products/${category.id}`}>
+                <div
+                  className="card"
+                  style={{ width: "10rem", height: "15rem" }}
                 >
-                  <Card.Img variant="top" src={category.image} />
-                  <Card.Body style={{ width: "10rem" }}>
-                    <Card.Title>{category.name}</Card.Title>
-                    <Card.Text className="overflow-hidden text-ellipsis">
-                      {category.description}
-                    </Card.Text>
-                  </Card.Body>
-                </Link>
-              </Card>
+                  <img
+                    src="https://valtec.ru/image/groups/1.jpg"
+                    alt="valtecimg"
+                    class="card-img-top"
+                  />
+                  <div class="card-body" style={{ overflow: "hidden" }}>
+                    <p
+                      class="card-text"
+                      style={{
+                        overflow: "auto",
+                        width: "10rem",
+                        height: "4rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {category.name}
+                    </p>
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </div>

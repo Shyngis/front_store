@@ -512,3 +512,93 @@ const handleDelete = (i) => {
                         </button>
                       </div>
                     </div>
+
+
+
+
+
+
+                    <div className="row" style={{ paddingLeft: "90px", paddingTop: "20px" }}>
+        {mainCategories.map((category) => (
+          <div
+            key={category.id}
+            className="col-6 col-xs-12 col-sm-4 col-md-3 col-lg-2 my-3"
+            style={{ width: "220px", height: "25  0px" }}
+          >
+            <Link to={`/catalog/first-level/${category.id}`}>
+              <Card>
+                <Card.Body>
+                  <Card.Img
+                    variant="top"
+                    src="https://valtec.ru/image/groups/1.jpg"
+                    style={{
+                      width: "150px",
+                      height: "140px",
+                      padding: "10px",
+
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  />
+                  <Card.Title style={{ height: "10px" }}>
+                    {category.name}
+                  </Card.Title>
+                </Card.Body>
+              </Card>
+            </Link>
+          </div>
+        ))}
+      </div>
+
+
+
+
+
+      <section className="row">
+      <>
+        {records.map((record) => (
+          <Link to={`second-level/${record.name}`}>
+            <div className="col">
+              <div className="image_box">
+                <img src={record.image} alt="" />
+              </div>
+              <div className="details">
+                <p>{record.name}</p>
+                <p>{record.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <section className="cat_prod">
+      <>
+        {products.map((product) => (
+          <Link to={ `product/${product.id}`}>
+            <div className="cards">
+              <div className="image_box">
+                <img src={product.image} alt="" />
+              </div>
+              <div className="details">
+                <p>{product.name}</p>
+                <p>{product.description}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+
+      </>
+    </section>
+    

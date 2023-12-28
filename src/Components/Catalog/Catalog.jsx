@@ -16,37 +16,38 @@ export const Catalog = () => {
 
   return (
     <>
-      <div className="row" style={{ paddingLeft: "90px", paddingTop: "20px" }}>
-        {mainCategories.map((category) => (
-          <div
-            key={category.id}
-            className="col-6 col-xs-12 col-sm-4 col-md-3 col-lg-2 my-3"
-            style={{ width: "220px", height: "25  0px" }}
-          >
-            <Link to={`/catalog/first-level/${category.id}`}>
-              <Card>
-                <Card.Body>
-                  <Card.Img
-                    variant="top"
+      <div className="container">
+        <div className="row">
+          {mainCategories.map((category) => (
+            <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
+              <Link to={`/catalog/first-level/${category.id}`}>
+                <div
+                  className="card"
+                  style={{ width: "10rem", height: "15rem" }}
+                >
+                  <img
                     src="https://valtec.ru/image/groups/1.jpg"
-                    style={{
-                      width: "150px",
-                      height: "140px",
-                      padding: "10px",
-
-                      justifyContent: "center",
-                      alignItems: "center",
-                      textAlign: "center",
-                    }}
+                    alt="valtecimg"
+                    class="card-img-top"
                   />
-                  <Card.Title style={{ height: "10px" }}>
-                    {category.name}
-                  </Card.Title>
-                </Card.Body>
-              </Card>
-            </Link>
-          </div>
-        ))}
+                  <div class="card-body" style={{ overflow: "hidden" }}>
+                    <p
+                      class="card-text"
+                      style={{
+                        overflow: "auto",
+                        width: "10rem",
+                        height: "4rem",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {category.name}
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
