@@ -8,7 +8,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 export const URL = process.env.REACT_APP_API_URL;
 // export const URL = "http://161.97.144.45:8181";
-export const imgURL = "http://161.97.144.45:8182"
+export const imgPrefixURL = process.env.REACT_APP_IMAGE_PREFIX_URL;
 
 export const navlink =[
   {

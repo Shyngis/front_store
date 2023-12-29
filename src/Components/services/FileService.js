@@ -8,6 +8,19 @@ const FileService = {
         }).then((data) => { return data.json() })
     },
 
+
+    uploadEasy: function (productId, file) {
+        const formData = new FormData();
+        formData.append("container", productId);
+        formData.append("file", file);
+
+        return fetch(URL + "/upload/image/", {
+            method: "POST",
+            body: formData,
+        }).then((data) => { return data.json() })
+    },
+
+
     // findById: function (id) {
     //     return fetch(URL + "/product/" + id, {
     //         method: "GET",

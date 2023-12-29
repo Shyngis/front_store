@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { URL, imgURL } from "../../Common/ddata";
+import { URL, imgPrefixURL } from "../../Common/ddata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from "../../services/CategoryService";
@@ -476,7 +476,7 @@ export const ProdEdit = () => {
                           {product.filename}
                           <br />
                           <img
-                            src={imgURL + "/images/" + product.filename}
+                            src={imgPrefixURL + "/images/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
                           />
@@ -495,7 +495,7 @@ export const ProdEdit = () => {
                               <div className="img-thumbnail">
                                 <p>{product.filename}</p>
                                 <img
-                                  src={imgURL + "/images/" + product.filename}
+                                  src={imgPrefixURL + "/images/" + product.filename}
                                   alt="Filepath"
                                   className="img-thumbnail"
                                 />
@@ -534,13 +534,13 @@ export const ProdEdit = () => {
                     {fileDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
-                          <a
-                            href={imgURL + "/docs/" + product.filename}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {product.filename}
-                          </a>
+                          {product.filename}
+                          <br />
+                          <img
+                            src={imgPrefixURL + "/images/" + product.filename}
+                            alt="Filepath"
+                            className="img-thumbnail"
+                          />
                         </div>
                       );
                     })}
@@ -550,21 +550,20 @@ export const ProdEdit = () => {
                           <div className="col-md-4 mb-3" key={product.filename}>
                             <div className="img-thumbnail">
                               <div className="img-thumbnail">
-                                <a
-                                  href={imgURL + "/docs/" + product.filename}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {product.filename}
-                                </a>
-                              </div>
-                              <div className="col-12 mt-2">
-                                <button
-                                  type="button"
-                                  className="btn btn-danger"
-                                >
-                                  Удалить
-                                </button>
+                                <p>{product.filename}</p>
+                                <img
+                                  src={imgPrefixURL + "/images/" + product.filename}
+                                  alt="Filepath"
+                                  className="img-thumbnail"
+                                />
+                                <div className="col-12 mt-2">
+                                  <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                  >
+                                    Удалить
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -606,9 +605,3 @@ export const ProdEdit = () => {
     </>
   );
 };
-
-// <img
-//   src={imgURL + "/docs/" + product.filename}
-//   alt="Filepath"
-//   className="img-thumbnail"
-// />;
