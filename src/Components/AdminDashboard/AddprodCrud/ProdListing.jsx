@@ -57,73 +57,70 @@ export const ProdListing = () => {
   return (
     <>
       <div className="col-md-12">
-        <div className="card">
-
-          <div className="divbtn">
-            <h2>Продукты</h2>
-            <Link to="prodcreate" className="btn btn-success">
-              Добавить продукт <i class="fa fa-add"></i>
-            </Link>
-          </div>
-          <div>
-            <table className="table-responsive">
-              <thead>
-                <tr className="table-dark table-active">
-                  <th>ID</th>
-                  <th>Категория</th>
-                  <th>Название</th>
-                  <th>Описание</th>
-                  <th>Новинка</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {empdata &&
-                  empdata.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>
-                        {records
-                          .filter((cat) => cat.id === item.category)
-                          .map((cat) => cat.name)}
-                      </td>
-                      <td>{item.name}</td>
-                      <td>{item.description}</td>
-                      <td>{item.isNew ? "ДА" : "НЕТ"}</td>
-                      <td>
-                        <a
-                          onClick={() => {
-                            LoadEdit(item.id);
-                          }}
-                          className="btn btn-success"
-                        >
-                          {/* Редакт. */}
-                          <i class="fa fa-edit"></i>
-                        </a>
-                        <a
-                          onClick={() => {
-                            Removefunction(item);
-                          }}
-                          className="btn btn-danger"
-                        >
-                          {/* Удалить */}
-                          <i class="fa fa-trash"></i>
-                        </a>
-                        <a
-                          onClick={() => {
-                            LoadDetail(item.id);
-                          }}
-                          className="btn btn-primary"
-                        >
-                          {/* Подр. */}
-                          <i class="fa fa-eye"></i>
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+        <div className="divbtn">
+          <h2>Продукты</h2>
+          <Link to="prodcreate" className="btn btn-success">
+            Добавить продукт <i class="fa fa-add"></i>
+          </Link>
+        </div>
+        <div>
+          <table className="table-responsive">
+            <thead>
+              <tr className="table-dark table-active">
+                <th>ID</th>
+                <th>Категория</th>
+                <th>Название</th>
+                <th>Описание</th>
+                <th>Новинка</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {empdata &&
+                empdata.map((item) => (
+                  <tr key={item.id}>
+                    <td>{item.id}</td>
+                    <td>
+                      {records
+                        .filter((cat) => cat.id === item.category)
+                        .map((cat) => cat.name)}
+                    </td>
+                    <td>{item.name}</td>
+                    <td>{item.description}</td>
+                    <td>{item.isNew ? "ДА" : "НЕТ"}</td>
+                    <td>
+                      <a
+                        onClick={() => {
+                          LoadEdit(item.id);
+                        }}
+                        className="btn btn-success"
+                      >
+                        {/* Редакт. */}
+                        <i class="fa fa-edit"></i>
+                      </a>
+                      <a
+                        onClick={() => {
+                          Removefunction(item);
+                        }}
+                        className="btn btn-danger"
+                      >
+                        {/* Удалить */}
+                        <i class="fa fa-trash"></i>
+                      </a>
+                      <a
+                        onClick={() => {
+                          LoadDetail(item.id);
+                        }}
+                        className="btn btn-primary"
+                      >
+                        {/* Подр. */}
+                        <i class="fa fa-eye"></i>
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
         </div>
       </div>
 
