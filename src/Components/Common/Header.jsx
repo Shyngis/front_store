@@ -16,16 +16,16 @@ export const Header = () => {
     <>
       <Navbar key={size} expand={size} className="bg-body-tertiary mb-3">
         <Container fluid>
-          <Form className="d-flex" style={{ margin: "10px" }}>
-            <Navbar.Brand
-              href="#"
-              className="me-2"
-              style={{ marginTop: "10px" }}
-            >
+          <Form
+            className="d-flex  flex-md-row align-items-center"
+            style={{ margin: "10px", maxHeight: "66px" }}
+          >
+            <Navbar.Brand href="#" className="me-2">
               <img
                 src={logo}
                 alt="logosure"
-                style={{ maxWidth: "100%", height: "auto" }}
+                style={{ width: "240px", height: "120px" }}
+                className="me-5 img-fluid"
               />
             </Navbar.Brand>
             <Form.Control

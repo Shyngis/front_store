@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./ProdCreate.css";
-import { URL } from '../../Common/ddata';
-import CategoryService from '../../services/CategoryService';
-
+import { URL } from "../../Common/ddata";
+import CategoryService from "../../services/CategoryService";
 
 export const ProdCreate = () => {
   const { empid } = useParams();
@@ -14,7 +13,7 @@ export const ProdCreate = () => {
   const [isNew, setCheckbox_pr] = useState(false);
 
   const [productId, setproductId] = useState("");
-  const [validation, valchange] = useState(false)
+  const [validation, valchange] = useState(false);
 
   const [firstLevelCategory, setFirstLevelCategory] = useState();
   const [mainCategory, setMainCategory] = useState("");
@@ -26,7 +25,6 @@ export const ProdCreate = () => {
   const handlesubmit = (e) => {
     e.preventDefault();
     // console.log({id,name,email,phone,active});
-
 
     const products = {
       name,
@@ -41,26 +39,24 @@ export const ProdCreate = () => {
       productId,
     };
 
-
     fetch(URL + "/product", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(products)
+      body: JSON.stringify(products),
     })
       .then((product) => {
-        alert("Saved Succesfully")
+        alert("Saved Succesfully");
         product.json().then((data) => {
           console.log(data, "jsondata");
           setproductId(data.id);
-          navigate('/adminpage/prodlisting/prodedit/' + data.id)
-        })
+          navigate("/adminpage/prodlisting/prodedit/" + data.id);
+        });
         // navigate("/adminpage/prodlisting/prodedit/"+product.id)
-
-      }).catch((err) => {
-        console.log(err.message);
       })
-
-  }
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
   const [records, setRecords] = useState([]);
 
@@ -70,57 +66,51 @@ export const ProdCreate = () => {
     //   .then((categor) => setRecords(categor))
     //   .catch((err) => console.log(err));
 
-    CategoryService.findByParentId(1)
-      .then((result) => {
-        setMainCategories(result);
-      });
-
-
-
+    CategoryService.findByParentId(1).then((result) => {
+      setMainCategories(result);
+    });
   }, []);
 
   const getFirstLevelCategoryByParent = (y) => {
     y.preventDefault();
     const parentId = y.target.value;
     setMainCategory(parentId);
-    CategoryService.findByParentId(parentId)
-      .then((result) => {
-        setFirstLevelCategories(result);
-      });
-  }
+    CategoryService.findByParentId(parentId).then((result) => {
+      setFirstLevelCategories(result);
+    });
+  };
 
   const getSecondLevelCategoryByParent = (y) => {
     y.preventDefault();
     const parentId = y.target.value;
     setFirstLevelCategory(parentId);
-  }
-
+  };
 
   return (
     <div className="container">
-
       <form className="form-container" onSubmit={handlesubmit}>
         <div>
-
           <label htmlFor="main">Выберите основную категорию:</label>
-          <select className="category-select" value={mainCategory} onChange={getFirstLevelCategoryByParent}>
+          <select
+            className="form-select"
+            value={mainCategory}
+            onChange={getFirstLevelCategoryByParent}
+          >
             {mainCategories.map((category) => (
-              <option
-                name="option-main"
-                key={category.id}
-                value={category.id}>
+              <option name="option-main" key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
           </select>
 
           <label htmlFor="uroven1">Выберите под категорию:</label>
-          <select className="category-select" value={firstLevelCategory} onChange={getSecondLevelCategoryByParent}>
+          <select
+            className="category-select"
+            value={firstLevelCategory}
+            onChange={getSecondLevelCategoryByParent}
+          >
             {firstLevelCategories.map((category) => (
-              <option
-                name="option"
-                key={category.id}
-                value={category.id}>
+              <option name="option" key={category.id} value={category.id}>
                 {category.name}
               </option>
             ))}
@@ -131,15 +121,14 @@ export const ProdCreate = () => {
 
         <input
           type="hidden"
-          value={productId || ''}
+          value={productId || ""}
           name="productId"
           onChange={(y) => setproductId(y.target.value)}
-
         />
 
         <input
           type="text"
-          value={name || ''}
+          value={name || ""}
           onChange={(y) => setName_pr(y.target.value)}
           required
         />
@@ -148,7 +137,7 @@ export const ProdCreate = () => {
         <textarea
           required
           name="description"
-          value={description || ''}
+          value={description || ""}
           onChange={(y) => setDesc_pr(y.target.value)}
         />
 
@@ -156,7 +145,7 @@ export const ProdCreate = () => {
           <label>Новинка:</label>
           <input
             type="checkbox"
-            checked={isNew || ''}
+            checked={isNew || ""}
             onChange={(event) => setCheckbox_pr(event.target.checked)}
           />
         </div>
@@ -164,17 +153,20 @@ export const ProdCreate = () => {
         <label>Ссылка для видео:</label>
         <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
 
-
         <div className="col-lg-12">
           <div className="submit-buttons">
-
-            <button className="submit-button save-button" type='submit'>Сохранить</button>
-            <Link to='/adminpage/prodlisting' className="submit-button back-button" >Назад</Link>
+            <button className="submit-button save-button" type="submit">
+              Сохранить
+            </button>
+            <Link
+              to="/adminpage/prodlisting"
+              className="submit-button back-button"
+            >
+              Назад
+            </Link>
           </div>
         </div>
       </form>
-
     </div>
-  )
-}
-
+  );
+};
