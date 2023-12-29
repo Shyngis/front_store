@@ -60,12 +60,12 @@ export const Header = () => {
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/catalog">
+                  <Link className="nav-link" to="/aboutus">
                     О нас
                   </Link>
                 </Nav.Link>
                 <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/catalog">
+                  <Link className="nav-link" to="/contacts">
                     Контакты
                   </Link>
                 </Nav.Link>
