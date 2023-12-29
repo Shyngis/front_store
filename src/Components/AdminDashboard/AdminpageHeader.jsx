@@ -5,19 +5,13 @@ export const AdminpageHeader = () => {
   return (
     <div>
       <div className="row">
-        <ul className="admin-category">
-          <div className="col-md-4 col-lg-2">
-            <li>
-              <Link to="/adminpage/addingcategory">Категории</Link>
-            </li>
-          </div>
-          <div className="col-md-4 col-lg-2">
-            <li>
-              <Link to="/adminpage/prodlisting">Продукты</Link>
-            </li>
-          </div>
-        </ul>
+        <div className="col-md-12">
+          <Link className="btn btn-outline-primary" to="/adminpage/addingcategory">Категории</Link>
+          &nbsp;
+          <Link className="btn btn-outline-primary" to="/adminpage/prodlisting">Продукты</Link>
+        </div>
       </div>
+      <br />
       <div className="row">
         <Outlet />
       </div>
