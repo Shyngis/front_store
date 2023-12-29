@@ -534,43 +534,41 @@ export const ProdEdit = () => {
                     {fileDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
-                          {product.filename}
-                          <br />
-                          <img
-                            src={imgURL + "/images/" + product.filename}
-                            alt="Filepath"
-                            className="img-thumbnail"
-                          />
+                          <a
+                            href={imgURL + "/docs/" + product.filename}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {product.filename}
+                          </a>
                         </div>
                       );
                     })}
                     <div className="container">
                       <div className="row">
-                        {fileRealDisplay
-                          .filter((s) => s.filename.startsWith("thumbnail-"))
-                          .map((product) => (
-                            <div
-                              className="col-md-4 mb-3"
-                              key={product.filename}
-                            >
+                        {fileRealDisplay.map((product) => (
+                          <div className="col-md-4 mb-3" key={product.filename}>
+                            <div className="img-thumbnail">
                               <div className="img-thumbnail">
-                                <p>{product.filename}</p>
-                                <img
-                                  src={imgURL + "/images/" + product.filename}
-                                  alt="Filepath"
-                                  className="img-thumbnail"
-                                />
-                                <div className="col-12 mt-2">
-                                  <button
-                                    type="button"
-                                    className="btn btn-danger"
-                                  >
-                                    Удалить
-                                  </button>
-                                </div>
+                                <a
+                                  href={imgURL + "/docs/" + product.filename}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {product.filename}
+                                </a>
+                              </div>
+                              <div className="col-12 mt-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                >
+                                  Удалить
+                                </button>
                               </div>
                             </div>
-                          ))}
+                          </div>
+                        ))}
                       </div>
                     </div>
                     <div className="col-lg-12">
@@ -608,3 +606,9 @@ export const ProdEdit = () => {
     </>
   );
 };
+
+// <img
+//   src={imgURL + "/docs/" + product.filename}
+//   alt="Filepath"
+//   className="img-thumbnail"
+// />;

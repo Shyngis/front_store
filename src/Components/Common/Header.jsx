@@ -1,7 +1,7 @@
 import React from "react";
 // import "./header.css";
 import { Link } from "react-router-dom";
-
+import logo from "../../Assets/logo.png";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
@@ -22,7 +22,11 @@ export const Header = () => {
               className="me-2"
               style={{ marginTop: "10px" }}
             >
-              SantehPlast
+              <img
+                src={logo}
+                alt="logosure"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
             </Navbar.Brand>
             <Form.Control
               type="search"
