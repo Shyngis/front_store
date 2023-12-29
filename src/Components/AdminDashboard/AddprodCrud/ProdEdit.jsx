@@ -51,10 +51,22 @@ export const ProdEdit = () => {
           .then((data) => {
             setImgRealDisplay(data);
             console.log(data);
+          });
+
+        fetch(
+          URL +
+            "/upload/file/container/" +
+            resp.id +
+            "/container-class/Document"
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            setFileRealDisplay(data);
+            console.log(data);
           })
           .catch((err) => console.log(err));
 
-        console.log("Product fetched from server ");
+        console.log("Product doesn accesable fetched from server ");
       })
       .catch((err) => {
         console.log(err.message);
@@ -209,9 +221,9 @@ export const ProdEdit = () => {
       body: data,
     });
   }
-  const [files2, setFiles2] = useState([]);
+  const [files2, setFiles2] = useState();
   const handleFile = (y) => {
-    setFiles2(y.target.files2);
+    setFiles2(y.target.files);
   };
   const [fileRealDisplay, setFileRealDisplay] = useState([]);
   const [fileDisplay, setFileDisplay] = useState([]);
@@ -518,6 +530,49 @@ export const ProdEdit = () => {
                       // value={files}
                       onChange={handleFile}
                     />
+                    -{fileDisplay.length}-
+                    {fileDisplay.map((product) => {
+                      return (
+                        <div className="img-thumbnail">
+                          {product.filename}
+                          <br />
+                          <img
+                            src={imgURL + "/images/" + product.filename}
+                            alt="Filepath"
+                            className="img-thumbnail"
+                          />
+                        </div>
+                      );
+                    })}
+                    <div className="container">
+                      <div className="row">
+                        {fileRealDisplay
+                          .filter((s) => s.filename.startsWith("thumbnail-"))
+                          .map((product) => (
+                            <div
+                              className="col-md-4 mb-3"
+                              key={product.filename}
+                            >
+                              <div className="img-thumbnail">
+                                <p>{product.filename}</p>
+                                <img
+                                  src={imgURL + "/images/" + product.filename}
+                                  alt="Filepath"
+                                  className="img-thumbnail"
+                                />
+                                <div className="col-12 mt-2">
+                                  <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                  >
+                                    Удалить
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
                     <div className="col-lg-12">
                       <div className="form-group">
                         <button
