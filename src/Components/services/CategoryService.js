@@ -7,6 +7,13 @@ const CategoryService = {
         }).then((data) => { return data.json() })
     },
 
+    findByParentAndImageId: function (id) {
+        return fetch(URL + "/category/extended/parent/" + id, {
+            method: "GET",
+        }).then((data) => { return data.json() })
+    },
+
+
     create: function (bodyValue) {
         return fetch(URL + "/category", {
             method: "POST",
