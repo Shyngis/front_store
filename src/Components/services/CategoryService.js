@@ -32,6 +32,12 @@ const CategoryService = {
         return fetch(URL + "/category/by/first-level-rows-by-child-id/" + childId, {
             method: "GET",
         }).then((data) => { return data.json() });
+    },
+    
+    remove: function (id) {
+        return fetch(URL + "/category/" + id, {
+            method: "DELETE",
+        }).then((data) => { return data.json() });
     }
     
 };
