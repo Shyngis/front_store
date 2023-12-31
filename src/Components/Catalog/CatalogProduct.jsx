@@ -25,11 +25,11 @@ export const CatalogProduct = () => {
                 <img
                   src="https://valtec.ru/image/groups/1.jpg"
                   alt="valtecimg"
-                  class="card-img-top"
+                  className="card-img-top"
                 />
-                <div class="card-body" style={{ overflow: "hidden" }}>
+                <div className="card-body" style={{ overflow: "hidden" }}>
                   <p
-                    class="card-text"
+                    className="card-text"
                     style={{
                       overflow: "auto",
                       width: "10rem",

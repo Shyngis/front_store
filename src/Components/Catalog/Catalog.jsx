@@ -37,11 +37,11 @@ export const Catalog = () => {
                   <img
                     src={`${imgPrefixURL}/${item.image.filename}`}
                     alt="valtecimg"
-                    class="card-img-top"
+                    className="card-img-top"
                   />
-                  <div class="card-body" style={{ overflow: "hidden" }}>
+                  <div className="card-body" style={{ overflow: "hidden" }}>
                     <p
-                      class="card-text"
+                      className="card-text"
                       style={{
                         overflow: "auto",
                         width: "10rem",

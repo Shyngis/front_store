@@ -21,11 +21,11 @@ const FileService = {
     },
 
 
-    // findById: function (id) {
-    //     return fetch(URL + "/product/" + id, {
-    //         method: "GET",
-    //     }).then((data) => { return data.json() });
-    // },
+    findById: function (id) {
+        return fetch(URL + "/upload/image/id/" + id, {
+            method: "GET",
+        }).then((data) => { return data.json() });
+    },
 
     // findLevelCategoriesById: function (id) {
     //     return fetch(URL + "/category/by/rows-parent-id/" + id, {
