@@ -19,7 +19,7 @@ import { ProdDetail } from "../AdminDashboard/AddprodCrud/ProdDetail";
 import { ProdCreate2 } from "../AdminDashboard/AddprodCrud/ProdCreate2";
 import { SizeEdit } from "../AdminDashboard/AddprodCrud/SizeEdit";
 import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryByMainLevel";
-import { CategoryByLevelOne } from "../AdminDashboard/CategoryByLevel/CategoryByLevelOne";
+import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
 import { About } from "../Common/About";
 import { Contacts } from "../Common/Contacts";
 
@@ -53,7 +53,7 @@ export const Pages = () => {
           <Route path="adminpage" element={<AdminPage />}>
             <Route path="addingcategory" element={<AddingCategory />}>
               <Route path="mainlevel" element={<CategoryByMainLevel />} />
-              <Route path="level-1" element={<CategoryByLevelOne />} />
+              <Route path="level-1" element={<SubCategory />} />
             </Route>
 
             <Route path="addingproducts" element={<AddingProducts />} />
