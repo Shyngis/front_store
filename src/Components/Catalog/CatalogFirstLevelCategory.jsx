@@ -20,29 +20,25 @@ export const CatalogFirstLevelCategory = () => {
     <>
       <div className="container">
         <div className="row">
-          {categories.map((category) => (
+          {categories.map((item) => (
+            
             <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
-              <Link to={`products/${category.id}`}>
+              <Link to={`products/${item.category.id}`}>
                 <div
                   className="card"
                   style={{ width: "10rem", height: "15rem" }}
                 >
+                  <div className="card-body" style={{ overflow: "hidden" }}>
                   <img
-                    src={`${imgPrefixURL}/${category.image.filename}`}
-                    alt="valtecimg"
+                    src={`${imgPrefixURL}/${item.image.filename}`}
+                    alt="no-image"
                     className="card-img-top"
                   />
-                  <div className="card-body" style={{ overflow: "hidden" }}>
                     <p
                       className="card-text"
-                      style={{
-                        overflow: "auto",
-                        width: "10rem",
-                        height: "4rem",
-                        fontWeight: "bold",
-                      }}
                     >
-                      {category.name}
+                      {item.category.name}
+
                     </p>
                   </div>
                 </div>
