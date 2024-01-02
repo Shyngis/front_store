@@ -6,8 +6,9 @@ import CategoryService from "../services/CategoryService";
 
 export const Catalog = () => {
   const [mainCategories, setMainCategories] = useState([]);
-  useEffect(() => {
 
+  useEffect(() => {
+    
     CategoryService.findByParentAndImageId(1).then(result => {
       setMainCategories(result);
     });
@@ -23,7 +24,7 @@ export const Catalog = () => {
 
   return (
     <>
-      <div className="container">
+      <div>
         {/* <h1>{mainCategories.length}</h1> */}
         <div className="row">
 

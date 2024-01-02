@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import "./CatalogProducts.css";
 import { Link, useParams, Outlet } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
-import { Card } from "react-bootstrap";
+import { imgPrefixURL } from "../Common/ddata";
 
 export const CatalogFirstLevelCategory = () => {
   const [categories, setCategories] = useState([]);
   const params = useParams();
 
   useEffect(() => {
-    CategoryService.findByParentId(params.id).then((categories) => {
-      setCategories(categories);
+    console.log('params.id', params.id);
+    CategoryService.findByParentAndImageId(params.id).then(result => {
+      setCategories(result);
+      console.log('afte call');
     });
   }, []);
 
@@ -26,7 +28,7 @@ export const CatalogFirstLevelCategory = () => {
                   style={{ width: "10rem", height: "15rem" }}
                 >
                   <img
-                    src="https://valtec.ru/image/groups/1.jpg"
+                    src={`${imgPrefixURL}/${category.image.filename}`}
                     alt="valtecimg"
                     className="card-img-top"
                   />
