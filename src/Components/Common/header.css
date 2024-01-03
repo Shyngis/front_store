@@ -15,3 +15,11 @@ header > ul li {
 .logo {
   width: 230px;
 }
+
+.page-title {
+  color: #ec1c1c;
+  text-align:center;
+}
+.input-group input{
+  font:10pt/1.5 Verdana, Tahoma, Arial, sans-serif;
+}

@@ -21,7 +21,7 @@ export const Header = () => {
             style={{ margin: "10px", maxHeight: "66px" }}
           >
             <Navbar.Brand href="#" className="me-2">
-              <a className="nav-link" href="/">
+              <a className="nav-link" href="/main">
                 <img
                   src={logo}
                   alt="logosure"
@@ -64,12 +64,12 @@ export const Header = () => {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3  ">
-                <a className="nav-underline nav-link" href="/catalog">Главная</a>
+                <a className="nav-underline nav-link" href="/main">Главная</a>
                 <a className="nav-underline nav-link" href="/aboutus">О нас</a>
                 <a className="nav-underline nav-link" href="/contacts">Контакты</a>
                 {/* <a className="nav-underline nav-link" href="/adminpage">Управление</a> */}
                 <a className="nav-underline nav-link" href="tel:+7(705)2396303">+7(705)2396303</a>
-                <a className="nav-underline nav-link" href=""><i className="fa fa-sign-in"></i></a>
+                <a className="nav-underline nav-link" href="/adminpage"><i className="fa fa-sign-in"></i></a>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

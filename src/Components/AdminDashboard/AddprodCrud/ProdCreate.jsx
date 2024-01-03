@@ -91,6 +91,7 @@ export const ProdCreate = () => {
         <div>
           <label htmlFor="main">Выберите основную категорию:</label>
           <select
+            required
             className="form-select"
             value={mainCategory}
             onChange={getFirstLevelCategoryByParent}
@@ -104,10 +105,12 @@ export const ProdCreate = () => {
 
           <label htmlFor="uroven1">Выберите под категорию:</label>
           <select
+            required
             className="category-select"
             value={firstLevelCategory}
             onChange={getSecondLevelCategoryByParent}
           >
+            <option name="option" value="">--</option>
             {firstLevelCategories.map((category) => (
               <option name="option" key={category.id} value={category.id}>
                 {category.name}

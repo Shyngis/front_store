@@ -476,7 +476,7 @@ export const ProdEdit = () => {
                           {product.filename}
                           <br />
                           <img
-                            src={imgPrefixURL + "/images/" + product.filename}
+                            src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
                           />
@@ -496,7 +496,7 @@ export const ProdEdit = () => {
                                 <p>{product.filename}</p>
                                 <img
                                   src={
-                                    imgPrefixURL + "/images/" + product.filename
+                                    imgPrefixURL + "/" + product.filename
                                   }
                                   alt="Filepath"
                                   className="img-thumbnail"
@@ -539,7 +539,7 @@ export const ProdEdit = () => {
                           {product.filename}
                           <br />
                           <img
-                            src={imgPrefixURL + "/images/" + product.filename}
+                            src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
                           />

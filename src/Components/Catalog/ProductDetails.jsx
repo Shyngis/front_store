@@ -5,10 +5,9 @@ import { useParams } from "react-router-dom";
 import ProductService from "../services/ProductService";
 import ProductSizeService from "../services/ProductSizeService";
 import FileService from "../services/FileService";
+import { imgPrefixURL } from "../Common/ddata";
 
 const ProductDetails = () => {
-  // const IMAGE_URL = "http://161.97.144.45:8182/images/";
-  const IMAGE_URL = "http://161.97.144.45:8182/images/";
   const [product, setProduct] = useState("");
   const [images, setImages] = useState([]);
   const [productSizes, setProductSizes] = useState([]);
@@ -27,7 +26,7 @@ const ProductDetails = () => {
       if (thumbs && thumbs.length > 0) {
         setImages(thumbs);
         const originalFilename = getImageFilename(thumbs[0].filename);
-        setActiveImage(IMAGE_URL + originalFilename);
+        setActiveImage(imgPrefixURL + "/" + originalFilename);
       }
     });
 
@@ -37,7 +36,6 @@ const ProductDetails = () => {
   }, []);
 
   function getImageFilename(filename) {
-    console.log("fielname", filename);
     if (filename) {
       return filename.replace("thumbnail-", "");
     }
@@ -45,11 +43,7 @@ const ProductDetails = () => {
   }
 
   function activateThumbnail(thumbnailFilename) {
-    // thumbnailFilename.preventDefault();
-    // event.preventDefault();
-    // const thumbnailFilename = event.target.value;
-    // console.log('onclick', thumbnailFilename);
-    setActiveImage(IMAGE_URL + getImageFilename(thumbnailFilename));
+    setActiveImage(imgPrefixURL + "/" + getImageFilename(thumbnailFilename));
   }
 
   return (
@@ -66,7 +60,7 @@ const ProductDetails = () => {
             <div className="thumbnail-container">
               {images.map((image) => (
                 <img
-                  src={IMAGE_URL + image.filename}
+                  src={imgPrefixURL + "/" + image.filename}
                   alt=""
                   className="thumbnail"
                   onClick={(event) => activateThumbnail(image.filename)}

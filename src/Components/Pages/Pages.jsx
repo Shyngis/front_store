@@ -16,7 +16,6 @@ import { ProdListing } from "../AdminDashboard/AddprodCrud/ProdListing";
 import { ProdCreate } from "../AdminDashboard/AddprodCrud/ProdCreate";
 import { ProdEdit } from "../AdminDashboard/AddprodCrud/ProdEdit";
 import { ProdDetail } from "../AdminDashboard/AddprodCrud/ProdDetail";
-import { ProdCreate2 } from "../AdminDashboard/AddprodCrud/ProdCreate2";
 import { SizeEdit } from "../AdminDashboard/AddprodCrud/SizeEdit";
 import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryByMainLevel";
 import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
@@ -31,7 +30,7 @@ export const Pages = () => {
         <Routes>
           <Route path="/" element={<Main />} />
 
-          <Route path="catalog" element={<Catalog />} />
+          <Route path="main" element={<Catalog />} />
           <Route
             path="catalog/first-level/:id"
             element={<CatalogFirstLevelCategory />}
@@ -59,10 +58,6 @@ export const Pages = () => {
             <Route path="addingproducts" element={<AddingProducts />} />
             <Route path="prodlisting" element={<ProdListing />} />
             <Route path="prodlisting/prodcreate" element={<ProdCreate />} />
-            <Route
-              path="prodlisting/prodcreate/prodcreate2"
-              element={<ProdCreate2 />}
-            />
             <Route path="prodlisting/prodedit/:empid" element={<ProdEdit />} />
             <Route
               path="prodlisting/prodedit/:empid/:sizeid"
