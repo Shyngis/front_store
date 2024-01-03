@@ -32,7 +32,7 @@ export const Catalog = () => {
           {mainCategories.map((item) => (
             <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
               <Link to={`/catalog/first-level/${item.category.id}`}>
-                <div className="card" style={{ width: "10rem", height: "15rem" }}>
+                <div className="card santehplast-card">
                   <img
                     src={`${imgPrefixURL}/${item.image.filename}`}
                     alt="valtecimg"

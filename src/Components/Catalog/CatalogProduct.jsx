@@ -16,36 +16,25 @@ export const CatalogProduct = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row">
+      <div class="row">
         {products.map((product) => (
           <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
             <Link to={`product/${product.id}`}>
-              <div className="card" style={{ width: "10rem", height: "15rem" }}>
+              <div className="card santehplast-card">
                 <img
                   src="https://valtec.ru/image/groups/1.jpg"
                   alt="valtecimg"
                   className="card-img-top"
                 />
-                <div className="card-body" style={{ overflow: "hidden" }}>
-                  <p
-                    className="card-text"
-                    style={{
-                      overflow: "auto",
-                      width: "10rem",
-                      height: "4rem",
-                      fontWeight: "bold",
-                    }}
-                  >
+                <div className="card-body">
+                  <p className="card-text">
                     {product.name}
                   </p>
-                  <p>{product.description}</p>
                 </div>
               </div>
             </Link>
           </div>
         ))}
       </div>
-    </div>
   );
 };

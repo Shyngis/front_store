@@ -1,3 +1,9 @@
 .card-text {
     font-size: 10pt;
 }
+.santehplast-card {
+    height: 272px;    
+}
+.santehplast-card .card-text {
+    overflow: hidden;
+}

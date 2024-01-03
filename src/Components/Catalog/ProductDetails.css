@@ -1,10 +1,17 @@
-.flex-container {
+.flex-horizontal {
   display: flex;
+}
+
+.flex-vertical {
+  display: flex;
+  flex-direction: column;
+
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   background-color: #fff;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
 }
 
 

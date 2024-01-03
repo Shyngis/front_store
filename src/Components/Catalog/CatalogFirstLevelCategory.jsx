@@ -23,10 +23,10 @@ export const CatalogFirstLevelCategory = () => {
         <div className="row">
           {categories.map((item) => (
 
-            <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
+            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
               <Link to={`products/${item.category.id}`}>
                 <div
-                  className="card"
+                  className="card santehplast-card"
                   style={{ width: "10rem", height: "15rem" }}
                 >
 

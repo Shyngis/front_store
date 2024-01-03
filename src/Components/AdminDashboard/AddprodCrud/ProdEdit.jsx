@@ -274,9 +274,9 @@ export const ProdEdit = () => {
   return (
     <>
       <div>
-        <div className="row">
+        {/* <div className="row"> */}
           <div className="">
-            <form className="container" onSubmit={saveProduct}>
+            <form onSubmit={saveProduct}>
               <div className="card" style={{ textAlign: "left" }}>
                 <div className="card-title">
                   <h2>Редактирование</h2>
@@ -598,7 +598,7 @@ export const ProdEdit = () => {
             </form>
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
       {/* </form>
       </div>
