@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from 'react';
-import { URL, imgPrefixURL } from '../../Common/ddata';
-import { TabButtons } from '../../Category/TabButtons';
-import FileService from '../../services/FileService';
-import CategoryService from '../../services/CategoryService';
+import React, { useEffect, useState } from "react";
+import { URL, imgPrefixURL } from "../../Common/ddata";
+import { TabButtons } from "../../Category/TabButtons";
+import FileService from "../../services/FileService";
+import CategoryService from "../../services/CategoryService";
+import { ToastContainer, toast } from "react-toastify";
 
 export const CategoryByMainLevel = () => {
-
   const [name, setNazv_cat] = useState("");
   const [categoryImage, setCategoryImage] = useState();
   const [categories, setCategories] = useState([]);
 
-
   const handleSubmit = (y) => {
     y.preventDefault();
+
     const category = {
       name,
       parent: 1,
-      image: categoryImage
+      image: categoryImage,
     };
-    CategoryService.create(category).then(result => {
-      alert(result);
-    })
-  }
+    CategoryService.create(category).then((result) => {
+      toast.success("Успешно добавлено !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    });
+  };
 
   useEffect(() => {
-    CategoryService.findByParentId(1).then(result => {
+    CategoryService.findByParentId(1).then((result) => {
       setCategories(result);
     });
   }, []);
 
   function uploadCategoryImage(file) {
-    FileService.uploadEasy(1, file[0]).then(result => {
+    FileService.uploadEasy(1, file[0]).then((result) => {
       setCategoryImage(result.id);
     });
   }
@@ -38,44 +40,44 @@ export const CategoryByMainLevel = () => {
   const remove = (category) => {
     console.log("remove categoryes", category);
     CategoryService.remove(category.id).then(() => {
-      const updatedCategories = []
-      categories.forEach(item => {
-        if(item.id !== category.id) {
+      const updatedCategories = [];
+      categories.forEach((item) => {
+        if (item.id !== category.id) {
           updatedCategories.push(item);
         }
-      })
+      });
       setCategories(updatedCategories);
     });
+  };
 
-  }
-
-  const editStart = (category) => {
-
-  }
+  const editStart = (category) => {};
 
   return (
     <>
       <br />
       <div>
-
-        <div className='category'>
-
+        <div className="category">
           <form onSubmit={handleSubmit}>
             <h2>Добавление Категории</h2>
             <label>Наименование</label>
-            <input type="text" value={name} onChange={(y) => setNazv_cat(y.target.value)} required />
+            <input
+              type="text"
+              value={name}
+              onChange={(y) => setNazv_cat(y.target.value)}
+              required
+            />
             <label>Выбрать фото </label>
-            <input type="file" onChange={(y) => uploadCategoryImage(y.target.files)}
+            <input
+              type="file"
+              onChange={(y) => uploadCategoryImage(y.target.files)}
             />
             <div className="category-image">
-              <img src={``} ></img>
+              <img src={``}></img>
             </div>
             <button className="adding_pr">Cохранить</button>
           </form>
 
-          <div className='why'>
-
-          </div>
+          <div className="why"></div>
         </div>
         <div className="col-md-12">
           {/* <div className="divbtn">
@@ -90,19 +92,21 @@ export const CategoryByMainLevel = () => {
                 <tr className="table-dark table-active">
                   <th>#</th>
                   <th>Название</th>
-                  <th><i className="fa fa-tasks"></i></th>
+                  <th>
+                    <i className="fa fa-tasks"></i>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {categories &&
-                  categories.map((item) => (
-
-                    item.isRemoved == false &&
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.name}</td>
-                      <td>
-                        {/* <a
+                  categories.map(
+                    (item) =>
+                      item.isRemoved == false && (
+                        <tr key={item.id}>
+                          <td>{item.id}</td>
+                          <td>{item.name}</td>
+                          <td>
+                            {/* <a
         onClick={() => {
         LoadEdit(item.id);
       }}
@@ -112,16 +116,22 @@ export const CategoryByMainLevel = () => {
         </a>
         */}
 
-                        <a className="btn btn-danger" onClick={() => remove(item)} ><i class="fa fa-trash"></i></a>
-                      </td>
-                    </tr>
-                  ))}
+                            <a
+                              className="btn btn-danger"
+                              onClick={() => remove(item)}
+                            >
+                              <i class="fa fa-trash"></i>
+                            </a>
+                          </td>
+                        </tr>
+                      )
+                  )}
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
+      <ToastContainer />
     </>
-  )
-}
+  );
+};

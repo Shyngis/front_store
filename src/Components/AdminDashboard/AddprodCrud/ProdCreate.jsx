@@ -45,7 +45,6 @@ export const ProdCreate = () => {
       body: JSON.stringify(products),
     })
       .then((product) => {
-        alert("Saved Succesfully");
         product.json().then((data) => {
           console.log(data, "jsondata");
           setproductId(data.id);
