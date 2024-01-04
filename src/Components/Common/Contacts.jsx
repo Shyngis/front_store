@@ -3,15 +3,13 @@ import React from "react";
 export const Contacts = () => {
   return (
     <div class="container fluid">
-      <div class="row gy-3">
-        <h2
-          class="mb-2 display-2"
-          style={{ fontWeight: "bold", marginLeft: "2%" }}
-        >
-          Контакты
-        </h2>
-
-        <div class="col-12 col-lg-4" style={{ marginTop: "3%" }}>
+      <div class="row">
+        <div class="col-md-12 mb-10">
+          <h6 className="page-title">Контакты</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-lg-4">
           <img
             class="img-fluid rounded"
             loading="lazy"
@@ -19,7 +17,7 @@ export const Contacts = () => {
             alt=""
           />
         </div>
-        <div class="col-12 col-lg-4" style={{ marginTop: "5%" }}>
+        <div class="col-12 col-lg-4"  style={{ marginTop: "5%" }}>
           <div class="row justify-content-xl-center">
             <div class="col-12 col-xl-10">
               <div class="d-flex justify-content-center align-items-center">

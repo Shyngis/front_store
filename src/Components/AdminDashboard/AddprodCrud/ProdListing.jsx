@@ -60,7 +60,7 @@ export const ProdListing = () => {
         <div className="divbtn">
           <h2>Продукты</h2>
           <Link to="prodcreate" className="btn btn-success">
-            Добавить продукт <i class="fa fa-add"></i>
+            Добавить продукт <i className="fa fa-add"></i>
           </Link>
         </div>
         <div>
@@ -96,7 +96,7 @@ export const ProdListing = () => {
                         className="btn btn-success"
                       >
                         {/* Редакт. */}
-                        <i class="fa fa-edit"></i>
+                        <i className="fa fa-edit"></i>
                       </a>
                       <a
                         onClick={() => {
@@ -105,7 +105,7 @@ export const ProdListing = () => {
                         className="btn btn-danger"
                       >
                         {/* Удалить */}
-                        <i class="fa fa-trash"></i>
+                        <i className="fa fa-trash"></i>
                       </a>
                       <a
                         onClick={() => {
@@ -114,7 +114,7 @@ export const ProdListing = () => {
                         className="btn btn-primary"
                       >
                         {/* Подр. */}
-                        <i class="fa fa-eye"></i>
+                        <i className="fa fa-eye"></i>
                       </a>
                     </td>
                   </tr>

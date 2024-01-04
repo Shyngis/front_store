@@ -1,46 +1,48 @@
 import React, { useEffect, useState } from "react";
 import "./CatalogProducts.css";
+import "./Catalog.css";
 import { Link, useParams, Outlet } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
-import { Card } from "react-bootstrap";
+import { imgPrefixURL } from "../Common/ddata";
 
 export const CatalogFirstLevelCategory = () => {
   const [categories, setCategories] = useState([]);
   const params = useParams();
 
   useEffect(() => {
-    CategoryService.findByParentId(params.id).then((categories) => {
-      setCategories(categories);
+    console.log('params.id', params.id);
+    CategoryService.findByParentAndImageId(params.id).then(result => {
+      setCategories(result);
+      console.log('afte call');
     });
   }, []);
 
   return (
     <>
-      <div className="container">
+      <div>
         <div className="row">
-          {categories.map((category) => (
-            <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
-              <Link to={`products/${category.id}`}>
+          {categories.map((item) => (
+
+            <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+              <Link to={`products/${item.category.id}`}>
                 <div
-                  className="card"
+                  className="card santehplast-card"
                   style={{ width: "10rem", height: "15rem" }}
                 >
-                  <img
-                    src="https://valtec.ru/image/groups/1.jpg"
-                    alt="valtecimg"
-                    class="card-img-top"
-                  />
-                  <div class="card-body" style={{ overflow: "hidden" }}>
+
+                  {item.image.filename
+                    && <img
+                      src={`${imgPrefixURL}/${item.image.filename}`}
+                      alt="no-image"
+                      className="card-img-top"
+                    />}
+
+                  <div className="card-body" style={{ overflow: "hidden" }}>
                     <p
-                      class="card-text"
-                      style={{
-                        overflow: "auto",
-                        width: "10rem",
-                        height: "4rem",
-                        fontWeight: "bold",
-                      }}
+                      className="card-text"
                     >
-                      {category.name}
+                      {!item.image.filename && <div><i className="fa fa-faucet fa-xl"></i></div>}
+                      {item.category.name}
                     </p>
                   </div>
                 </div>

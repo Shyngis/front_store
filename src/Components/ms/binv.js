@@ -186,7 +186,7 @@ const handleDelete = (i) => {
               </button>
             </form>
           </div>
-          <ul class="navbar">
+          <ul className="navbar">
             <li>
               <Link to="/catalog">Главная</Link>
             </li>
@@ -298,22 +298,22 @@ const handleDelete = (i) => {
 
 
 
-      <div class="row row-cols-2 row-cols-xs-2  row-cols-md-6 row-cols-sm-4 ">
-        <div class="col" style={{ width: "200px", height: "300px" }}>
+      <div className="row row-cols-2 row-cols-xs-2  row-cols-md-6 row-cols-sm-4 ">
+        <div className="col" style={{ width: "200px", height: "300px" }}>
           {mainCategories.map((category) => (
             <Link
               to={`/catalog/first-level/${category.id}`}
               className="card-link d-block h-100"
             >
-              <div class="card h-10" key={category.id}>
-                <div class="card-body">
+              <div className="card h-10" key={category.id}>
+                <div className="card-body">
                   <img
                     src="https://valtec.ru/image/groups/1.jpg"
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                   <h5
-                    class="card-title"
+                    className="card-title"
                     style={{
                       maxHeight: "60px",
                       overflow: "hidden",

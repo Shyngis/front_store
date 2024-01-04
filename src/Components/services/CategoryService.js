@@ -22,6 +22,14 @@ const CategoryService = {
         }).then((data) => { return data.json() });
     },
 
+    update: function (bodyValue) {
+        return fetch(URL + "/category", {
+            method: "PUT",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(bodyValue),
+        }).then((data) => { return data.json() });
+    },
+
     findLevelCategoriesById: function (id) {
         return fetch(URL + "/category/by/rows-parent-id/" + id, {
             method: "GET",

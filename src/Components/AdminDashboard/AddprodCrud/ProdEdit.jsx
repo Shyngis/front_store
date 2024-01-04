@@ -274,9 +274,9 @@ export const ProdEdit = () => {
   return (
     <>
       <div>
-        <div className="row">
+        {/* <div className="row"> */}
           <div className="">
-            <form className="container" onSubmit={saveProduct}>
+            <form onSubmit={saveProduct}>
               <div className="card" style={{ textAlign: "left" }}>
                 <div className="card-title">
                   <h2>Редактирование</h2>
@@ -476,7 +476,7 @@ export const ProdEdit = () => {
                           {product.filename}
                           <br />
                           <img
-                            src={imgPrefixURL + "/images/" + product.filename}
+                            src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
                           />
@@ -496,7 +496,7 @@ export const ProdEdit = () => {
                                 <p>{product.filename}</p>
                                 <img
                                   src={
-                                    imgPrefixURL + "/images/" + product.filename
+                                    imgPrefixURL + "/" + product.filename
                                   }
                                   alt="Filepath"
                                   className="img-thumbnail"
@@ -539,7 +539,7 @@ export const ProdEdit = () => {
                           {product.filename}
                           <br />
                           <img
-                            src={imgPrefixURL + "/images/" + product.filename}
+                            src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
                           />
@@ -598,7 +598,7 @@ export const ProdEdit = () => {
             </form>
           </div>
         </div>
-      </div>
+      {/* </div> */}
 
       {/* </form>
       </div>

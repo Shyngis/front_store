@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AddingProducts.css";
 import { URL } from "../Common/ddata";
 import { AddingprDisplay } from "./AddingprDisplay";
-import { ProdCreate2 } from "./AddprodCrud/ProdCreate2";
+// import { ProdCreate2 } from "./AddprodCrud/ProdCreate2";
 
 const AddingProducts = () => {
   const [name, setName_pr] = useState("");

@@ -1,5 +1,5 @@
 import React from "react";
-// import "./header.css";
+import "./header.css";
 import { Link } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import Button from "react-bootstrap/Button";
@@ -20,26 +20,26 @@ export const Header = () => {
             className="d-flex  flex-md-row align-items-center"
             style={{ margin: "10px", maxHeight: "66px" }}
           >
-            <Navbar.Brand href="#" className="me-2">
+            <Navbar.Brand href="/" className="me-2">
               <img
                 src={logo}
                 alt="logosure"
-                style={{ width: "240px", height: "120px" }}
-                className="me-5 img-fluid"
+                className="logo"
               />
             </Navbar.Brand>
-            <Form.Control
+            {/* <Form.Control
               type="search"
               placeholder="Search"
               className="me-2"
               aria-label="Search"
             />
             <Button
-              variant="outline-success"
+              variant="outline-danger"
               style={{ paddingTop: "5px", margin: "10px" }}
             >
               Поиск
-            </Button>
+            </Button> */}
+
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${size}`} />
           </Form>
           <Navbar.Offcanvas
@@ -53,32 +53,22 @@ export const Header = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+            <div className="search-input">
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="basic-addon2" />
+                <div className="input-group-append">
+                  <button className="btn btn-outline-secondary" type="button"><i className="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+
               <Nav className="justify-content-end flex-grow-1 pe-3  ">
-                <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/catalog">
-                    Главная
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/aboutus">
-                    О нас
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/contacts">
-                    Контакты
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/adminpage">
-                    Управление
-                  </Link>
-                </Nav.Link>
-                <Nav.Link className="nav-underline">
-                  <Link className="nav-link" to="/login">
-                    Вход
-                  </Link>
-                </Nav.Link>
+                <a className="nav-underline nav-link" href="/">Главная</a>
+                <a className="nav-underline nav-link" href="/aboutus">О нас</a>
+                <a className="nav-underline nav-link" href="/contacts">Контакты</a>
+                {/* <a className="nav-underline nav-link" href="/adminpage">Управление</a> */}
+                <a className="nav-underline nav-link" href="tel:+7(705)2396303">+7(705)2396303</a>
+                <a className="nav-underline nav-link" href="/adminpage"><i className="fa fa-sign-in"></i></a>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

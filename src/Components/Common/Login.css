@@ -3,13 +3,7 @@ body {
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  margin-top: 30px;
-  background: #fff;
-  padding-bottom: 30px;
-  width: 500px;
+  margin-top: 10px;
 }
 
 .header {

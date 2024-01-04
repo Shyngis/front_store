@@ -16,10 +16,9 @@ import { ProdListing } from "../AdminDashboard/AddprodCrud/ProdListing";
 import { ProdCreate } from "../AdminDashboard/AddprodCrud/ProdCreate";
 import { ProdEdit } from "../AdminDashboard/AddprodCrud/ProdEdit";
 import { ProdDetail } from "../AdminDashboard/AddprodCrud/ProdDetail";
-import { ProdCreate2 } from "../AdminDashboard/AddprodCrud/ProdCreate2";
 import { SizeEdit } from "../AdminDashboard/AddprodCrud/SizeEdit";
 import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryByMainLevel";
-import { CategoryByLevelOne } from "../AdminDashboard/CategoryByLevel/CategoryByLevelOne";
+import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
 import { About } from "../Common/About";
 import { Contacts } from "../Common/Contacts";
 
@@ -29,9 +28,9 @@ export const Pages = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Catalog />} />
 
-          <Route path="catalog" element={<Catalog />} />
+          {/* <Route path="main" element={<Catalog />} /> */}
           <Route
             path="catalog/first-level/:id"
             element={<CatalogFirstLevelCategory />}
@@ -53,16 +52,12 @@ export const Pages = () => {
           <Route path="adminpage" element={<AdminPage />}>
             <Route path="addingcategory" element={<AddingCategory />}>
               <Route path="mainlevel" element={<CategoryByMainLevel />} />
-              <Route path="level-1" element={<CategoryByLevelOne />} />
+              <Route path="level-1" element={<SubCategory />} />
             </Route>
 
             <Route path="addingproducts" element={<AddingProducts />} />
             <Route path="prodlisting" element={<ProdListing />} />
             <Route path="prodlisting/prodcreate" element={<ProdCreate />} />
-            <Route
-              path="prodlisting/prodcreate/prodcreate2"
-              element={<ProdCreate2 />}
-            />
             <Route path="prodlisting/prodedit/:empid" element={<ProdEdit />} />
             <Route
               path="prodlisting/prodedit/:empid/:sizeid"
