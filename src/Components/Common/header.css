@@ -8,12 +8,12 @@ header > ul li {
 }
 
 .search-input {
-  width: 300px;
+  max-width: 300px;
   margin: 10px;
 }
 
 .logo {
-  width: 230px;
+  width: 200px;
 }
 
 .page-title {

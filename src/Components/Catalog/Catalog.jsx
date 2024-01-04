@@ -13,24 +13,14 @@ export const Catalog = () => {
     CategoryService.findByParentAndImageId(1).then(result => {
       setMainCategories(result);
     });
-
-
-    // fetch(URL + "/category/parent/1")
-    //   .then((response) => response.json())
-    //   .then((mainCategories) => {
-    //     setMainCategories(mainCategories);
-    //   })
-    //   .catch((err) => console.log(err));
   }, []);
 
   return (
     <>
       <div>
-        {/* <h1>{mainCategories.length}</h1> */}
         <div className="row">
-
           {mainCategories.map((item) => (
-            <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
+            <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={item.category.id}>
               <Link to={`/catalog/first-level/${item.category.id}`}>
                 <div className="card santehplast-card">
                   <img

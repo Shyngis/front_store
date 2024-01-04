@@ -20,14 +20,12 @@ export const Header = () => {
             className="d-flex  flex-md-row align-items-center"
             style={{ margin: "10px", maxHeight: "66px" }}
           >
-            <Navbar.Brand href="#" className="me-2">
-              <a className="nav-link" href="/main">
-                <img
-                  src={logo}
-                  alt="logosure"
-                  className="logo"
-                />
-              </a>
+            <Navbar.Brand href="/" className="me-2">
+              <img
+                src={logo}
+                alt="logosure"
+                className="logo"
+              />
             </Navbar.Brand>
             {/* <Form.Control
               type="search"
@@ -41,14 +39,6 @@ export const Header = () => {
             >
               Поиск
             </Button> */}
-            <div className="search-input">
-              <div className="input-group">
-                <input type="text" class="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="basic-addon2" />
-                <div className="input-group-append">
-                  <button className="btn btn-outline-secondary" type="button"><i className="fa fa-search"></i></button>
-                </div>
-              </div>
-            </div>
 
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${size}`} />
           </Form>
@@ -63,8 +53,17 @@ export const Header = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
+            <div className="search-input">
+              <div className="input-group">
+                <input type="text" className="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="basic-addon2" />
+                <div className="input-group-append">
+                  <button className="btn btn-outline-secondary" type="button"><i className="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+
               <Nav className="justify-content-end flex-grow-1 pe-3  ">
-                <a className="nav-underline nav-link" href="/main">Главная</a>
+                <a className="nav-underline nav-link" href="/">Главная</a>
                 <a className="nav-underline nav-link" href="/aboutus">О нас</a>
                 <a className="nav-underline nav-link" href="/contacts">Контакты</a>
                 {/* <a className="nav-underline nav-link" href="/adminpage">Управление</a> */}

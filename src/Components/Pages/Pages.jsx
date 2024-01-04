@@ -28,9 +28,9 @@ export const Pages = () => {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Catalog />} />
 
-          <Route path="main" element={<Catalog />} />
+          {/* <Route path="main" element={<Catalog />} /> */}
           <Route
             path="catalog/first-level/:id"
             element={<CatalogFirstLevelCategory />}
