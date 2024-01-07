@@ -49,13 +49,13 @@ const ProductDetails = () => {
   return (
     <div>
       <>
-        <div className="flex-vertical">
+        <div className="row">
           
-          <div><h5 className="product-name">{product.name}</h5></div>
+          <div className="col-md-12  mt-3 mb-3"><h5 className="product-name">{product.name}</h5></div>
 
-          <div className="flex-horizontal">
+          <div className="row">
 
-          <div className="image-container">
+          <div className="col-md-6 image-container">
             <img src={activeImg} alt="" className="product-image" />
             <div className="thumbnail-container">
               {images.map((image) => (
@@ -68,7 +68,7 @@ const ProductDetails = () => {
               ))}
             </div>
           </div>
-          <div className="about-container">
+          <div className="col-md-6">
             <p className="product-description">{product.description}</p>
 
             <table>
