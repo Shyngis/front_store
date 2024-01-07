@@ -69,6 +69,7 @@ export const Pages = () => {
             />
           </Route>
         </Routes>
+        <Footer />
       </Router>
     </>
   );
