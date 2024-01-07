@@ -23,3 +23,9 @@ header > ul li {
 .input-group input{
   font:10pt/1.5 Verdana, Tahoma, Arial, sans-serif;
 }
+
+.nav-link  {
+  color:black;
+  text-transform: uppercase;
+  padding: 18px;
+}
