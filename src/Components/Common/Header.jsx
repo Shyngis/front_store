@@ -37,7 +37,7 @@ export const Header = () => {
   // console.log(data);
   return (
     <>
-      <Navbar key={size} expand={size} className="bg-body-tertiary mb-3">
+      <Navbar key={size} expand={size} className="bg-body-tertiary mb-3 mt-3">
         <Container fluid>
           <Form
             className="d-flex  flex-md-row align-items-center"

@@ -3,15 +3,11 @@ import React from "react";
 export const Footer = () => {
   return (
     <>
-      <div
-        class="container fluid bg-body-tertiary text-center"
-        style={{ marginTop: "8%" }}
-      >
+      <div class="bg-body-tertiary text-center mt-5 pb-5" >
         <div class="row  gy-3">
-          <h6 className="page-title">...</h6>
           <div
             class="col-12 col-lg-4"
-            style={{ textAlign: "center", marginTop: "4%" }}
+            style={{ textAlign: "center" }}
           >
             <p>Мы в соцсетях</p>
             <a
@@ -69,7 +65,7 @@ export const Footer = () => {
             <div class="d-flex justify-content-center align-items-center">
               <i class="fas fa-location-dot fa-2x"></i>
             </div>
-            <div style={{ marginTop: "5%" }}>
+            <div>
               <p style={{ textAlign: "center" }}>
                 ТОО "SANTEHPLAST"
                 <p>
@@ -93,27 +89,11 @@ export const Footer = () => {
             <div class="d-flex justify-content-center align-items-center">
               <i class="fa-solid fa-map-location-dot fa-2x"></i>
             </div>
-            <div style={{ marginTop: "5%" }}>
+            <div>
               <p style={{ textAlign: "center" }}>
                 <p>
-                  Филиал в г.Нур-Султан <br />
-                  ул Бейсекбаева 19 1 этаж
-                </p>
-                <p>
-                  Филиал в г.Шымкент <br />
-                  ул Бейсекбаева 19 1 этаж
-                </p>
-                <p>
-                  Филиал в г.Туркестан <br />
-                  ул Бейсекбаева 19 1 этаж
-                </p>
-                <p>
-                  Филиал в г.Жезказган <br />
-                  ул Бейсекбаева 19 1 этаж
-                </p>
-                <p>
-                  Филиал в г.Темиртау <br />
-                  ул Бейсекбаева 19 1 этаж
+                  в г.Нур-Султан <br />
+                  ул Бейсекбаева 18Б 1 этаж
                 </p>
               </p>
             </div>
@@ -123,13 +103,6 @@ export const Footer = () => {
         <div class="text-center p-3">
           <p>
             © 2024 TОО «SantehPlast»
-            <a
-              class="text-reset fw-bold"
-              href="#!"
-              style={{ marginLeft: "10px" }}
-            >
-              Все права защищены.
-            </a>
           </p>
         </div>
       </div>
