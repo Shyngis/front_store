@@ -1,3 +1,4 @@
+
 .card-text {
     font-size: 10pt;
 }
@@ -6,4 +7,20 @@
 }
 .santehplast-card .card-text {
     overflow: hidden;
+    text-transform: capitalize;
 }
+
+.product-filter {
+    text-align: center;
+}
+.product-filter button {
+    font: 10pt/1.5 Verdana, Tahoma, Arial, sans-serif;
+
+}
+.product-filter button:hover {
+    background-color: rgb(250, 239, 239);
+
+}
+
+/* $btn-hover-bg-shade-amount: 2%; */
+

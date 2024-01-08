@@ -63,7 +63,7 @@ const ProductDetails = () => {
                   src={imgPrefixURL + "/" + image.filename}
                   alt=""
                   className="thumbnail"
-                  onClick={(event) => activateThumbnail(image.filename)}
+                  onClick={() => activateThumbnail(image.filename)}
                 />
               ))}
             </div>

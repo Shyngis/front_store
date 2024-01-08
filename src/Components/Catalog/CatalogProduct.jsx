@@ -3,6 +3,7 @@ import "./CatalogProducts.css";
 import { Link, useParams, Outlet } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
 import ProductService from "../services/ProductService";
+import { CatalogFilter } from "./CatalogFilter";
 
 export const CatalogProduct = () => {
   const [products, setProducts] = useState([]);
@@ -16,6 +17,8 @@ export const CatalogProduct = () => {
   }, []);
 
   return (
+    <>
+      <CatalogFilter />
       <div class="row">
         {products.map((product) => (
           <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
@@ -36,5 +39,6 @@ export const CatalogProduct = () => {
           </div>
         ))}
       </div>
+    </>
   );
 };

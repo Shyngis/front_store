@@ -5,7 +5,9 @@ import { Button, Card } from "react-bootstrap";
 import CategoryService from "../services/CategoryService";
 import "./Catalog.css";
 
+
 export const Catalog = () => {
+
   const [mainCategories, setMainCategories] = useState([]);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ export const Catalog = () => {
   return (
     <>
       <div>
-        <div className="row">
+        <div className="row mt-3">
           {mainCategories.map((item) => (
             <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={item.category.id}>
               <Link to={`/catalog/first-level/${item.category.id}`}>

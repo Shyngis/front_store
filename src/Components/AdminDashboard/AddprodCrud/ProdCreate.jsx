@@ -11,9 +11,9 @@ export const ProdCreate = () => {
   const [description, setDesc_pr] = useState("");
   const [video, setVideo_pr] = useState("");
   const [isNew, setCheckbox_pr] = useState(false);
+  const [isSantec, setIsSantec] = useState(false);
 
   const [productId, setproductId] = useState("");
-  const [validation, valchange] = useState(false);
 
   const [firstLevelCategory, setFirstLevelCategory] = useState();
   const [mainCategory, setMainCategory] = useState("");
@@ -29,14 +29,11 @@ export const ProdCreate = () => {
     const products = {
       name,
       description,
-      // image,
-      // artSizeData,
-      // file_pr1,
-
       video,
       isNew,
       category: firstLevelCategory,
       productId,
+      isSantec
     };
 
     fetch(URL + "/product", {
@@ -96,6 +93,7 @@ export const ProdCreate = () => {
             value={mainCategory}
             onChange={getFirstLevelCategoryByParent}
           >
+            <option name="option" value="">--</option>
             {mainCategories.map((category) => (
               <option name="option-main" key={category.id} value={category.id}>
                 {category.name}
@@ -106,7 +104,7 @@ export const ProdCreate = () => {
           <label htmlFor="uroven1">Выберите под категорию:</label>
           <select
             required
-            className="category-select"
+            className="form-select"
             value={firstLevelCategory}
             onChange={getSecondLevelCategoryByParent}
           >
@@ -119,7 +117,7 @@ export const ProdCreate = () => {
           </select>
         </div>
 
-        <label>Название товара:</label>
+
 
         <input
           type="hidden"
@@ -128,36 +126,59 @@ export const ProdCreate = () => {
           onChange={(y) => setproductId(y.target.value)}
         />
 
-        <input
-          type="text"
-          value={name || ""}
-          onChange={(y) => setName_pr(y.target.value)}
-          required
-        />
-        {/* ... (other input fields) */}
-        <label>Описание:</label>
-        <textarea
-          required
-          name="description"
-          value={description || ""}
-          onChange={(y) => setDesc_pr(y.target.value)}
-        />
-
-        <div className="checkbox">
-          <label>Новинка:</label>
+        <div class="mb-3">
+          <label className="form-label">Название товара:</label>
           <input
-            type="checkbox"
-            checked={isNew || ""}
-            onChange={(event) => setCheckbox_pr(event.target.checked)}
+            className="form-control"
+            type="text"
+            value={name || ""}
+            onChange={(y) => setName_pr(y.target.value)}
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label className="form-label">Описание:</label>
+          <textarea
+            className="form-control"
+            required
+            name="description"
+            value={description || ""}
+            onChange={(y) => setDesc_pr(y.target.value)}
           />
         </div>
 
-        <label>Ссылка для видео:</label>
-        <input type="url" onChange={(y) => setVideo_pr(y.target.value)} />
+        <div class="mb-3">
+          <div className="checkbox">
+            <label className="form-check-label">Новинка:</label>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isNew || ""}
+              onChange={(event) => setCheckbox_pr(event.target.checked)}
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div className="checkbox">
+            <label className="form-check-label">Продукция SANTEC:</label>
+            <input
+              className="form-check-input"
+              type="checkbox"
+              checked={isSantec || ""}
+              onChange={(event) => setIsSantec(event.target.checked)}
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label className="form-label">Ссылка для видео:</label>
+          <input className="form-control" type="url" onChange={(y) => setVideo_pr(y.target.value)} />
+        </div>
 
         <div className="col-lg-12">
           <div className="submit-buttons">
-            <button className="submit-button save-button" type="submit">
+            <button className="btn btn-outline-success" type="submit">
               Сохранить
             </button>
             <Link
