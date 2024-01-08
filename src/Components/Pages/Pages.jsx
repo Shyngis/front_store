@@ -1,7 +1,6 @@
 import React from "react";
 import { Header } from "../Common/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Main } from "../Category/Main";
 import { AddingCategory } from "../AdminDashboard/AddingCategory";
 import { Catalog } from "../Catalog/Catalog";
 
@@ -17,7 +16,7 @@ import { ProdCreate } from "../AdminDashboard/AddprodCrud/ProdCreate";
 import { ProdEdit } from "../AdminDashboard/AddprodCrud/ProdEdit";
 import { ProdDetail } from "../AdminDashboard/AddprodCrud/ProdDetail";
 import { SizeEdit } from "../AdminDashboard/AddprodCrud/SizeEdit";
-import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryByMainLevel";
+import { MainCategory } from "../AdminDashboard/CategoryByLevel/MainCategory";
 import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
 import { About } from "../Common/About";
 import { Contacts } from "../Common/Contacts";
@@ -53,7 +52,7 @@ export const Pages = () => {
           <Route path="login" element={<Login />} />
           <Route path="adminpage" element={<AdminPage />}>
             <Route path="addingcategory" element={<AddingCategory />}>
-              <Route path="mainlevel" element={<CategoryByMainLevel />} />
+              <Route path="mainlevel" element={<MainCategory />} />
               <Route path="level-1" element={<SubCategory />} />
             </Route>
 
