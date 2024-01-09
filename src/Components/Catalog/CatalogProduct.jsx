@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CatalogProducts.css";
-import { Link, useParams, Outlet } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import CategoryService from "../services/CategoryService";
 import ProductService from "../services/ProductService";
 
@@ -8,9 +8,12 @@ export const CatalogProduct = () => {
   const [products, setProducts] = useState([]);
   const params = useParams();
   const category = params.categoryId;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const isSantec = searchParams.get('isSantec');
+  const isValtec = searchParams.get('isValtec');
 
   useEffect(() => {
-    ProductService.findByCategory(category).then((products) => {
+    ProductService.findByCategoryAndParams(category, isSantec, isValtec).then((products) => {
       setProducts(products);
     });
   }, []);
