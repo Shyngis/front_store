@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { URL } from "./ddata";
+import { URL, imgPrefixURL } from "./ddata";
 
 export const Search = (e) => {
   const location = useLocation();
@@ -15,8 +15,16 @@ export const Search = (e) => {
   // console.log(data);
   return (
     <>
-      {location.state.data.map((sure) => (
-        <div>{sure.name}</div>
+      {location.state.data.map((search) => (
+        <div className="img-thumbnail">
+          <h5>{search.name} </h5>
+          <p>{search.description}</p>
+          <img
+            src={imgPrefixURL + "/" + search.name}
+            alt="Filepath"
+            className="img-thumbnail"
+          />
+        </div>
       ))}
     </>
   );
