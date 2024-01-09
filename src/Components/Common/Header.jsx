@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
@@ -9,9 +9,32 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { URL } from "./ddata";
 
 export const Header = () => {
   const size = "md";
+
+  const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const [data, setData] = useState("");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    navigate("/search", { state: { data, query } });
+  };
+
+  useEffect(() => {
+    fetch(URL + "/product/search?query=" + query)
+      .then((response) => response.json())
+      .then((data1) => setData(data1));
+  }, [query]);
+
+  // const fetchData = () => {
+  //   fetch(URL + "/product/search?query=" + query)
+  //     .then((response) => response.json())
+  //     .then((data1) => setData(data1.name));
+  // };
+  // console.log(data);
   return (
     <>
       <Navbar key={size} expand={size} className="bg-body-tertiary mb-3">
@@ -21,11 +44,7 @@ export const Header = () => {
             style={{ margin: "10px", maxHeight: "66px" }}
           >
             <Navbar.Brand href="/" className="me-2">
-              <img
-                src={logo}
-                alt="logosure"
-                className="logo"
-              />
+              <img src={logo} alt="logosure" className="logo" />
             </Navbar.Brand>
             {/* <Form.Control
               type="search"
@@ -53,22 +72,41 @@ export const Header = () => {
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-            <div className="search-input">
-              <div className="input-group">
-                <input type="text" className="form-control" placeholder="Поиск" aria-label="Поиск" aria-describedby="basic-addon2" />
-                <div className="input-group-append">
-                  <button className="btn btn-outline-secondary" type="button"><i className="fa fa-search"></i></button>
+              <form className="search-input" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Поиск"
+                    aria-label="Поиск"
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setQuery(e.target.value)}
+                  />
+                  <div className="input-group-append">
+                    <button className="btn btn-outline-secondary" type="button">
+                      <i className="fa fa-search"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </form>
 
               <Nav className="justify-content-end flex-grow-1 pe-3  ">
-                <a className="nav-underline nav-link" href="/">Главная</a>
-                <a className="nav-underline nav-link" href="/aboutus">О нас</a>
-                <a className="nav-underline nav-link" href="/contacts">Контакты</a>
+                <a className="nav-underline nav-link" href="/">
+                  Главная
+                </a>
+                <a className="nav-underline nav-link" href="/aboutus">
+                  О нас
+                </a>
+                <a className="nav-underline nav-link" href="/contacts">
+                  Контакты
+                </a>
                 {/* <a className="nav-underline nav-link" href="/adminpage">Управление</a> */}
-                <a className="nav-underline nav-link" href="tel:+7(705)2396303">+7(705)2396303</a>
-                <a className="nav-underline nav-link" href="/adminpage"><i className="fa fa-sign-in"></i></a>
+                <a className="nav-underline nav-link" href="tel:+7(705)2396303">
+                  +7(705)2396303
+                </a>
+                <a className="nav-underline nav-link" href="/adminpage">
+                  <i className="fa fa-sign-in"></i>
+                </a>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

@@ -21,6 +21,7 @@ import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryB
 import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
 import { About } from "../Common/About";
 import { Contacts } from "../Common/Contacts";
+import { Search } from "../Common/Search";
 
 export const Pages = () => {
   return (
@@ -31,6 +32,7 @@ export const Pages = () => {
           <Route path="/" element={<Catalog />} />
 
           {/* <Route path="main" element={<Catalog />} /> */}
+          <Route path="/search" element={<Search />} />
           <Route
             path="catalog/first-level/:id"
             element={<CatalogFirstLevelCategory />}
