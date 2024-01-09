@@ -16,7 +16,9 @@ export const Header = () => {
 
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
+  const [queryImg, setQueryImg] = useState("");
   const [data, setData] = useState("");
+  const [dataImg, setDataImg] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -24,11 +26,16 @@ export const Header = () => {
   };
 
   useEffect(() => {
-    fetch(URL + "/product/search?query=" + query)
+    fetch(URL + "/product/search-ext?query=" + query)
       .then((response) => response.json())
       .then((data1) => setData(data1));
   }, [query]);
 
+  // useEffect(() => {
+  //   fetch(URL + "/product/search-ext?query=" + query)
+  //     .then((response) => response.json())
+  //     .then((data1) => setDataImg(data1));
+  // }, []);
   // const fetchData = () => {
   //   fetch(URL + "/product/search?query=" + query)
   //     .then((response) => response.json())

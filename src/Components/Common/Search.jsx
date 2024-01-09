@@ -13,17 +13,26 @@ export const Search = (e) => {
   // }, []);
 
   // console.log(data);
+
   return (
     <>
       {location.state.data.map((search) => (
-        <div className="img-thumbnail">
-          <h5>{search.name} </h5>
-          <p>{search.description}</p>
+        <div className="img-thumbnail  d-flex ">
           <img
-            src={imgPrefixURL + "/" + search.name}
+            src={imgPrefixURL + "/" + search.filename}
             alt="Filepath"
-            className="img-thumbnail"
+            className="img-thumbnail img-fluid"
+            style={{ width: "120px", height: "180px" }}
           />
+          <div
+            className="ml-3"
+            style={{ maxHeight: "180px", overflow: "hidden" }}
+          >
+            <p>
+              <b>{search.name} </b>
+            </p>
+            <p>{search.description}</p>
+          </div>
         </div>
       ))}
     </>

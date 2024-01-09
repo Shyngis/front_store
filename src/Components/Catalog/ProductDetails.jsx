@@ -50,54 +50,54 @@ const ProductDetails = () => {
     <div>
       <>
         <div className="row">
-          
-          <div className="col-md-12  mt-3 mb-3"><h5 className="product-name">{product.name}</h5></div>
+          <div className="col-md-12  mt-3 mb-3">
+            <h5 className="product-name">{product.name}</h5>
+          </div>
 
           <div className="row">
-
-          <div className="col-md-6 image-container">
-            <img src={activeImg} alt="" className="product-image" />
-            <div className="thumbnail-container">
-              {images.map((image) => (
-                <img
-                  src={imgPrefixURL + "/" + image.filename}
-                  alt=""
-                  className="thumbnail"
-                  onClick={() => activateThumbnail(image.filename)}
-                />
-              ))}
-            </div>
-          </div>
-          <div className="col-md-6">
-            <p className="product-description">{product.description}</p>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>Артикул</th>
-                  <th>Размер</th>
-                </tr>
-              </thead>
-              <tbody>
-                {productSizes.map((productSize) => (
-                  <tr>
-                    <td>{productSize.article}</td>
-                    <td>{productSize.size}</td>
-                  </tr>
+            <div className="col-md-6 image-container">
+              <img src={activeImg} alt="" className="product-image" />
+              <div className="thumbnail-container">
+                {images.map((image) => (
+                  <img
+                    src={imgPrefixURL + "/" + image.filename}
+                    alt=""
+                    className="thumbnail"
+                    onClick={() => activateThumbnail(image.filename)}
+                  />
                 ))}
-              </tbody>
-            </table>
-
-            <div className="video-container">
-              <ReactPlayer
-                className="video-player"
-                url={product.video}
-                controls
-              />
+              </div>
             </div>
+            <div className="col-md-6">
+              <p className="product-description">{product.description}</p>
 
-            <div id="fileDisplayArea">{product.file_pr}</div>
-          </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Артикул</th>
+                    <th>Размер</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {productSizes.map((productSize) => (
+                    <tr>
+                      <td>{productSize.article}</td>
+                      <td>{productSize.size}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <div className="video-container">
+                <ReactPlayer
+                  className="video-player"
+                  url={product.video}
+                  controls
+                />
+              </div>
+
+              <div id="fileDisplayArea">{product.file_pr}</div>
+            </div>
           </div>
         </div>
       </>
