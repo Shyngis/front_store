@@ -37,3 +37,8 @@
 .admin-category li a:hover {
   background-color: #f0f0f0;
 }
+
+
+.admin-panel {
+  min-height: 500px;
+}

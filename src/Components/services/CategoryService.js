@@ -13,7 +13,12 @@ const CategoryService = {
         }).then((data) => { return data.json() })
     },
 
-
+    findSantecAndValtecByParentId: function (id, isSantec, isValtec) {
+        return fetch(URL + "/category/extended/parent/" + id +"?isSantec=" + isSantec + "&isValtec=" + isValtec, {
+            method: "GET",
+        }).then((data) => { return data.json() })
+    },
+    
     create: function (bodyValue) {
         return fetch(URL + "/category", {
             method: "POST",

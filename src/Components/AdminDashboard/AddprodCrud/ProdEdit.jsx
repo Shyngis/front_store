@@ -27,6 +27,7 @@ export const ProdEdit = () => {
         isNewchange(resp.isNew);
         setVideo_pr(resp.video);
         setproduct(resp.id);
+        setIsSantec(resp.isSantec);
 
         if (resp.category) {
           CategoryService.findLevelCategoriesById(resp.category).then(
@@ -55,9 +56,9 @@ export const ProdEdit = () => {
 
         fetch(
           URL +
-            "/upload/file/container/" +
-            resp.id +
-            "/container-class/Document"
+          "/upload/file/container/" +
+          resp.id +
+          "/container-class/Document"
         )
           .then((response) => response.json())
           .then((data) => {
@@ -77,6 +78,7 @@ export const ProdEdit = () => {
   const [name, namechange] = useState("");
   const [description, descriptionchange] = useState("");
   const [isNew, isNewchange] = useState(true);
+  const [isSantec, setIsSantec] = useState(false);
   const [video, setVideo_pr] = useState("");
   const [validation, valchange] = useState(false);
 
@@ -91,6 +93,7 @@ export const ProdEdit = () => {
       description,
       isNew,
       video,
+      isSantec
     };
 
     fetch(URL + "/product", {
@@ -195,6 +198,7 @@ export const ProdEdit = () => {
   const [files, setFiles] = useState();
 
   const handleImage = (y) => {
+    y.preventDefault();
     setFiles(y.target.files);
   };
   const [imgRealDisplay, setImgRealDisplay] = useState([]);
@@ -275,201 +279,183 @@ export const ProdEdit = () => {
     <>
       <div>
         {/* <div className="row"> */}
-          <div className="">
-            <form onSubmit={saveProduct}>
-              <div className="card" style={{ textAlign: "left" }}>
-                <div className="card-title">
-                  <h2>Редактирование</h2>
-                </div>
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-lg-12">
+        <div className="">
+          <form onSubmit={saveProduct}>
+            <div className="card" style={{ textAlign: "left" }}>
+              <div className="card-title">
+                <h2>Редактирование</h2>
+              </div>
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <input
+                      type="hidden"
+                      value={id}
+                      disabled="disabled"
+                      className="form-control"
+                    />
+                    <div className="form-group">
+                      <label htmlFor="main">
+                        Выберите основную категорию:
+                      </label>
+                      <select
+                        required
+                        className="category-select"
+                        value={mainCategory}
+                        onChange={getFirstLevelCategoryByParent}
+                      >
+                        <option value="">--</option>
+                        {mainCategories.map((category) => (
+                          <option
+                            name="option-main"
+                            key={category.id}
+                            value={category.id}
+                          >
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label htmlFor="uroven1">Выберите под категорию: </label>
+                      <select
+                        required
+                        className="category-select"
+                        value={firstLevelCategory}
+                        onChange={getSecondLevelCategoryByParent}
+                      >
+                        <option value="">--</option>
+                        {firstLevelCategories.map((category) => (
+                          <option
+                            name="option"
+                            key={category.id}
+                            value={category.id}
+                          >
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group mb-3">
+                      <label className="form-label" htmlFor="">Наименование</label>
                       <input
-                        type="hidden"
-                        value={id}
-                        disabled="disabled"
+                        required
+                        value={name}
+                        onMouseDown={(e) => valchange(true)}
+                        onChange={(e) => namechange(e.target.value)}
                         className="form-control"
                       />
-                      <div className="form-group">
-                        <label htmlFor="main">
-                          Выберите основную категорию:
-                        </label>
-                        <select
-                          required
-                          className="category-select"
-                          value={mainCategory}
-                          onChange={getFirstLevelCategoryByParent}
-                        >
-                          <option value="">--</option>
-                          {mainCategories.map((category) => (
-                            <option
-                              name="option-main"
-                              key={category.id}
-                              value={category.id}
-                            >
-                              {category.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
+                      {name.length === 0 && validation && (
+                        <span className="text-danger">Заполнить Наименование</span>
+                      )}
                     </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label htmlFor="uroven1">Выберите под категорию:</label>
-                        <select
-                          required
-                          className="category-select"
-                          value={firstLevelCategory}
-                          onChange={getSecondLevelCategoryByParent}
-                        >
-                          <option value="">--</option>
-                          {firstLevelCategories.map((category) => (
-                            <option
-                              name="option"
-                              key={category.id}
-                              value={category.id}
-                            >
-                              {category.name}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label htmlFor="">ID</label>
-                        <input
-                          value={id}
-                          disabled="disabled"
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label htmlFor="">Name</label>
-                        <input
-                          required
-                          value={name}
-                          onMouseDown={(e) => valchange(true)}
-                          onChange={(e) => namechange(e.target.value)}
-                          className="form-control"
-                        />
-                        {name.length === 0 && validation && (
-                          <span className="text-danger">Enter the name</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label htmlFor="">Description</label>
-                        <input
-                          value={description}
-                          onChange={(e) => descriptionchange(e.target.value)}
-                          className="form-control"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <label className="form-check-label" htmlFor="">
-                          Новинка
-                        </label>
-                        <input
-                          checked={isNew}
-                          onChange={(e) => isNewchange(e.target.checked)}
-                          type="checkbox"
-                        />
-                      </div>
-                    </div>
-                    <label>Ссылка для видео:</label>
-                    <input
-                      type="url"
-                      value={video}
-                      onChange={(e) => setVideo_pr(e.target.value)}
-                    />
-                    <div className="d-inline-block">
-                      <ReactPlayer
-                        className="img-thumbnail"
-                        url={video}
-                        controls
-                        width="200px"
-                        height="150px"
+                  </div>
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="">Описание</label>
+                      <input
+                        value={description}
+                        onChange={(e) => descriptionchange(e.target.value)}
+                        className="form-control"
                       />
                     </div>
-                    <div className="all">
-                      <div className="article_size">
-                        <label>Артикул и размер</label>
+                  </div>
+                  <div className="row mb-3">
+                    <div className="col-lg-6">
+                      <div className="form-group">
+                        <label className="form-check-label"> Новинка </label>
+                        <input className="form-check-input" checked={isNew} onChange={(e) => isNewchange(e.target.checked)} type="checkbox" />
                       </div>
-
-                      <div>
-                        <label>Артикул товара</label>
-                        <input
-                          type="text"
-                          value={article || ""}
-                          onChange={(y) => setArticle(y.target.value)}
-                        />
-
-                        <label>Размер товара</label>
-                        <input
-                          type="number"
-                          value={size || ""}
-                          onChange={(y) => setSize(y.target.value)}
-                        />
-                      </div>
-
-                      <ToastContainer />
-                      <button onClick={handleSubmit1}>Добавить</button>
-
-                      <table>
-                        <thead>
-                          <tr>
-                            <td>Артикул</td>
-                            <td>Размер</td>
-                            <td>Action</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {productArticleAndSize.map((product) => {
-                            return (
-                              product.isRemoved == false && (
-                                <tr key={product.id}>
-                                  <td>{product.article}</td>
-                                  <td>{product.size}</td>
-                                  <td>
-                                    <a
-                                      onClick={() => {
-                                        LoadEdit(product.id);
-                                      }}
-                                      className="btn btn-success"
-                                    >
-                                      Редакт.
-                                    </a>
-                                    <a
-                                      onClick={() => {
-                                        Removefunction(product);
-                                      }}
-                                      className="btn btn-danger"
-                                    >
-                                      Удалить
-                                    </a>
-                                  </td>
-                                </tr>
-                              )
-                            );
-                          })}
-                        </tbody>
-                      </table>
                     </div>
-                    <label>Загрузить фото:</label>
-                    <input
-                      type="file"
-                      name="file"
-                      multiple
-                      // value={files}
-                      onChange={handleImage}
+                    <div className="col-lg-6">
+                      <div className="form-group">
+                        <label className="form-check-label"> Продукция SANTEC </label>
+                        <input className="form-check-input" checked={isSantec} onChange={(e) => setIsSantec(e.target.checked)} type="checkbox" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="form-group  mb-3">
+                    <label className="form-label">Ссылка для видео: </label>
+                    <input className="form-control" type="url" value={video} onChange={(e) => setVideo_pr(e.target.value)} />
+                  </div>
+
+
+                  <div className="d-inline-block mb-3">
+                    <ReactPlayer
+                      className="img-thumbnail"
+                      url={video}
+                      controls
+                      width="200px"
+                      height="150px"
                     />
-                    -{imageDisplay.length}-
+                  </div>
+
+                  <hr />
+
+                  <fieldset>
+                    <legend>Артикул и размер</legend>
+                    <div>
+                      <label className="form-label">Артикул товара</label>
+                      <input className="form-control" type="text" value={article || ""} onChange={(y) => setArticle(y.target.value)}
+                      />
+                      <label className="form-label">Размер товара</label>
+                      <input className="form-control" type="number" value={size || ""} onChange={(y) => setSize(y.target.value)} />
+                    </div>
+
+                    <button className="mt-3 btn btn-sm btn-success" onClick={handleSubmit1}>Добавить</button>
+
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Артикул</td>
+                          <td>Размер</td>
+                          <td>Action</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {productArticleAndSize.map((product) => {
+                          return (
+                            product.isRemoved == false && (
+                              <tr key={product.id}>
+                                <td>{product.article}</td>
+                                <td>{product.size}</td>
+                                <td>
+                                  <a
+                                    onClick={() => {
+                                      LoadEdit(product.id);
+                                    }}
+                                    className="btn btn-success"
+                                  >
+                                    Редакт.
+                                  </a>
+                                  <a
+                                    onClick={() => {
+                                      Removefunction(product);
+                                    }}
+                                    className="btn btn-danger"
+                                  >
+                                    Удалить
+                                  </a>
+                                </td>
+                              </tr>
+                            )
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </fieldset>
+
+                  <hr />
+                  <br />
+                  <div className="col-md-12">
+                    <label>Выбрать картинки для продукта: </label>
+                    <input className="btn btn-sm btn-outline-primary" type="file" name="file" multiple onChange={handleImage} />
                     {imageDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
@@ -483,62 +469,57 @@ export const ProdEdit = () => {
                         </div>
                       );
                     })}
-                    <div className="container">
-                      <div className="row">
-                        {imgRealDisplay
-                          .filter((s) => s.filename.startsWith("thumbnail-"))
-                          .map((product) => (
-                            <div
-                              className="col-md-4 mb-3"
-                              key={product.filename}
-                            >
-                              <div className="img-thumbnail">
-                                <p>{product.filename}</p>
-                                <img
-                                  src={
-                                    imgPrefixURL + "/" + product.filename
-                                  }
-                                  alt="Filepath"
-                                  className="img-thumbnail"
-                                />
-                                <div className="col-12 mt-2">
-                                  <button
-                                    type="button"
-                                    className="btn btn-danger"
-                                  >
-                                    Удалить
-                                  </button>
-                                </div>
+                  </div>
+
+                  <div className="container">
+                    <div className="row">
+                      {imgRealDisplay
+                        .filter((s) => s.filename.startsWith("thumbnail-"))
+                        .map((product) => (
+                          <div
+                            className="col-md-4 mb-3"
+                            key={product.filename}
+                          >
+                            <div className="img-thumbnail">
+                              <p>{product.filename}</p>
+                              <img
+                                src={
+                                  imgPrefixURL + "/" + product.filename
+                                }
+                                alt="Filepath"
+                                className="img-thumbnail"
+                              />
+                              <div className="col-12 mt-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                >
+                                  Удалить
+                                </button>
                               </div>
                             </div>
-                          ))}
-                      </div>
+                          </div>
+                        ))}
                     </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <button
-                          className="btn btn-primary"
-                          onClick={handleUpload}
-                        >
-                          Загрузить
-                        </button>
-                      </div>
+                  </div>
+                  <div className="col-lg-12 mb-3">
+                    <div className="form-group">
+                      <button className="btn btn-sm  btn-primary" onClick={handleUpload} > Загрузить </button>
                     </div>
-                    <label>Загрузить файлы:</label>
-                    <input
-                      type="file"
-                      name="file"
-                      multiple
-                      // value={files}
-                      onChange={handleFile}
-                    />
-                    -{fileDisplay.length}-
+                  </div>
+
+                  <hr />
+                  <br />
+
+                  <div class="col-md-12">
+                    <label className="form-label">Загрузить паспорта и сертификаты: </label>
+                    <input className="form-input" type="file" name="file" multiple onChange={handleFile} />
                     {fileDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
                           {product.filename}
                           <br />
-                          <img
+                          <img 
                             src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"
@@ -546,58 +527,60 @@ export const ProdEdit = () => {
                         </div>
                       );
                     })}
-                    <div className="container">
-                      <div className="row">
-                        {fileRealDisplay.map((product) => (
-                          <div className="col-md-4 mb-3" key={product.filename}>
+                  </div>
+                  <div className="container">
+                    <div className="row">
+                      {fileRealDisplay.map((product) => (
+                        <div className="col-md-4 mb-3" key={product.filename}>
+                          <div className="img-thumbnail">
                             <div className="img-thumbnail">
-                              <div className="img-thumbnail">
-                                <p>{product.filename}</p>
-                                <img
-                                  src={
-                                    imgPrefixURL + "/images/" + product.filename
-                                  }
-                                  alt="Filepath"
-                                  className="img-thumbnail"
-                                />
-                                <div className="col-12 mt-2">
-                                  <button
-                                    type="button"
-                                    className="btn btn-danger"
-                                  >
-                                    Удалить
-                                  </button>
-                                </div>
+                              <p>{product.filename}</p>
+                              <img
+                                src={
+                                  imgPrefixURL + "/images/" + product.filename
+                                }
+                                alt="Filepath"
+                                className="img-thumbnail"
+                              />
+                              <div className="col-12 mt-2">
+                                <button
+                                  type="button"
+                                  className="btn btn-danger"
+                                >
+                                  Удалить
+                                </button>
                               </div>
                             </div>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                      ))}
                     </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <button
-                          className="btn btn-primary"
-                          onClick={handleUploadFiles}
-                        >
-                          Загрузить files
-                        </button>
-                      </div>
+                  </div>
+                  <div className="col-lg-12 mb-3">
+                    <div className="form-group">
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={handleUploadFiles}
+                      >
+                        Загрузить паспорта и сертификаты
+                      </button>
                     </div>
-                    <div className="col-lg-12">
-                      <div className="form-group">
-                        <button className="btn btn-success" type="submit">
-                          Сохранить
-                        </button>
-                        {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
-                      </div>
+                  </div>
+                  <hr />
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <button className="btn btn-success float-right" type="submit">
+                        Сохранить
+                      </button>
+                      {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
+      </div >
       {/* </div> */}
 
       {/* </form>
@@ -606,6 +589,8 @@ export const ProdEdit = () => {
     </div>
     </>
  */}
+      <ToastContainer />
+
     </>
   );
 };

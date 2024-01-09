@@ -1,7 +1,6 @@
 import React from "react";
 import { Header } from "../Common/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Main } from "../Category/Main";
 import { AddingCategory } from "../AdminDashboard/AddingCategory";
 import { Catalog } from "../Catalog/Catalog";
 
@@ -10,14 +9,14 @@ import { Login } from "../Common/Login";
 import { AdminPage } from "../AdminDashboard/AdminPage";
 import { Footer } from "../Common/Footer";
 import ProductDetails from "../Catalog/ProductDetails";
-import { CatalogFirstLevelCategory } from "../Catalog/CatalogFirstLevelCategory";
+import { CatalogSubCategory } from "../Catalog/CatalogSubCategory";
 import { CatalogProduct } from "../Catalog/CatalogProduct";
 import { ProdListing } from "../AdminDashboard/AddprodCrud/ProdListing";
 import { ProdCreate } from "../AdminDashboard/AddprodCrud/ProdCreate";
 import { ProdEdit } from "../AdminDashboard/AddprodCrud/ProdEdit";
 import { ProdDetail } from "../AdminDashboard/AddprodCrud/ProdDetail";
 import { SizeEdit } from "../AdminDashboard/AddprodCrud/SizeEdit";
-import { CategoryByMainLevel } from "../AdminDashboard/CategoryByLevel/CategoryByMainLevel";
+import { MainCategory } from "../AdminDashboard/CategoryByLevel/MainCategory";
 import { SubCategory } from "../AdminDashboard/CategoryByLevel/SubCategory";
 import { About } from "../Common/About";
 import { Contacts } from "../Common/Contacts";
@@ -34,15 +33,15 @@ export const Pages = () => {
           {/* <Route path="main" element={<Catalog />} /> */}
           <Route path="/search" element={<Search />} />
           <Route
-            path="catalog/first-level/:id"
-            element={<CatalogFirstLevelCategory />}
+            path="catalog/:id"
+            element={<CatalogSubCategory />}
           />
           <Route
-            path="catalog/first-level/:id/products/:categoryId"
+            path="catalog/:id/products/:categoryId"
             element={<CatalogProduct />}
           />
           <Route
-            path="catalog/first-level/:id/products/:categoryId/product/:productId"
+            path="catalog/:id/products/:categoryId/product/:productId"
             element={<ProductDetails />}
           />
           {/* <Route path='category/:id' element={<Product />} /> */}
@@ -53,7 +52,7 @@ export const Pages = () => {
           <Route path="login" element={<Login />} />
           <Route path="adminpage" element={<AdminPage />}>
             <Route path="addingcategory" element={<AddingCategory />}>
-              <Route path="mainlevel" element={<CategoryByMainLevel />} />
+              <Route path="mainlevel" element={<MainCategory />} />
               <Route path="level-1" element={<SubCategory />} />
             </Route>
 

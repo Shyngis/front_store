@@ -8,7 +8,7 @@ header > ul li {
 }
 
 .search-input {
-  max-width: 300px;
+  min-width: 300px;
   margin: 10px;
 }
 
@@ -22,4 +22,10 @@ header > ul li {
 }
 .input-group input{
   font:10pt/1.5 Verdana, Tahoma, Arial, sans-serif;
+}
+
+.nav-link  {
+  color:black;
+  text-transform: uppercase;
+  padding: 18px;
 }

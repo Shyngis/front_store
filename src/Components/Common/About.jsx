@@ -1,4 +1,5 @@
 import React from "react";
+import aboutUsImageUrl from "../../Assets/about-us.png";
 
 export const About = () => {
   return (
@@ -9,7 +10,7 @@ export const About = () => {
           <img
             class="img-fluid rounded"
             loading="lazy"
-            src="https://septic78.ru/assets/cache_image/assets/santehnikazag_0x0_0fe.jpg"
+            src={aboutUsImageUrl}
             alt=""
           />
         </div>

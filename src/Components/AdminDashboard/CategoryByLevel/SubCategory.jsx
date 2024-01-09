@@ -14,6 +14,8 @@ export const SubCategory = () => {
   const [subCategories, setSubCategories] = useState([]);
   const [categoryImage, setCategoryImage] = useState();
   const [category, setCategory] = useState({});
+  const [isSantec, setIsSantec] = useState(false);
+  const [isValtec, setIsValtec] = useState(false);
 
 
 
@@ -29,12 +31,18 @@ export const SubCategory = () => {
   const saveCategory = (y) => {
 
     y.preventDefault();
-    category.parent =  mainCategoryId;
+    
+    category.parent = mainCategoryId;
+    category.isSantec = isSantec;
+    category.isValtec = isValtec;
 
     if (category.id) {
       CategoryService.update(category)
         .then((result) => {
           updateCategory(result);
+          setIsValtec(false);
+          setIsSantec(false);
+          setCategoryName("");
           toast.success("Успешно обновлено !", { autoClose: 1000 });
         });
     } else {
@@ -42,6 +50,8 @@ export const SubCategory = () => {
         .then((result) => {
           setSubCategories([...subCategories, result]);
           setCategoryName("");
+          setIsValtec(false);
+          setIsSantec(false);
           toast.success("Успешно сохранено !", { autoClose: 1000 });
         });
     }
@@ -77,6 +87,8 @@ export const SubCategory = () => {
   const editStart = (editedCategory) => {
 
     setName(editedCategory.name);
+    setIsSantec(editedCategory.isSantec);
+    setIsValtec(editedCategory.isValtec);
     setCategory({
       ...category,
       id: editedCategory.id,
@@ -84,6 +96,8 @@ export const SubCategory = () => {
       isRemoved: editedCategory.isRemoved,
       parent: editedCategory.parent,
       image: editedCategory.image,
+      isSantec: editedCategory.isSantec,
+      isValtec: editedCategory.isValtec
     });
 
     if (editedCategory.image) {
@@ -105,6 +119,8 @@ export const SubCategory = () => {
         item.name = updatedCategory.name;
         item.isRemoved = updatedCategory.isRemoved;
         item.image = updatedCategory.image;
+        item.isValtec = updatedCategory.isValtec;
+        item.isSantec = updatedCategory.isSantec;
       }
       updatedCategories.push(item);
     })
@@ -123,69 +139,89 @@ export const SubCategory = () => {
   return (
     <>
       <br />
-      <div className='category'>
-        <form onSubmit={saveCategory}>
+      <div className='row'>
+        <div className='col-md-12'>
 
-          <label htmlFor="cars">Выберите основную категорию:</label>
-          <select className="category-select" value={mainCategoryId} onChange={(y) => mainCategorySelected(y.target.value)}>
-            <option value="">--</option>
-            {mainCategories.map((category) => (
-              <option
-                name="option"
-                key={category.id}
-                value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <form onSubmit={saveCategory}>
+            <h2>Добавление подкатегории</h2>
 
-          {/* <h2>Добавление Категории</h2> */}
-          <label>Наименование</label>
-          <input type="text"
-            value={name}
-            onChange={(y) => setCategoryName(y.target.value)}
-            required />
+            <label htmlFor="cars">Выберите основную категорию:</label>
+            <select className="category-select" value={mainCategoryId} onChange={(y) => mainCategorySelected(y.target.value)}>
+              <option value="">--</option>
+              {mainCategories.map((category) => (
+                <option
+                  name="option"
+                  key={category.id}
+                  value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
 
-          <label>Загрузить фото </label>
-          <input type="file" onChange={(y) => uploadCategoryImage(y.target.files)}></input>
-          <div className="category-image">
-            {categoryImage &&
-              <img src={`${imgPrefixURL}/${categoryImage.filename}`} ></img>}
+            <div className="col-md-12">
+              <label className="form-label">Наименование</label>
+              <input className="form-control" type="text" value={name} onChange={(y) => setCategoryName(y.target.value)} required />
+            </div>
+
+            <div class="row">
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label className="form-check-label"> Категория для Santec </label>
+                  <input className="form-check-control" checked={isSantec} onChange={(e) => setIsSantec(e.target.checked)} type="checkbox" />
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="form-group">
+                  <label className="form-check-label"> Категория для Valtec </label>
+                  <input className="form-check-control" checked={isValtec} onChange={(e) => setIsValtec(e.target.checked)} type="checkbox" />
+                </div>
+              </div>
+            </div>
+
+            <div className="col-md-12">
+              <label className="form-label">Загрузить фото </label>
+              <input className="form-control" type="file" onChange={(y) => uploadCategoryImage(y.target.files)}></input>
+              <div className="category-image mb-3">
+                {categoryImage &&
+                  <img src={`${imgPrefixURL}/${categoryImage.filename}`} ></img>}
+              </div>
+
+              <button className="btn btn-outline-success">Сохранить</button>
+            </div>
+
+          </form>
+
+
+          <div className="col-md-12">
+            <div>
+              <table className="table-responsive">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Название</th>
+                    <th><i className="fa fa-tasks"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subCategories &&
+                    subCategories.map((item) => (
+
+                      item.isRemoved == false &&
+                      <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td>{item.name}</td>
+                        <td>
+                          <a className="btn btn-success" onClick={() => editStart(item)}><i className="fa fa-edit"></i></a>
+                          <a className="btn btn-danger" onClick={() => remove(item)} ><i className="fa fa-trash"></i></a>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-
-          <button className="adding_pr">Сохранить</button>
-        </form>
-
-
-        <div className="col-md-12">
-          <div>
-            <table className="table-responsive">
-              <thead>
-                <tr className="table-dark table-active">
-                  <th>#</th>
-                  <th>Название</th>
-                  <th><i className="fa fa-tasks"></i></th>
-                </tr>
-              </thead>
-              <tbody>
-                {subCategories &&
-                  subCategories.map((item) => (
-
-                    item.isRemoved == false &&
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.name}</td>
-                      <td>
-                        <a className="btn btn-success" onClick={() => editStart(item)}><i className="fa fa-edit"></i></a>
-                        <a className="btn btn-danger" onClick={() => remove(item)} ><i className="fa fa-trash"></i></a>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+          <ToastContainer autoClose={2000} />
         </div>
-        <ToastContainer autoClose={2000} />
       </div>
 
 

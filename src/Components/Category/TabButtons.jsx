@@ -10,7 +10,7 @@ export const TabButtons = () => {
               Основные категории
             </Link>&nbsp;
             <Link className="btn btn-outline-secondary" to="/adminpage/addingcategory/level-1">
-              Категории уровен 1
+              Подкатегории
             </Link>
       </div>
       <div className="col-md-12">

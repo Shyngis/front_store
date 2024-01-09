@@ -1,4 +1,5 @@
 import React from "react";
+import pipeImageUrl from "../../Assets/santec-pipes.png";
 
 export const Contacts = () => {
   return (
@@ -13,7 +14,7 @@ export const Contacts = () => {
           <img
             class="img-fluid rounded"
             loading="lazy"
-            src="https://media.istockphoto.com/id/537742287/photo/man-shopping-for-bathroom-equipment-in-shop.jpg?s=612x612&w=0&k=20&c=q_B29_L47wUdJHBA3bG4lpkED5thZh1fCZO1MiO6d7Q="
+            src={pipeImageUrl}
             alt=""
           />
         </div>
