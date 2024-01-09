@@ -9,13 +9,6 @@ export const CatalogFilter = () => {
   const [valtec, setValtec] = useState('active');
   const [santec, setSantec] = useState('');
 
-  // useEffect(() => {
-
-  //   CategoryService.findByParentAndImageId(1).then(result => {
-  //     setMainCategories(result);
-  //   });
-  // }, []);
-
   function toggle(type) {
     if (type === 'valtec') {
       if (valtec === 'active') {
@@ -25,7 +18,6 @@ export const CatalogFilter = () => {
       }
     };
     if (type === 'santec') {
-
       if (santec === 'active') {
         setSantec('');
       } else {

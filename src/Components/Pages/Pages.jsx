@@ -9,7 +9,7 @@ import { Login } from "../Common/Login";
 import { AdminPage } from "../AdminDashboard/AdminPage";
 import { Footer } from "../Common/Footer";
 import ProductDetails from "../Catalog/ProductDetails";
-import { CatalogFirstLevelCategory } from "../Catalog/CatalogFirstLevelCategory";
+import { CatalogSubCategory } from "../Catalog/CatalogSubCategory";
 import { CatalogProduct } from "../Catalog/CatalogProduct";
 import { ProdListing } from "../AdminDashboard/AddprodCrud/ProdListing";
 import { ProdCreate } from "../AdminDashboard/AddprodCrud/ProdCreate";
@@ -33,15 +33,15 @@ export const Pages = () => {
           {/* <Route path="main" element={<Catalog />} /> */}
           <Route path="/search" element={<Search />} />
           <Route
-            path="catalog/first-level/:id"
-            element={<CatalogFirstLevelCategory />}
+            path="catalog/:id"
+            element={<CatalogSubCategory />}
           />
           <Route
-            path="catalog/first-level/:id/products/:categoryId"
+            path="catalog/:id/products/:categoryId"
             element={<CatalogProduct />}
           />
           <Route
-            path="catalog/first-level/:id/products/:categoryId/product/:productId"
+            path="catalog/:id/products/:categoryId/product/:productId"
             element={<ProductDetails />}
           />
           {/* <Route path='category/:id' element={<Product />} /> */}
