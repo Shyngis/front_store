@@ -20,13 +20,15 @@ export const Catalog = () => {
 
   function toggle(type) {
     if (type === 'valtec') {
-      isValtec = !isValtec;
-      setIsValtec(isValtec);
+      isValtec = true;
+      isSantec = false;
     };
     if (type === 'santec') {
-      isSantec = !isSantec;
-      setIsSantec(isSantec);
+      isValtec = false;
+      isSantec = true;
     };
+    setIsValtec(isValtec);
+    setIsSantec(isSantec);
     loadCategories(isSantec, isValtec);
   }
 
