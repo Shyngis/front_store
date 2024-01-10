@@ -602,3 +602,38 @@ const handleDelete = (i) => {
       </>
     </section>
     
+
+
+     <div className="container">
+      <div className="header">
+        <div className="text">Login</div>
+        <div className="underline"></div>
+      </div>
+      <form className="inputs" onSubmit={handleSubmit}>
+        <div className="input">
+          <img src={email_icon} alt="" />
+          <input
+            type="email"
+            value={email}
+            onChange={(y) => setEmail(y.target.value)}
+            placeholder="Email Id"
+          />
+        </div>
+        <div className="input">
+          <img src={password_icon} alt="" />
+          <input
+            type="password"
+            value={password}
+            onChange={(y) => setPassword(y.target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <div className="forgot-password">
+          Forgot password?<span>Click Here!</span>
+        </div>
+
+        <div className="submit-container">
+          <button>Login </button>
+        </div>
+      </form>
+    </div>

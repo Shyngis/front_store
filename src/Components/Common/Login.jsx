@@ -24,38 +24,38 @@ export const Login = () => {
   };
 
   return (
-    <div className="container">
-      <div className="header">
-        <div className="text">Login</div>
-        <div className="underline"></div>
+    <>
+      <div className="Auth-form-container">
+        <form className="Auth-form">
+          <div className="Auth-form-content">
+            <h3 className="Auth-form-title">Sign In</h3>
+            <div className="form-group mt-3">
+              <label>Email address</label>
+              <input
+                type="email"
+                className="form-control mt-1"
+                placeholder="Enter email"
+              />
+            </div>
+            <div className="form-group mt-3">
+              <label>Password</label>
+              <input
+                type="password"
+                className="form-control mt-1"
+                placeholder="Enter password"
+              />
+            </div>
+            <div className="d-grid gap-2 mt-3">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </div>
+            <p className="forgot-password text-right mt-2">
+              Forgot <a href="#">password?</a>
+            </p>
+          </div>
+        </form>
       </div>
-      <form className="inputs" onSubmit={handleSubmit}>
-        <div className="input">
-          <img src={email_icon} alt="" />
-          <input
-            type="email"
-            value={email}
-            onChange={(y) => setEmail(y.target.value)}
-            placeholder="Email Id"
-          />
-        </div>
-        <div className="input">
-          <img src={password_icon} alt="" />
-          <input
-            type="password"
-            value={password}
-            onChange={(y) => setPassword(y.target.value)}
-            placeholder="Password"
-          />
-        </div>
-        <div className="forgot-password">
-          Forgot password?<span>Click Here!</span>
-        </div>
-
-        <div className="submit-container">
-          <button>Login </button>
-        </div>
-      </form>
-    </div>
+    </>
   );
 };

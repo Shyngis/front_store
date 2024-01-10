@@ -9,9 +9,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+
 import { URL } from "./ddata";
 
+import Modal from "react-bootstrap/Modal";
+
 export const Header = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const size = "md";
 
   const navigate = useNavigate();
@@ -114,11 +121,43 @@ export const Header = () => {
                 <a className="nav-underline nav-link" href="/adminpage">
                   <i className="fa fa-sign-in"></i>
                 </a>
+                <a className="nav-underline nav-link">
+                  <Button onClick={handleShow}>Login</Button>
+                </a>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
       </Navbar>
+
+      <Modal show={show} onHide={handleClose} className="modal">
+        <Modal.Header closeButton>
+          <Modal.Title>Авторизация</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Логин</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="santec@mail.ru"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Label>Пароль</Form.Label>
+            <Form.Control type="password" autoFocus />
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            className="modal_footer mx-auto"
+            variant="primary"
+            onClick={handleClose}
+          >
+            Вход
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
