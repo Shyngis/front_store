@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { URL, imgPrefixURL } from "./ddata";
+import "./search.css";
 
 export const Search = (e) => {
   const location = useLocation();
@@ -17,25 +18,25 @@ export const Search = (e) => {
   return (
     <>
       {location.state.data.map((search) => (
-        <Link to={`product/${search.id}`}>
-          <div className="img-thumbnail  d-flex ">
-            <img
-              src={imgPrefixURL + "/" + search.filename}
-              alt="Filepath"
-              className="img-thumbnail img-fluid"
-              style={{ width: "120px", height: "180px" }}
-            />
-            <div
-              className="ml-3"
-              style={{ maxHeight: "180px", overflow: "hidden" }}
-            >
+        <div className="img-thumbnail  d-flex ">
+          <img
+            src={imgPrefixURL + "/" + search.filename}
+            alt="Filepath"
+            className="img-thumbnail img-fluid imgPr"
+            // style={{ width: "120px", height: "180px" }}
+          />
+          <div
+            className="ml-3 textPr"
+            // style={{ maxHeight: "180px", overflow: "hidden" }}
+          >
+            <Link to={`product/${search.id}`}>
               <p>
                 <b>{search.name} </b>
               </p>
-              <p>{search.description}</p>
-            </div>
+            </Link>
+            <p>{search.description}</p>
           </div>
-        </Link>
+        </div>
       ))}
     </>
   );

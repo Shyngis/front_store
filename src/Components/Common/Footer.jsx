@@ -89,7 +89,7 @@ export const Footer = () => {
             <div>
               <p style={{ textAlign: "center" }}>
                 <p>
-                  в г.Нур-Султан <br />
+                  в г.Астана <br />
                   ул Бейсекбаева 18Б 1 этаж
                 </p>
               </p>

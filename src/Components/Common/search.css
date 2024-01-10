@@ -1,0 +1,10 @@
+
+.imgPr {
+  width: 120px;
+  
+}
+.textPr {
+  margin-left: 15px;
+  max-height: 180px;
+  overflow: hidden;
+}
