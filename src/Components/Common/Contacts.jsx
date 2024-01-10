@@ -18,7 +18,7 @@ export const Contacts = () => {
             alt=""
           />
         </div>
-        <div class="col-12 col-lg-4"  style={{ marginTop: "5%" }}>
+        <div class="col-12 col-lg-4" style={{ marginTop: "5%" }}>
           <div class="row justify-content-xl-center">
             <div class="col-12 col-xl-10">
               <div class="d-flex justify-content-center align-items-center">
@@ -28,7 +28,7 @@ export const Contacts = () => {
                 <p style={{ textAlign: "center" }}>
                   ТОО "SANTEHPLAST"
                   <p>Юридический адрес : город Караганды, ул Гоголя 64/3</p>
-                  <p>Тел.: +7(705)759-00-99</p>
+                  <p>Тел: +7(705)759-00-99</p>
                 </p>
               </div>
             </div>
@@ -42,8 +42,8 @@ export const Contacts = () => {
               </div>
               <div style={{ marginTop: "9%" }}>
                 <p style={{ textAlign: "center" }}>Время работы:</p>
-                <p style={{ textAlign: "center" }}>Пн-Пт: 11:00 — 23:00</p>
-                <p style={{ textAlign: "center" }}>Сб-Вс: 11:00 — 22:00</p>
+                <p style={{ textAlign: "center" }}>Пн-Пт: 9:00 — 18:00</p>
+                <p style={{ textAlign: "center" }}>Сб: 9:00 — 14:00</p>
               </div>
             </div>
           </div>

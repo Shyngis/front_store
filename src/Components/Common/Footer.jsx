@@ -3,12 +3,9 @@ import React from "react";
 export const Footer = () => {
   return (
     <>
-      <div class="bg-body-tertiary text-center mt-5 pb-5" >
+      <div class="bg-body-tertiary text-center mt-5 pb-5">
         <div class="row  gy-3">
-          <div
-            class="col-12 col-lg-4"
-            style={{ textAlign: "center" }}
-          >
+          <div class="col-12 col-lg-4" style={{ textAlign: "center" }}>
             <p>Мы в соцсетях</p>
             <a
               data-mdb-ripple-init
@@ -80,8 +77,8 @@ export const Footer = () => {
               </div>
               <div style={{ marginTop: "5%" }}>
                 <p style={{ textAlign: "center" }}>Время работы:</p>
-                <p style={{ textAlign: "center" }}>Пн-Пт: 11:00 — 23:00</p>
-                <p style={{ textAlign: "center" }}>Сб-Вс: 11:00 — 22:00</p>
+                <p style={{ textAlign: "center" }}>Пн-Пт: 9:00 — 18:00</p>
+                <p style={{ textAlign: "center" }}>Сб: 9:00 — 14:00</p>
               </div>
             </div>
           </div>
@@ -101,9 +98,7 @@ export const Footer = () => {
         </div>
 
         <div class="text-center p-3">
-          <p>
-            © 2024 TОО «SantehPlast»
-          </p>
+          <p>© 2024 TОО «SantehPlast»</p>
         </div>
       </div>
     </>
