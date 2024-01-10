@@ -31,18 +31,16 @@ export const CatalogSubCategory = () => {
                   style={{ width: "10rem", height: "15rem" }}
                 >
 
-                  {item.image.filename
-                    && <img
-                      src={`${imgPrefixURL}/${item.image.filename}`}
+                  <img
+                      src={`${imgPrefixURL}/${(item.image.filename ? item.image.filename : 'santec-bg.png')}`}
                       alt="no-image"
                       className="card-img-top"
-                    />}
+                    />
 
                   <div className="card-body" style={{ overflow: "hidden" }}>
                     <p
                       className="card-text"
                     >
-                      {!item.image.filename && <div><i className="fa fa-faucet fa-xl"></i></div>}
                       {item.category.name}
                     </p>
                   </div>
