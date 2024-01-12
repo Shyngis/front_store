@@ -12,29 +12,13 @@ import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 export const Catalog = () => {
   const [mainCategories, setMainCategories] = useState([]);
-  let [isValtec, setIsValtec] = useState(true);
-  let [isSantec, setIsSantec] = useState(false);
 
   useEffect(() => {
-    loadCategories(isSantec, isValtec);
+    loadCategories();
   }, []);
 
-  function toggle(type) {
-    if (type === "valtec") {
-      isValtec = true;
-      isSantec = false;
-    }
-    if (type === "santec") {
-      isValtec = false;
-      isSantec = true;
-    }
-    setIsValtec(isValtec);
-    setIsSantec(isSantec);
-    loadCategories(isSantec, isValtec);
-  }
-
-  function loadCategories(isSantec, isValtec) {
-    CategoryService.findSantecAndValtecByParentId(1, isSantec, isValtec).then(
+  function loadCategories() {
+    CategoryService.findByParentAndImageId(1).then(
       (result) => {
         setMainCategories(result);
       }
@@ -55,31 +39,6 @@ export const Catalog = () => {
         </MDBCarouselItem>
       </MDBCarousel>
       <div>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="product-filter">
-              {/* Фильтр:&nbsp; */}
-              <button
-                className={
-                  "btn btn-outline-danger " + (isValtec ? "active" : "")
-                }
-                onClick={() => toggle("valtec")}
-              >
-                Valtec
-              </button>
-              &nbsp;
-              <button
-                className={
-                  "btn btn-outline-danger " + (isSantec ? "active" : "")
-                }
-                onClick={() => toggle("santec")}
-              >
-                Santec
-              </button>
-            </div>
-          </div>
-        </div>
-
         <div className="row mt-3">
           {mainCategories.map((item) => (
             <div
@@ -87,7 +46,7 @@ export const Catalog = () => {
               key={item.category.id}
             >
               <Link
-                to={`/catalog/${item.category.id}?isSantec=${isSantec}&isValtec=${isValtec}`}
+                to={`/catalog/${item.category.id}`}
               >
                 <div className="card santehplast-card">
                   <img

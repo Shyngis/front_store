@@ -17,6 +17,9 @@ const FileService = {
         return fetch(URL + "/upload/image/", {
             method: "POST",
             body: formData,
+            headers: {
+                'Content-type': 'application/json',
+            },
         }).then((data) => { return data.json() })
     },
 
@@ -38,7 +41,7 @@ const FileService = {
     //         method: "GET",
     //     }).then((data) => { return data.json() });
     // }
-    
+
 };
 
 export default FileService;
