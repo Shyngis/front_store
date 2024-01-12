@@ -1,4 +1,5 @@
 import { URL } from '../Common/ddata';
+import AuthService from './AuthService';
 
 const FileService = {
 
@@ -17,9 +18,10 @@ const FileService = {
         return fetch(URL + "/upload/image/", {
             method: "POST",
             body: formData,
-            headers: {
-                'Content-type': 'application/json',
-            },
+            // headers: {
+            //     "Content-type": "application/json",
+            //     // 'Authorization': 'Bearer ' + AuthService.token()
+            // },
         }).then((data) => { return data.json() })
     },
 
