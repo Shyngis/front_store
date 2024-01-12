@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import "./ProdListing.css";
 import ReactPlayer from "react-player";
 import { URL } from "../../Common/ddata";
+import ProductService from "../../services/ProductService";
 
 export const ProdListing = () => {
   const [empdata, empdatachange] = useState();
@@ -34,24 +35,14 @@ export const ProdListing = () => {
   };
 
   useEffect(() => {
-    fetch(URL + "/product/page?size=20")
-      .then((res) => {
-        return res.json();
-      })
+
+    ProductService.getProducts(20)
       .then((resp) => {
         empdatachange(resp.products);
       })
       .catch((err) => {
         console.log(err.message);
       });
-  }, []);
-  const [records, setRecords] = useState([]);
-
-  useEffect(() => {
-    fetch(URL + "/category/parent/2")
-      .then((response) => response.json())
-      .then((categor) => setRecords(categor))
-      .catch((err) => console.log(err));
   }, []);
 
   return (
@@ -81,9 +72,9 @@ export const ProdListing = () => {
                   <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>
-                      {records
+                      {/* {records
                         .filter((cat) => cat.id === item.category)
-                        .map((cat) => cat.name)}
+                        .map((cat) => cat.name)} */}
                     </td>
                     <td>{item.name}</td>
                     <td>{item.description}</td>

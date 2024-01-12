@@ -7,18 +7,18 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
-
+import UserService from "../services/UserService";
 import { URL } from "./ddata";
 
 import Modal from "react-bootstrap/Modal";
 
 export const Header = () => {
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   const size = "md";
 
   const navigate = useNavigate();
@@ -26,6 +26,28 @@ export const Header = () => {
   const [queryImg, setQueryImg] = useState("");
   const [data, setData] = useState("");
   const [dataImg, setDataImg] = useState("");
+
+  const handleClose = () => {
+    setShow(false)
+  };
+
+  const login = () => {
+    const form = { username: username, password: password };
+    UserService.login(form)
+      .then(result => {
+        localStorage.setItem('santec_items', JSON.stringify(result));
+        navigate("/adminPage");
+        setShow(false);
+      }).catch(error => {
+        
+      });
+
+
+
+    // setShow(false)
+  };
+  const handleShow = () => setShow(true);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -118,12 +140,15 @@ export const Header = () => {
                 <a className="nav-underline nav-link" href="tel:+7(705)2396303">
                   +7(705)2396303
                 </a>
+
+                <button className="btn btn-sm btn-outline-link" onClick={handleShow}><i className="fa fa-sign-in"></i></button>
+{/* 
                 <a className="nav-underline nav-link" href="/adminpage">
-                  <i className="fa fa-sign-in"></i>
-                </a>
-                <a className="nav-underline nav-link">
+                  <i className="fa fa-sign-in" onClick={handleShow}></i>
+                </a> */}
+                {/* <a className="nav-underline nav-link">
                   <Button onClick={handleShow}>Login</Button>
-                </a>
+                </a> */}
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
@@ -142,17 +167,19 @@ export const Header = () => {
                 type="email"
                 placeholder="santec@mail.ru"
                 autoFocus
+                onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
             <Form.Label>Пароль</Form.Label>
-            <Form.Control type="password" autoFocus />
+            <Form.Control type="password" autoFocus
+              onChange={(e) => setPassword(e.target.value)} />
           </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button
             className="modal_footer mx-auto"
             variant="primary"
-            onClick={handleClose}
+            onClick={login}
           >
             Вход
           </Button>

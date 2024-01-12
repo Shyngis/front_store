@@ -1,4 +1,5 @@
 import { URL } from '../Common/ddata';
+import AuthService from './AuthService';
 
 const CategoryService = {
     findByParentId: function (id) {
@@ -14,25 +15,9 @@ const CategoryService = {
     },
 
     findSantecAndValtecByParentId: function (id, isSantec, isValtec) {
-        return fetch(URL + "/category/extended/parent/" + id +"?isSantec=" + isSantec + "&isValtec=" + isValtec, {
+        return fetch(URL + "/category/extended/parent/" + id + "?isSantec=" + isSantec + "&isValtec=" + isValtec, {
             method: "GET",
         }).then((data) => { return data.json() })
-    },
-    
-    create: function (bodyValue) {
-        return fetch(URL + "/category", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(bodyValue),
-        }).then((data) => { return data.json() });
-    },
-
-    update: function (bodyValue) {
-        return fetch(URL + "/category", {
-            method: "PUT",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(bodyValue),
-        }).then((data) => { return data.json() });
     },
 
     findLevelCategoriesById: function (id) {
@@ -41,18 +26,47 @@ const CategoryService = {
         }).then((data) => { return data.json() });
     },
 
-    findFirstLevelRowsByChildId: function (childId) {
-        return fetch(URL + "/category/by/first-level-rows-by-child-id/" + childId, {
+
+
+    findByParentIdPrivate: function (id) {
+        return fetch(URL + "/private/category/parent/" + id, {
             method: "GET",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+        }).then((data) => { return data.json() })
+    },
+
+    create: function (bodyValue) {
+        return fetch(URL + "/private/category", {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+            body: JSON.stringify(bodyValue),
         }).then((data) => { return data.json() });
     },
-    
+
+    update: function (bodyValue) {
+        return fetch(URL + "/private/category", {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+            body: JSON.stringify(bodyValue),
+        }).then((data) => { return data.json() });
+    },
+
     remove: function (id) {
-        return fetch(URL + "/category/" + id, {
+        return fetch(URL + "/private/category/" + id, {
             method: "DELETE",
         }).then((data) => { return data.json() });
     }
-    
+
+
 };
 
 export default CategoryService;

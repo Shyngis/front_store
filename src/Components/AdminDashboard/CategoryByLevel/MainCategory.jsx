@@ -66,7 +66,7 @@ export const MainCategory = () => {
   }
 
   useEffect(() => {
-    CategoryService.findByParentId(1).then((result) => {
+    CategoryService.findByParentIdPrivate(1).then((result) => {
       setCategories(result);
     });
 

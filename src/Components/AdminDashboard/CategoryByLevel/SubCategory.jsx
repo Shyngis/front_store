@@ -21,7 +21,7 @@ export const SubCategory = () => {
 
   useEffect(() => {
 
-    CategoryService.findByParentId(1)
+    CategoryService.findByParentIdPrivate(1)
       .then((result) => {
         setMainCategories(result);
       });
