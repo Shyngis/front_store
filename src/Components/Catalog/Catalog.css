@@ -20,6 +20,9 @@
     background-color: rgb(250, 239, 239);
 
 }
+a {
+    text-decoration: none;
+}
 
 .slider_wrap{
     height: 220px;

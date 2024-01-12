@@ -27,7 +27,6 @@ export const CatalogProduct = () => {
               <div className="card santehplast-card">
                 <img
                   src={`${imgPrefixURL}/${(product.filename ? product.filename : 'santec-bg.png')}`}
-                  alt="valtecimg"
                   className="card-img-top"
                 />
                 <div className="card-body">

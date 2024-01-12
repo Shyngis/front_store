@@ -51,7 +51,6 @@ export const Catalog = () => {
                 <div className="card santehplast-card">
                   <img
                     src={`${imgPrefixURL}/${item.image.filename}`}
-                    alt="valtecimg"
                     className="card-img-top"
                   />
                   <div className="card-body" style={{ overflow: "hidden" }}>
