@@ -4,6 +4,7 @@ import { URL, imgPrefixURL } from "../../Common/ddata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from "../../services/CategoryService";
+import ProductService from "../../services/ProductService";
 import ReactPlayer from "react-player";
 
 export const ProdEdit = () => {
@@ -12,7 +13,6 @@ export const ProdEdit = () => {
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
-  // const [empdata, empdatachange] = useState({});
 
   useEffect(() => {
     fetch(URL + "/product/id/" + empid)
@@ -33,7 +33,6 @@ export const ProdEdit = () => {
           CategoryService.findLevelCategoriesById(resp.category).then(
             (result) => {
               if (result) {
-                console.log("result in resp.category", result, resp.category);
                 if (resp.category) {
                   setFirstLevelCategory(resp.category);
                 }
@@ -86,7 +85,7 @@ export const ProdEdit = () => {
 
   const saveProduct = (e) => {
     e.preventDefault();
-    const empdata = {
+    const product = {
       id,
       name,
       category: firstLevelCategory,
@@ -96,18 +95,16 @@ export const ProdEdit = () => {
       isSantec
     };
 
-    fetch(URL + "/product", {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(empdata),
-    })
+    ProductService.update(product)
       .then((res) => {
         toast.success("Успешно сохранено !", {
           position: toast.POSITION.TOP_RIGHT,
         });
       })
       .catch((err) => {
-        console.log(err.message);
+        toast.error("Ошибка при сохранении !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
       });
   };
 
@@ -255,7 +252,7 @@ export const ProdEdit = () => {
   }
 
   useEffect(() => {
-    CategoryService.findByParentId(1).then((result) => {
+    CategoryService.findByParentIdPrivate(1).then((result) => {
       setMainCategories(result);
     });
   }, []);
@@ -264,7 +261,7 @@ export const ProdEdit = () => {
     y.preventDefault();
     const parentId = y.target.value;
     setMainCategory(parentId);
-    CategoryService.findByParentId(parentId).then((result) => {
+    CategoryService.findByParentIdPrivate(parentId).then((result) => {
       setFirstLevelCategories(result);
     });
   };
@@ -519,7 +516,7 @@ export const ProdEdit = () => {
                         <div className="img-thumbnail">
                           {product.filename}
                           <br />
-                          <img 
+                          <img
                             src={imgPrefixURL + "/" + product.filename}
                             alt="Filepath"
                             className="img-thumbnail"

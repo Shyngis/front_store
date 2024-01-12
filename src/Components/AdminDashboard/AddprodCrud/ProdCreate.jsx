@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import "./ProdCreate.css";
 import { URL } from "../../Common/ddata";
 import CategoryService from "../../services/CategoryService";
+import ProductService from "../../services/ProductService";
 
 export const ProdCreate = () => {
   const { empid } = useParams();
@@ -24,9 +25,7 @@ export const ProdCreate = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-    // console.log({id,name,email,phone,active});
-
-    const products = {
+    const product = {
       name,
       description,
       video,
@@ -36,33 +35,19 @@ export const ProdCreate = () => {
       isSantec
     };
 
-    fetch(URL + "/product", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(products),
+
+    ProductService.create(product)
+    .then((data) => {
+      setproductId(data.id);
+      navigate("/adminpage/prodlisting/prodedit/" + data.id);
     })
-      .then((product) => {
-        product.json().then((data) => {
-          console.log(data, "jsondata");
-          setproductId(data.id);
-          navigate("/adminpage/prodlisting/prodedit/" + data.id);
-        });
-        // navigate("/adminpage/prodlisting/prodedit/"+product.id)
-      })
       .catch((err) => {
         console.log(err.message);
       });
   };
-
-  const [records, setRecords] = useState([]);
-
+  
   useEffect(() => {
-    // fetch(URL + "/category/parent/2")
-    //   .then((response) => response.json())
-    //   .then((categor) => setRecords(categor))
-    //   .catch((err) => console.log(err));
-
-    CategoryService.findByParentId(1).then((result) => {
+    CategoryService.findByParentIdPrivate(1).then((result) => {
       setMainCategories(result);
     });
   }, []);
@@ -71,7 +56,7 @@ export const ProdCreate = () => {
     y.preventDefault();
     const parentId = y.target.value;
     setMainCategory(parentId);
-    CategoryService.findByParentId(parentId).then((result) => {
+    CategoryService.findByParentIdPrivate(parentId).then((result) => {
       setFirstLevelCategories(result);
     });
   };
