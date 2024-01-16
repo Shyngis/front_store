@@ -57,6 +57,10 @@ const CategoryService = {
     remove: function (id) {
         return fetch(URL + "/private/category/" + id, {
             method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
         }).then((data) => { return data.json() });
     }
 

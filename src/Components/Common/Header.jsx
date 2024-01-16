@@ -19,7 +19,7 @@ export const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const size = "md";
+  const size = "sm";
 
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -104,7 +104,7 @@ export const Header = () => {
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${size}`}>
-                SantehPlast
+                <img src={logo} alt="logosure" className="logo-in-mobile" />
               </Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
@@ -136,19 +136,10 @@ export const Header = () => {
                 <a className="nav-underline nav-link" href="/contacts">
                   Контакты
                 </a>
-                {/* <a className="nav-underline nav-link" href="/adminpage">Управление</a> */}
                 <a className="nav-underline nav-link" href="tel:+7(705)2396303">
                   +7(705)2396303
                 </a>
-
-                <button className="btn btn-sm btn-outline-link" onClick={handleShow}><i className="fa fa-sign-in"></i></button>
-{/* 
-                <a className="nav-underline nav-link" href="/adminpage">
-                  <i className="fa fa-sign-in" onClick={handleShow}></i>
-                </a> */}
-                {/* <a className="nav-underline nav-link">
-                  <Button onClick={handleShow}>Login</Button>
-                </a> */}
+                <button className="sign-in-button btn btn-sm btn-outline-secondary" onClick={handleShow}><i className="fa fa-sign-in"></i></button>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
