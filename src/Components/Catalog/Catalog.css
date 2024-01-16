@@ -7,7 +7,6 @@
 }
 .santehplast-card .card-text {
     overflow: hidden;
-    text-transform: capitalize;
 }
 
 .product-filter {
@@ -20,6 +19,9 @@
 .product-filter button:hover {
     background-color: rgb(250, 239, 239);
 
+}
+a {
+    text-decoration: none;
 }
 
 .slider_wrap{

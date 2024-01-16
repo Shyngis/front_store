@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 export const MainCategory = () => {
 
   const [name, setName] = useState("");
+  const [order, setOrder] = useState(0);
   const [isSantec, setIsSantec] = useState(false);
   const [isValtec, setIsValtec] = useState(false);
 
@@ -33,11 +34,13 @@ export const MainCategory = () => {
   const saveCategory = () => {
     category.isSantec = isSantec;
     category.isValtec = isValtec;
+    category.order = order;
     if (category.id) {
       CategoryService.update(category).then(result => {
         setCategory({ ...category, name: null, image: null });
         setCategoryImage("");
         setName("");
+        setOrder(0);
         setIsValtec(false);
         setIsSantec(false);
         const updatedCategories = [];
@@ -47,6 +50,7 @@ export const MainCategory = () => {
             item.isValtec = result.isValtec;
             item.isSantec = result.isSantec;
             item.image =result.image;
+            item.order = result.order;
           }
           updatedCategories.push(item);
         });
@@ -59,6 +63,7 @@ export const MainCategory = () => {
         setCategory({ ...category, name: null, image: null });
         setCategoryImage("");
         setName("");
+        setOrder(0);
         setIsValtec(false);
         setIsSantec(false);
       });
@@ -96,6 +101,7 @@ export const MainCategory = () => {
     setName(editedCategory.name);
     setIsSantec(editedCategory.isSantec);
     setIsValtec(editedCategory.isValtec);
+    setOrder(editedCategory.order);
     setCategory({
       ...category,
       id: editedCategory.id,
@@ -104,7 +110,8 @@ export const MainCategory = () => {
       parent: editedCategory.parent,
       image: editedCategory.image,
       isSantec: editedCategory.isSantec,
-      isValtec: editedCategory.isValtec
+      isValtec: editedCategory.isValtec,
+      order: editedCategory.order
     });
     if (editedCategory.image) {
       FileService.findById(editedCategory.image).then(result => {
@@ -124,6 +131,13 @@ export const MainCategory = () => {
             <div className="form-group">
               <label className="form-label"> Наименование </label>
               <input className="form-input" type="text" value={name} onChange={(y) => updateName(y.target.value)} required />
+            </div>
+          </div>
+
+          <div className="col-md-12 category">
+            <div className="form-group">
+              <label className="form-label"> Очередность </label>
+              <input className="form-input" type="text" value={order} onChange={(y) => setOrder(y.target.value)} />
             </div>
           </div>
 

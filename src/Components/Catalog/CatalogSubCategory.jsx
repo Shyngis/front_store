@@ -13,7 +13,7 @@ export const CatalogSubCategory = () => {
   const isValtec = searchParams.get('isValtec');
 
   useEffect(() => {
-    CategoryService.findSantecAndValtecByParentId(params.id, isSantec, isValtec).then(result => {
+    CategoryService.findByParentAndImageId(params.id).then(result => {
       setCategories(result);
     });
   }, []);

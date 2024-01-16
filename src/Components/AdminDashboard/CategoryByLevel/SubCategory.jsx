@@ -59,7 +59,7 @@ export const SubCategory = () => {
 
   const mainCategorySelected = (categoryId) => {
     setMainCategoryId(categoryId);
-    CategoryService.findByParentId(categoryId).then(result => {
+    CategoryService.findByParentIdPrivate(categoryId).then(result => {
       setSubCategories(result);
     });
   };
@@ -163,7 +163,7 @@ export const SubCategory = () => {
               <input className="form-control" type="text" value={name} onChange={(y) => setCategoryName(y.target.value)} required />
             </div>
 
-            <div class="row">
+            {/* <div class="row">
               <div className="col-md-6">
                 <div className="form-group">
                   <label className="form-check-label"> Категория для Santec </label>
@@ -176,7 +176,7 @@ export const SubCategory = () => {
                   <input className="form-check-control" checked={isValtec} onChange={(e) => setIsValtec(e.target.checked)} type="checkbox" />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-md-12">
               <label className="form-label">Загрузить фото </label>

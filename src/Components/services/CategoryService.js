@@ -14,12 +14,6 @@ const CategoryService = {
         }).then((data) => { return data.json() })
     },
 
-    findSantecAndValtecByParentId: function (id, isSantec, isValtec) {
-        return fetch(URL + "/category/extended/parent/" + id + "?isSantec=" + isSantec + "&isValtec=" + isValtec, {
-            method: "GET",
-        }).then((data) => { return data.json() })
-    },
-
     findLevelCategoriesById: function (id) {
         return fetch(URL + "/category/by/rows-parent-id/" + id, {
             method: "GET",
@@ -63,6 +57,10 @@ const CategoryService = {
     remove: function (id) {
         return fetch(URL + "/private/category/" + id, {
             method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
         }).then((data) => { return data.json() });
     }
 
