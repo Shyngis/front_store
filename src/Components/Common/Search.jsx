@@ -21,9 +21,11 @@ export const Search = (e) => {
         <div className="img-thumbnail  d-flex ">
           <img
             src={imgPrefixURL + "/" + search.filename}
-            alt="Filepath"
+            alt="filepath"
             className="img-thumbnail img-fluid imgPr"
-            // style={{ width: "120px", height: "180px" }}
+            onError={(e) => {
+              e.target.src = "https://santehplast.kz/images/santec-bg.png";
+            }}
           />
           <div
             className="ml-3 textPr"

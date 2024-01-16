@@ -35,7 +35,6 @@ export const ProdListing = () => {
   };
 
   useEffect(() => {
-
     ProductService.getProducts(20)
       .then((resp) => {
         empdatachange(resp.products);
@@ -43,6 +42,14 @@ export const ProdListing = () => {
       .catch((err) => {
         console.log(err.message);
       });
+  }, []);
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(URL + "/category/extended/parent/" + 1).then((response) =>
+      response.json().then((data) => setCategories(data))
+    );
   }, []);
 
   return (
@@ -53,6 +60,7 @@ export const ProdListing = () => {
           <Link to="prodcreate" className="btn btn-success">
             Добавить продукт <i className="fa fa-add"></i>
           </Link>
+          {categories.name}
         </div>
         <div>
           <table className="table-responsive">
@@ -114,7 +122,6 @@ export const ProdListing = () => {
           </table>
         </div>
       </div>
-
 
       <Outlet />
     </>
