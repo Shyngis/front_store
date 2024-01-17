@@ -637,3 +637,23 @@ const handleDelete = (i) => {
         </div>
       </form>
     </div>
+
+
+
+
+
+
+     <label htmlFor="cars">Выберите основную категорию:</label>
+          <select
+            className="category-select"
+            // value={mainCategoryId}
+            // onChange={(y) => mainCategorySelected(y.target.value)}
+            // value={category.category.id}
+            onChange={(e) => setMainCategoryId(e.target.value)}
+          >
+            {categories.map((category) => (
+              <option name="option" key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
