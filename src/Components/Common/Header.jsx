@@ -14,12 +14,11 @@ import { URL } from "./ddata";
 import Modal from "react-bootstrap/Modal";
 
 export const Header = () => {
-
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const size = "sm";
+  const size = "lg";
 
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
@@ -28,21 +27,18 @@ export const Header = () => {
   const [dataImg, setDataImg] = useState("");
 
   const handleClose = () => {
-    setShow(false)
+    setShow(false);
   };
 
   const login = () => {
     const form = { username: username, password: password };
     UserService.login(form)
-      .then(result => {
-        localStorage.setItem('santec_items', JSON.stringify(result));
+      .then((result) => {
+        localStorage.setItem("santec_items", JSON.stringify(result));
         navigate("/adminPage");
         setShow(false);
-      }).catch(error => {
-        
-      });
-
-
+      })
+      .catch((error) => {});
 
     // setShow(false)
   };
@@ -71,6 +67,7 @@ export const Header = () => {
   //     .then((data1) => setData(data1.name));
   // };
   // console.log(data);
+
   return (
     <>
       <Navbar key={size} expand={size} className="bg-body-tertiary mb-3 mt-3">
@@ -119,7 +116,7 @@ export const Header = () => {
                     onChange={(e) => setQuery(e.target.value)}
                   />
                   <div className="input-group-append">
-                    <button className="btn btn-outline-secondary" type="button">
+                    <button className="btn btn-outline-secondary" type="submit">
                       <i className="fa fa-search"></i>
                     </button>
                   </div>
@@ -139,7 +136,12 @@ export const Header = () => {
                 <a className="nav-underline nav-link" href="tel:+7(705)2396303">
                   +7(705)2396303
                 </a>
-                <button className="sign-in-button btn btn-sm btn-outline-secondary" onClick={handleShow}><i className="fa fa-sign-in"></i></button>
+                <button
+                  className="sign-in-button btn btn-sm btn-outline-secondary"
+                  onClick={handleShow}
+                >
+                  <i className="fa fa-sign-in"></i>
+                </button>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>
@@ -162,8 +164,11 @@ export const Header = () => {
               />
             </Form.Group>
             <Form.Label>Пароль</Form.Label>
-            <Form.Control type="password" autoFocus
-              onChange={(e) => setPassword(e.target.value)} />
+            <Form.Control
+              type="password"
+              autoFocus
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </Form>
         </Modal.Body>
         <Modal.Footer>
