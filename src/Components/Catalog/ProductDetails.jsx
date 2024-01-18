@@ -12,6 +12,7 @@ const ProductDetails = () => {
   const [images, setImages] = useState([]);
   const [productSizes, setProductSizes] = useState([]);
   const [activeImg, setActiveImage] = useState();
+  const [fileRealDisplay, setFileRealDisplay] = useState([]);
 
   const params = useParams();
   const id = params.productId;
@@ -23,8 +24,11 @@ const ProductDetails = () => {
 
     FileService.findImagesByContainerId(id).then((result) => {
       const thumbs = result.filter((i) => i.containerClass == "Thumbnail");
+      const docs = result.filter((r) => r.containerClass == "Document");
+      setFileRealDisplay(docs);
       if (thumbs && thumbs.length > 0) {
         setImages(thumbs);
+
         const originalFilename = getImageFilename(thumbs[0].filename);
         setActiveImage(imgPrefixURL + "/" + originalFilename);
       }
@@ -88,15 +92,47 @@ const ProductDetails = () => {
                 </tbody>
               </table>
 
-              <div className="video-container">
+              <div className="d-inline-block mb-3">
                 <ReactPlayer
-                  className="video-player"
+                  className="mo"
                   url={product.video}
                   controls
+                  width="400px"
+                  height="280px"
                 />
               </div>
 
               <div id="fileDisplayArea">{product.file_pr}</div>
+            </div>
+          </div>
+
+          <div className="container">
+            <div className="row">
+              {fileRealDisplay.map((product) => (
+                <div className="col-md-4 mb-3" key={product.filename}>
+                  <div className="img-thumbnail">
+                    <div className="img-thumbnail">
+                      <div className="d-flex">
+                        <a
+                          href={
+                            "http://161.97.144.45:8182" +
+                            "/docs/" +
+                            product.filename
+                          }
+                          target="_blank"
+                        >
+                          <i className="fa fa-file-pdf-o pdfFile"></i>
+                          <div className="file_name">
+                            <span className="file_name">
+                              {product.filename}
+                            </span>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

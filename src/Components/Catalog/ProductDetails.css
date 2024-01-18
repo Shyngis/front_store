@@ -74,3 +74,8 @@
  #fileDisplayArea {
   margin-top: 20px;
  }
+
+ .video_player{
+  width: 400px;
+  height: 300px;
+ }

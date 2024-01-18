@@ -6,7 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import CategoryService from "../../services/CategoryService";
 import ProductService from "../../services/ProductService";
 import ReactPlayer from "react-player";
-
+import pdf from "../../../Assets/pdf.png";
+import "./ProdEdit.css";
 export const ProdEdit = () => {
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
@@ -50,14 +51,14 @@ export const ProdEdit = () => {
           .then((response) => response.json())
           .then((data) => {
             setImgRealDisplay(data);
-            console.log(data);
+            // console.log(data);
           });
 
         fetch(
           URL +
-          "/upload/file/container/" +
-          resp.id +
-          "/container-class/Document"
+            "/upload/file/container/" +
+            resp.id +
+            "/container-class/Document"
         )
           .then((response) => response.json())
           .then((data) => {
@@ -92,7 +93,7 @@ export const ProdEdit = () => {
       description,
       isNew,
       video,
-      isSantec
+      isSantec,
     };
 
     ProductService.update(product)
@@ -292,9 +293,7 @@ export const ProdEdit = () => {
                       className="form-control"
                     />
                     <div className="form-group">
-                      <label htmlFor="main">
-                        Выберите основную категорию:
-                      </label>
+                      <label htmlFor="main">Выберите основную категорию:</label>
                       <select
                         required
                         className="category-select"
@@ -302,15 +301,16 @@ export const ProdEdit = () => {
                         onChange={getFirstLevelCategoryByParent}
                       >
                         <option value="">--</option>
-                        {mainCategories.map((category) => (
-                          <option
-                            name="option-main"
-                            key={category.id}
-                            value={category.id}
-                          >
-                            {category.name}
-                          </option>
-                        ))}
+                        {mainCategories &&
+                          mainCategories.map((category) => (
+                            <option
+                              name="option-main"
+                              key={category.id}
+                              value={category.id}
+                            >
+                              {category.name}
+                            </option>
+                          ))}
                       </select>
                     </div>
                   </div>
@@ -339,7 +339,9 @@ export const ProdEdit = () => {
 
                   <div className="col-lg-12">
                     <div className="form-group mb-3">
-                      <label className="form-label" htmlFor="">Наименование</label>
+                      <label className="form-label" htmlFor="">
+                        Наименование
+                      </label>
                       <input
                         required
                         value={name}
@@ -348,13 +350,17 @@ export const ProdEdit = () => {
                         className="form-control"
                       />
                       {name.length === 0 && validation && (
-                        <span className="text-danger">Заполнить Наименование</span>
+                        <span className="text-danger">
+                          Заполнить Наименование
+                        </span>
                       )}
                     </div>
                   </div>
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="">Описание</label>
+                      <label className="form-label" htmlFor="">
+                        Описание
+                      </label>
                       <input
                         value={description}
                         onChange={(e) => descriptionchange(e.target.value)}
@@ -366,22 +372,39 @@ export const ProdEdit = () => {
                     <div className="col-lg-6">
                       <div className="form-group">
                         <label className="form-check-label"> Новинка </label>
-                        <input className="form-check-input" checked={isNew} onChange={(e) => isNewchange(e.target.checked)} type="checkbox" />
+                        <input
+                          className="form-check-input"
+                          checked={isNew}
+                          onChange={(e) => isNewchange(e.target.checked)}
+                          type="checkbox"
+                        />
                       </div>
                     </div>
                     <div className="col-lg-6">
                       <div className="form-group">
-                        <label className="form-check-label"> Продукция SANTEC </label>
-                        <input className="form-check-input" checked={isSantec} onChange={(e) => setIsSantec(e.target.checked)} type="checkbox" />
+                        <label className="form-check-label">
+                          {" "}
+                          Продукция SANTEC{" "}
+                        </label>
+                        <input
+                          className="form-check-input"
+                          checked={isSantec}
+                          onChange={(e) => setIsSantec(e.target.checked)}
+                          type="checkbox"
+                        />
                       </div>
                     </div>
                   </div>
 
                   <div className="form-group  mb-3">
                     <label className="form-label">Ссылка для видео: </label>
-                    <input className="form-control" type="url" value={video} onChange={(e) => setVideo_pr(e.target.value)} />
+                    <input
+                      className="form-control"
+                      type="url"
+                      value={video}
+                      onChange={(e) => setVideo_pr(e.target.value)}
+                    />
                   </div>
-
 
                   <div className="d-inline-block mb-3">
                     <ReactPlayer
@@ -399,13 +422,27 @@ export const ProdEdit = () => {
                     <legend>Артикул и размер</legend>
                     <div>
                       <label className="form-label">Артикул товара</label>
-                      <input className="form-control" type="text" value={article || ""} onChange={(y) => setArticle(y.target.value)}
+                      <input
+                        className="form-control"
+                        type="text"
+                        value={article || ""}
+                        onChange={(y) => setArticle(y.target.value)}
                       />
                       <label className="form-label">Размер товара</label>
-                      <input className="form-control" type="number" value={size || ""} onChange={(y) => setSize(y.target.value)} />
+                      <input
+                        className="form-control"
+                        type="number"
+                        value={size || ""}
+                        onChange={(y) => setSize(y.target.value)}
+                      />
                     </div>
 
-                    <button className="mt-3 btn btn-sm btn-success" onClick={handleSubmit1}>Добавить</button>
+                    <button
+                      className="mt-3 btn btn-sm btn-success"
+                      onClick={handleSubmit1}
+                    >
+                      Добавить
+                    </button>
 
                     <table>
                       <thead>
@@ -452,7 +489,13 @@ export const ProdEdit = () => {
                   <br />
                   <div className="col-md-12">
                     <label>Выбрать картинки для продукта: </label>
-                    <input className="btn btn-sm btn-outline-primary" type="file" name="file" multiple onChange={handleImage} />
+                    <input
+                      className="btn btn-sm btn-outline-primary"
+                      type="file"
+                      name="file"
+                      multiple
+                      onChange={handleImage}
+                    />
                     {imageDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
@@ -473,16 +516,11 @@ export const ProdEdit = () => {
                       {imgRealDisplay
                         .filter((s) => s.filename.startsWith("thumbnail-"))
                         .map((product) => (
-                          <div
-                            className="col-md-4 mb-3"
-                            key={product.filename}
-                          >
+                          <div className="col-md-4 mb-3" key={product.filename}>
                             <div className="img-thumbnail">
                               <p>{product.filename}</p>
                               <img
-                                src={
-                                  imgPrefixURL + "/" + product.filename
-                                }
+                                src={imgPrefixURL + "/" + product.filename}
                                 alt="Filepath"
                                 className="img-thumbnail"
                               />
@@ -501,7 +539,13 @@ export const ProdEdit = () => {
                   </div>
                   <div className="col-lg-12 mb-3">
                     <div className="form-group">
-                      <button className="btn btn-sm  btn-primary" onClick={handleUpload} > Загрузить </button>
+                      <button
+                        className="btn btn-sm  btn-primary"
+                        onClick={handleUpload}
+                      >
+                        {" "}
+                        Загрузить{" "}
+                      </button>
                     </div>
                   </div>
 
@@ -509,18 +553,30 @@ export const ProdEdit = () => {
                   <br />
 
                   <div class="col-md-12">
-                    <label className="form-label">Загрузить паспорта и сертификаты: </label>
-                    <input className="form-input" type="file" name="file" multiple onChange={handleFile} />
+                    <label className="form-label">
+                      Загрузить паспорта и сертификаты:{" "}
+                    </label>
+                    <input
+                      className="form-input"
+                      type="file"
+                      name="file"
+                      multiple
+                      onChange={handleFile}
+                    />
                     {fileDisplay.map((product) => {
                       return (
                         <div className="img-thumbnail">
-                          {product.filename}
-                          <br />
-                          <img
-                            src={imgPrefixURL + "/" + product.filename}
-                            alt="Filepath"
-                            className="img-thumbnail"
-                          />
+                          <a
+                            href={
+                              "http://161.97.144.45:8182" +
+                              "/docs/" +
+                              product.filename
+                            }
+                            target="_blank"
+                          >
+                            <i className="fa fa-file-pdf-o pdfFile"></i>
+                            <p>{product.filename}</p>
+                          </a>
                         </div>
                       );
                     })}
@@ -531,14 +587,21 @@ export const ProdEdit = () => {
                         <div className="col-md-4 mb-3" key={product.filename}>
                           <div className="img-thumbnail">
                             <div className="img-thumbnail">
-                              <p>{product.filename}</p>
-                              <img
-                                src={
-                                  imgPrefixURL + "/images/" + product.filename
-                                }
-                                alt="Filepath"
-                                className="img-thumbnail"
-                              />
+                              <div className="d-flex">
+                                <a
+                                  href={
+                                    "http://161.97.144.45:8182" +
+                                    "/docs/" +
+                                    product.filename
+                                  }
+                                  target="_blank"
+                                >
+                                  <i className="fa fa-file-pdf-o pdfFile"></i>
+                                  <span className="file_name">
+                                    {product.filename}
+                                  </span>
+                                </a>
+                              </div>
                               <div className="col-12 mt-2">
                                 <button
                                   type="button"
@@ -566,7 +629,10 @@ export const ProdEdit = () => {
                   <hr />
                   <div className="col-lg-12">
                     <div className="form-group">
-                      <button className="btn btn-success float-right" type="submit">
+                      <button
+                        className="btn btn-success float-right"
+                        type="submit"
+                      >
                         Сохранить
                       </button>
                       {/* <Link to='/adminpage/prodlisting' className='btn btn-danger' >Назад</Link> */}
@@ -577,7 +643,7 @@ export const ProdEdit = () => {
             </div>
           </form>
         </div>
-      </div >
+      </div>
       {/* </div> */}
 
       {/* </form>
@@ -587,7 +653,6 @@ export const ProdEdit = () => {
     </>
  */}
       <ToastContainer />
-
     </>
   );
 };
