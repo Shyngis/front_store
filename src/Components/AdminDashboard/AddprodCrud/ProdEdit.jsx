@@ -224,6 +224,32 @@ export const ProdEdit = () => {
     });
   }
   const [files2, setFiles2] = useState();
+  const [fileRealName, setFileRealName] = useState();
+
+  const handleFileRealName = (t) => {
+    t.preventDefault();
+
+    console.log(fileRealName);
+
+    const fileServ = {
+      name: fileRealName,
+      productID: productId,
+    };
+
+    fetch("https://jsonplaceholder.typicode.com/posts/1", {
+      method: "PUT",
+      body: JSON.stringify(fileServ),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setFileRealName(data.name))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   const handleFile = (y) => {
     setFiles2(y.target.files);
   };
@@ -563,10 +589,70 @@ export const ProdEdit = () => {
                       multiple
                       onChange={handleFile}
                     />
-                    {fileDisplay.map((product) => {
-                      return (
-                        <div className="img-thumbnail">
-                          <a
+                    <div class="alert alert-danger  alert_red" role="alert">
+                      Загружать файлы по одному!!!
+                    </div>
+                  </div>
+                  <>
+                    <fieldset>
+                      <table>
+                        <thead>
+                          <tr>
+                            <td>ID</td>
+
+                            <td>Файл</td>
+
+                            <td>Название</td>
+                            <td>Action</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {fileDisplay.map((product) => {
+                            return (
+                              <tr key={product.id}>
+                                <td>{product.id}</td>
+
+                                <td>
+                                  <a
+                                    href={
+                                      "http://161.97.144.45:8182" +
+                                      "/docs/" +
+                                      product.filename
+                                    }
+                                    target="_blank"
+                                  >
+                                    <i className="fa fa-file-pdf-o pdfFile"></i>
+                                    <p>{product.filename}</p>
+                                  </a>
+                                </td>
+
+                                <td>
+                                  <input
+                                    className="form-control"
+                                    type="text"
+                                    name="file"
+                                    value={fileRealName}
+                                    onChange={(t) =>
+                                      setFileRealName(t.target.value)
+                                    }
+                                  />
+                                </td>
+                                <td>
+                                  <button
+                                    type="button"
+                                    class="btn btn-success"
+                                    onClick={handleFileRealName}
+                                  >
+                                    Save
+                                  </button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </fieldset>
+                    {/* <a
                             href={
                               "http://161.97.144.45:8182" +
                               "/docs/" +
@@ -576,15 +662,13 @@ export const ProdEdit = () => {
                           >
                             <i className="fa fa-file-pdf-o pdfFile"></i>
                             <p>{product.filename}</p>
-                          </a>
-                        </div>
-                      );
-                    })}
-                  </div>
+                          </a> */}
+                  </>
+
                   <div className="container">
                     <div className="row">
                       {fileRealDisplay.map((product) => (
-                        <div className="col-md-4 mb-3" key={product.filename}>
+                        <div className="col-md-4 mb-3" key={product.container}>
                           <div className="img-thumbnail">
                             <div className="img-thumbnail">
                               <div className="d-flex">
