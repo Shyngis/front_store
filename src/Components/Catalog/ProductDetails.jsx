@@ -124,7 +124,7 @@ const ProductDetails = () => {
                           <i className="fa fa-file-pdf-o pdfFile"></i>
                           <div className="file_name">
                             <span className="file_name">
-                              {product.filename}
+                              {product.description}
                             </span>
                           </div>
                         </a>

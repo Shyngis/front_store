@@ -8,6 +8,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 export const URL = process.env.REACT_APP_API_URL;
 // export const URL = "http://161.97.144.45:8181";
 export const imgPrefixURL = process.env.REACT_APP_IMAGE_PREFIX_URL;
+export const docPrefixURL = process.env.REACT_APP_DOC_PREFIX_URL;
 export const file_image =
   "https://www.google.com/imgres?imgurl=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Ffile-extensions-1%2F64%2Fpdfs-512.png&tbnid=vFTHfMqlcS_BoM&vet=12ahUKEwiWmLK7puaDAxUsMRAIHVCMDckQMygDegQIARBR..i&imgrefurl=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F774684%2Fpdf_document_extension_file_format_icon&docid=A_kS90K1gfbTTM&w=512&h=512&q=pdf%20file%20icon&ved=2ahUKEwiWmLK7puaDAxUsMRAIHVCMDckQMygDegQIARBR";
 export const navlink = [

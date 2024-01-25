@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { URL, imgPrefixURL } from "../../Common/ddata";
+import { URL, docPrefixURL, imgPrefixURL } from "../../Common/ddata";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from "../../services/CategoryService";
@@ -152,7 +152,7 @@ export const ProdEdit = () => {
       .then((resp) => {
         //  setProductsize(resp);
         setProductArticleAndSize(resp);
-        console.log("seen");
+        console.log("PRoduct size seen");
       })
       .catch((err) => {
         console.log(err.message);
@@ -224,7 +224,7 @@ export const ProdEdit = () => {
     });
   }
   const [files2, setFiles2] = useState();
-  const [fileRealName, setFileRealName] = useState();
+  const [fileRealName, setFileRealName] = useState("");
 
   const handleFileRealName = (t) => {
     t.preventDefault();
@@ -232,11 +232,11 @@ export const ProdEdit = () => {
     console.log(fileRealName);
 
     const fileServ = {
-      name: fileRealName,
-      productID: productId,
+      id: documentID,
+      description: fileRealName,
     };
 
-    fetch("https://jsonplaceholder.typicode.com/posts/1", {
+    fetch(URL + "/upload/document/description", {
       method: "PUT",
       body: JSON.stringify(fileServ),
       headers: {
@@ -244,7 +244,13 @@ export const ProdEdit = () => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setFileRealName(data.name))
+      .then((data) => {
+        setFileRealName(data.name);
+        toast.success("Успешно обновлено !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+
       .catch((error) => {
         console.error("Error:", error);
       });
@@ -255,7 +261,7 @@ export const ProdEdit = () => {
   };
   const [fileRealDisplay, setFileRealDisplay] = useState([]);
   const [fileDisplay, setFileDisplay] = useState([]);
-
+  const [documentID, setDocumentID] = useState();
   async function handleUploadFiles() {
     const docs = [];
 
@@ -268,6 +274,8 @@ export const ProdEdit = () => {
       docs.push(sendFileResponse);
     }
     setFileDisplay(docs);
+    setDocumentID(docs[0].id);
+    console.log("1dm:", docs[0].id);
   }
 
   function SendFile(data) {
@@ -524,7 +532,7 @@ export const ProdEdit = () => {
                     />
                     {imageDisplay.map((product) => {
                       return (
-                        <div className="img-thumbnail">
+                        <div className="img-thumbnail" key={product.id}>
                           {product.filename}
                           <br />
                           <img
@@ -542,7 +550,7 @@ export const ProdEdit = () => {
                       {imgRealDisplay
                         .filter((s) => s.filename.startsWith("thumbnail-"))
                         .map((product) => (
-                          <div className="col-md-4 mb-3" key={product.filename}>
+                          <div className="col-md-4 mb-3" key={product.id}>
                             <div className="img-thumbnail">
                               <p>{product.filename}</p>
                               <img
@@ -586,39 +594,39 @@ export const ProdEdit = () => {
                       className="form-input"
                       type="file"
                       name="file"
-                      multiple
+                      // multiple
                       onChange={handleFile}
                     />
-                    <div class="alert alert-danger  alert_red" role="alert">
-                      Загружать файлы по одному!!!
-                    </div>
                   </div>
                   <>
-                    <fieldset>
-                      <table>
-                        <thead>
-                          <tr>
-                            <td>ID</td>
+                    {fileDisplay.map((product) => {
+                      return (
+                        <fieldset>
+                          <table>
+                            <thead>
+                              <tr>
+                                <td>ID</td>
 
-                            <td>Файл</td>
+                                <td>Файл</td>
 
-                            <td>Название</td>
-                            <td>Action</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {fileDisplay.map((product) => {
-                            return (
+                                <td>Название</td>
+                                <td>Action</td>
+                              </tr>
+                            </thead>
+                            <tbody>
                               <tr key={product.id}>
-                                <td>{product.id}</td>
+                                <td
+                                  value={product.id}
+                                  onChange={(p) =>
+                                    setDocumentID(p.target.value)
+                                  }
+                                >
+                                  {product.id}
+                                </td>
 
                                 <td>
                                   <a
-                                    href={
-                                      "http://161.97.144.45:8182" +
-                                      "/docs/" +
-                                      product.filename
-                                    }
+                                    href={docPrefixURL + product.filename}
                                     target="_blank"
                                   >
                                     <i className="fa fa-file-pdf-o pdfFile"></i>
@@ -647,11 +655,11 @@ export const ProdEdit = () => {
                                   </button>
                                 </td>
                               </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </fieldset>
+                            </tbody>
+                          </table>
+                        </fieldset>
+                      );
+                    })}
                     {/* <a
                             href={
                               "http://161.97.144.45:8182" +
@@ -668,21 +676,17 @@ export const ProdEdit = () => {
                   <div className="container">
                     <div className="row">
                       {fileRealDisplay.map((product) => (
-                        <div className="col-md-4 mb-3" key={product.container}>
+                        <div className="col-md-4 mb-3" key={product.id}>
                           <div className="img-thumbnail">
                             <div className="img-thumbnail">
                               <div className="d-flex">
                                 <a
-                                  href={
-                                    "http://161.97.144.45:8182" +
-                                    "/docs/" +
-                                    product.filename
-                                  }
+                                  href={docPrefixURL + product.filename}
                                   target="_blank"
                                 >
                                   <i className="fa fa-file-pdf-o pdfFile"></i>
                                   <span className="file_name">
-                                    {product.filename}
+                                    {product.description}
                                   </span>
                                 </a>
                               </div>
