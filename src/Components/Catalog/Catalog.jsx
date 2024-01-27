@@ -27,7 +27,7 @@ export const Catalog = () => {
 
   return (
     <>
-      <MDBCarousel fade interval={5000} className="slider_wrap">
+      {/* <MDBCarousel fade interval={5000} className="slider_wrap">
         <MDBCarouselItem itemId={1} className="slider">
           <img src={carou} className="d-block w-100" alt="..." />
         </MDBCarouselItem>
@@ -37,7 +37,7 @@ export const Catalog = () => {
         <MDBCarouselItem itemId={3} className="slider">
           <img src={lake} className="d-block w-100" alt="..." />
         </MDBCarouselItem>
-      </MDBCarousel>
+      </MDBCarousel> */}
       <div>
         <div className="row mt-3">
           {mainCategories.map((item) => (
