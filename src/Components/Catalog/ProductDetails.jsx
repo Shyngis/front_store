@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import ProductService from "../services/ProductService";
 import ProductSizeService from "../services/ProductSizeService";
 import FileService from "../services/FileService";
-import { imgPrefixURL } from "../Common/ddata";
+import { docPrefixURL, imgPrefixURL } from "../Common/ddata";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState("");
@@ -114,11 +114,7 @@ const ProductDetails = () => {
                     <div className="img-thumbnail">
                       <div className="d-flex">
                         <a
-                          href={
-                            "http://161.97.144.45:8182" +
-                            "/docs/" +
-                            product.filename
-                          }
+                          href={docPrefixURL + product.filename}
                           target="_blank"
                         >
                           <i className="fa fa-file-pdf-o pdfFile"></i>

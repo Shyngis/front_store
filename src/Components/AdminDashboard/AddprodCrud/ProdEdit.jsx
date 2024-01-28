@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { URL, docPrefixURL, imgPrefixURL } from "../../Common/ddata";
 import { ToastContainer, toast } from "react-toastify";
@@ -262,6 +262,7 @@ export const ProdEdit = () => {
   const [fileRealDisplay, setFileRealDisplay] = useState([]);
   const [fileDisplay, setFileDisplay] = useState([]);
   const [documentID, setDocumentID] = useState();
+
   async function handleUploadFiles() {
     const docs = [];
 
@@ -598,6 +599,17 @@ export const ProdEdit = () => {
                       onChange={handleFile}
                     />
                   </div>
+                  <div className="col-lg-12 mb-3 UploadFilebutton">
+                    <div className="form-group">
+                      <button
+                        className="btn btn-sm btn-primary"
+                        onClick={handleUploadFiles}
+                      >
+                        Загрузить паспорта и сертификаты
+                      </button>
+                    </div>
+                  </div>
+                  <hr />
                   <>
                     {fileDisplay.map((product) => {
                       return (
@@ -704,17 +716,7 @@ export const ProdEdit = () => {
                       ))}
                     </div>
                   </div>
-                  <div className="col-lg-12 mb-3">
-                    <div className="form-group">
-                      <button
-                        className="btn btn-sm btn-primary"
-                        onClick={handleUploadFiles}
-                      >
-                        Загрузить паспорта и сертификаты
-                      </button>
-                    </div>
-                  </div>
-                  <hr />
+
                   <div className="col-lg-12">
                     <div className="form-group">
                       <button

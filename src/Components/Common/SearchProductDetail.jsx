@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { URL, imgPrefixURL } from "./ddata";
+import { URL, docPrefixURL, imgPrefixURL } from "./ddata";
 import ReactPlayer from "react-player";
 import ProductService from "../services/ProductService";
 import FileService from "../services/FileService";
@@ -14,6 +14,7 @@ export const SearchProductDetail = () => {
   const [images, setImages] = useState([]);
   const [productSizes, setProductSizes] = useState([]);
   const [activeImg, setActiveImage] = useState();
+  const [fileRealDisplay, setFileRealDisplay] = useState([]);
   useEffect(() => {
     fetch(URL + "/product/id/" + params.id)
       .then((response) => response.json())
@@ -30,6 +31,8 @@ export const SearchProductDetail = () => {
 
     FileService.findImagesByContainerId(params.id).then((result) => {
       const thumbs = result.filter((i) => i.containerClass == "Thumbnail");
+      const docs = result.filter((r) => r.containerClass == "Document");
+      setFileRealDisplay(docs);
       if (thumbs && thumbs.length > 0) {
         setImages(thumbs);
         const originalFilename = getImageFilename(thumbs[0].filename);
@@ -102,6 +105,29 @@ export const SearchProductDetail = () => {
             </div>
 
             <div id="fileDisplayArea">{product.file_pr}</div>
+          </div>
+        </div>
+
+        <div className="container">
+          <div className="row">
+            {fileRealDisplay.map((product) => (
+              <div className="col-md-4 mb-3" key={product.filename}>
+                <div className="img-thumbnail">
+                  <div className="img-thumbnail">
+                    <div className="d-flex">
+                      <a href={docPrefixURL + product.filename} target="_blank">
+                        <i className="fa fa-file-pdf-o pdfFile"></i>
+                        <div className="file_name">
+                          <span className="file_name">
+                            {product.description}
+                          </span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
