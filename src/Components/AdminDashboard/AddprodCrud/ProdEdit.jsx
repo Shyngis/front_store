@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CategoryService from "../../services/CategoryService";
 import ProductService from "../../services/ProductService";
+import FileService from "../../services/FileService";
 import ReactPlayer from "react-player";
 import pdf from "../../../Assets/pdf.png";
 import "./ProdEdit.css";
@@ -47,23 +48,15 @@ export const ProdEdit = () => {
         }
 
         setproductId(resp.id);
-        fetch(URL + "/upload/image/" + resp.id)
-          .then((response) => response.json())
+
+        FileService.findImagesByContainerId(resp.id)
           .then((data) => {
             setImgRealDisplay(data);
-            // console.log(data);
           });
 
-        fetch(
-          URL +
-            "/upload/file/container/" +
-            resp.id +
-            "/container-class/Document"
-        )
-          .then((response) => response.json())
+        FileService.findDocumentByContainerId(resp.id)
           .then((data) => {
             setFileRealDisplay(data);
-            console.log(data);
           })
           .catch((err) => console.log(err));
 
@@ -175,11 +168,8 @@ export const ProdEdit = () => {
     setProductArticleAndSize(newProductArticleAndSize);
   };
   const Removefunction = (product) => {
-    fetch(URL + "/product/size/" + product.id, {
-      method: "DELETE",
-      // headers:{"content-type":"application/json"},
-      // body:JSON.stringify(empdata)
-    })
+
+    FileService.removeById(product.id)
       .then((res) => {
         product.isRemoved = true;
         removeArticleAndSize(product.id);
@@ -235,22 +225,17 @@ export const ProdEdit = () => {
     const images = [];
 
     for (let i = 0; i < files.length; i++) {
+
       const container1 = new FormData();
       container1.append("container", productId);
       container1.append(`file`, files[i]);
-      const sendImage = await Send(container1);
+
+      // const sendImage = await Send(container1);
+      const sendImage = await FileService.syncUpload(container1);
       const sendImageResponse = await sendImage.json();
       images.push(sendImageResponse);
     }
     setimageDisplay(images);
-  }
-
-  function Send(data) {
-    return fetch(URL + "/upload/image", {
-      method: "POST",
-      // headers: { "Content-type": "multipart/form-data" },
-      body: data,
-    });
   }
   const [files2, setFiles2] = useState();
   const [fileRealName, setFileRealName] = useState("");
@@ -258,27 +243,17 @@ export const ProdEdit = () => {
   const handleFileRealName = (t) => {
     t.preventDefault();
 
-    console.log(fileRealName);
-
     const fileServ = {
       id: documentID,
       description: fileRealName,
     };
 
-    fetch(URL + "/upload/document/description", {
-      method: "PUT",
-      body: JSON.stringify(fileServ),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    FileService.updateDescription(fileServ).then((data) => {
+      setFileRealName(data.name);
+      toast.success("Успешно обновлено !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     })
-      .then((response) => response.json())
-      .then((data) => {
-        setFileRealName(data.name);
-        toast.success("Успешно обновлено !", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      })
 
       .catch((error) => {
         console.error("Error:", error);
@@ -299,21 +274,13 @@ export const ProdEdit = () => {
       const container1 = new FormData();
       container1.append("container", productId);
       container1.append(`file`, files2[i]);
-      const sendFile = await SendFile(container1);
+      const sendFile = await FileService.syncUploadDocument(container1);
       const sendFileResponse = await sendFile.json();
       docs.push(sendFileResponse);
     }
     setFileDisplay(docs);
     setDocumentID(docs[0].id);
     console.log("1dm:", docs[0].id);
-  }
-
-  function SendFile(data) {
-    return fetch(URL + "/upload/document", {
-      method: "POST",
-      // headers: { "Content-type": "multipart/form-data" },
-      body: data,
-    });
   }
 
   useEffect(() => {
@@ -336,6 +303,27 @@ export const ProdEdit = () => {
     const parentId = y.target.value;
     setFirstLevelCategory(parentId);
   };
+
+  const removeById = (id, type) => {
+    FileService.removeById(id)
+      .then(result => {
+        if (result) {
+          if (type == 'doc') {
+            FileService.findDocumentByContainerId(empid)
+              .then((data) => {
+                setFileRealDisplay(data);
+              })
+              .catch((err) => console.log(err));
+          } else {
+            FileService.findImagesByContainerId(empid)
+              .then((data) => {
+                setImgRealDisplay(data);
+              });
+          }
+        }
+      });
+  };
+
 
   return (
     <>
@@ -561,7 +549,7 @@ export const ProdEdit = () => {
                       onChange={handleImage}
                     />
                     {imageDisplay.map((product) => {
-                      return (
+                      return product.isRemoved == false && (
                         <div className="img-thumbnail" key={product.id}>
                           {product.filename}
                           <br />
@@ -579,7 +567,7 @@ export const ProdEdit = () => {
                     <div className="row">
                       {imgRealDisplay
                         .filter((s) => s.filename.startsWith("thumbnail-"))
-                        .map((product) => (
+                        .map((product) => product.isRemoved == false && (
                           <div className="col-md-4 mb-3" key={product.id}>
                             <div className="img-thumbnail">
                               <p>{product.filename}</p>
@@ -593,7 +581,7 @@ export const ProdEdit = () => {
                                   type="button"
                                   className="btn btn-danger"
                                   onClick={() => {
-                                    RemoveFile(product);
+                                    removeById(product.id, 'image');
                                   }}
                                 >
                                   Удалить
@@ -704,17 +692,6 @@ export const ProdEdit = () => {
                         </fieldset>
                       );
                     })}
-                    {/* <a
-                            href={
-                              "http://161.97.144.45:8182" +
-                              "/docs/" +
-                              product.filename
-                            }
-                            target="_blank"
-                          >
-                            <i className="fa fa-file-pdf-o pdfFile"></i>
-                            <p>{product.filename}</p>
-                          </a> */}
                   </>
 
                   <div className="container">
@@ -738,6 +715,9 @@ export const ProdEdit = () => {
                                 <button
                                   type="button"
                                   className="btn btn-danger"
+                                  onClick={() => {
+                                    removeById(product.id, 'doc');
+                                  }}
                                 >
                                   Удалить
                                 </button>

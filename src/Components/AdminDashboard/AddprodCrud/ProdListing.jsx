@@ -83,7 +83,6 @@ export const ProdListing = () => {
         isValtec
       ).then((product) => {
         setProducts(product);
-        console.log(product);
       });
     }
   }, [subCategoryId, setProducts]);
@@ -147,7 +146,7 @@ export const ProdListing = () => {
         <div>
           <table className="table-responsive">
             <thead>
-              <tr className="table-dark table-active">
+              <tr>
                 <th>ID</th>
                 <th>Категория</th>
                 <th>Название</th>

@@ -15,14 +15,33 @@ const FileService = {
         formData.append("container", productId);
         formData.append("file", file);
 
-        return fetch(URL + "/upload/image/", {
+        return fetch(URL + "/private/upload/image/", {
             method: "POST",
             body: formData,
-            // headers: {
-            //     "Content-type": "application/json",
-            //     // 'Authorization': 'Bearer ' + AuthService.token()
-            // },
+            headers: {
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
         }).then((data) => { return data.json() })
+    },
+
+    syncUpload: function (data) {
+        return fetch(URL + "/private/upload/image", {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+            body: data,
+        });
+    },
+
+    syncUploadDocument: function (data) {
+        return fetch(URL + "/private/upload/document", {
+            method: "POST",
+            headers: {
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+            body: data,
+        });
     },
 
 
@@ -32,18 +51,32 @@ const FileService = {
         }).then((data) => { return data.json() });
     },
 
-    // findLevelCategoriesById: function (id) {
-    //     return fetch(URL + "/category/by/rows-parent-id/" + id, {
-    //         method: "GET",
-    //     }).then((data) => { return data.json() });
-    // },
+    findDocumentByContainerId: function (id) {
+        return fetch(URL + "/upload/file/container/" + id + "/container-class/Document", {
+            method: "GET",
+        }).then((data) => { return data.json() });
+    },
 
-    // findFirstLevelRowsByChildId: function (childId) {
-    //     return fetch(URL + "/category/by/first-level-rows-by-child-id/" + childId, {
-    //         method: "GET",
-    //     }).then((data) => { return data.json() });
-    // }
+    removeById: function (id) {
+        return fetch(URL + "/private/upload/file/" + id, {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+        }).then((data) => { return data.json() });
+    },
 
+    updateDescription: function (data) {
+        return fetch(URL + "/private/upload/document/description", {
+            method: "PUT",
+            body: JSON.stringify(data),
+            headers: {
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + AuthService.token()
+            },
+        }).then((response) => response.json())
+    }
 };
 
 export default FileService;
