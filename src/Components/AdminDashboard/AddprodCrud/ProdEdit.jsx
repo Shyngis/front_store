@@ -193,6 +193,35 @@ export const ProdEdit = () => {
       });
   };
 
+  const removeFileandImage = (id) => {
+    const newProductFileandImage = imgRealDisplay.map((paz) => {
+      if (paz === id) {
+        return { ...paz, isRemoved: true };
+      }
+      return paz;
+    });
+
+    setImgRealDisplay(newProductFileandImage);
+  };
+  const RemoveFile = (product) => {
+    fetch(URL + "/upload/" + product.id, {
+      method: "DELETE",
+      // headers:{"content-type":"application/json"},
+      // body:JSON.stringify(empdata)
+    })
+      .then((res) => {
+        product.isRemoved = true;
+        removeFileandImage(product.id);
+        console.log(removeFileandImage);
+        toast.error("Успешно удалено !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   const [files, setFiles] = useState();
 
   const handleImage = (y) => {
@@ -563,6 +592,9 @@ export const ProdEdit = () => {
                                 <button
                                   type="button"
                                   className="btn btn-danger"
+                                  onClick={() => {
+                                    RemoveFile(product);
+                                  }}
                                 >
                                   Удалить
                                 </button>
