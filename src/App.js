@@ -9,7 +9,7 @@ function App() {
 
     const response = await originalFetch(resource, config);
     if(response.status == 401) {
-      window.location.href="/";
+      // window.location.href="/";
     }
     return response;
   };
