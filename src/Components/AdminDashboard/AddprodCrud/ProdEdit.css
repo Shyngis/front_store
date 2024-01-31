@@ -7,6 +7,7 @@
 .file_name{
   margin-left: 10px;
   display:inline-flex;
+  display: flex;
   
   
 }
@@ -17,4 +18,12 @@
 
 .UploadFilebutton{
   margin-top: 18px;
+}
+
+.deleteButton{
+  position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    
 }

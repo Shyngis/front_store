@@ -106,25 +106,20 @@ const ProductDetails = () => {
             </div>
           </div>
 
-          <div className="container">
-            <div className="row">
+          <div className="container ">
+            <div className="row ">
               {fileRealDisplay.map((product) => (
-                <div className="col-md-4 mb-3" key={product.filename}>
-                  <div className="img-thumbnail">
-                    <div className="img-thumbnail">
-                      <div className="d-flex">
-                        <a
-                          href={docPrefixURL + product.filename}
-                          target="_blank"
-                        >
-                          <i className="fa fa-file-pdf-o pdfFile"></i>
-                          <div className="file_name">
-                            <span className="file_name">
-                              {product.description}
-                            </span>
-                          </div>
-                        </a>
-                      </div>
+                <div className="col-md-4 mb-3 " key={product.id}>
+                  <div className="img-thumbnail position-relative ">
+                    <div className="d-flex align-items-center ">
+                      <a
+                        href={docPrefixURL + product.filename}
+                        target="_blank"
+                        className="d-flex"
+                      >
+                        <i className="fa fa-file-pdf-o pdfFile"></i>
+                        <span className="file_name">{product.description}</span>
+                      </a>
                     </div>
                   </div>
                 </div>

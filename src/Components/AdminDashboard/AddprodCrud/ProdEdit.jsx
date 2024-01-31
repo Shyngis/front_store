@@ -9,6 +9,7 @@ import FileService from "../../services/FileService";
 import ReactPlayer from "react-player";
 import pdf from "../../../Assets/pdf.png";
 import "./ProdEdit.css";
+import AuthService from "../../services/AuthService";
 export const ProdEdit = () => {
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
@@ -49,10 +50,9 @@ export const ProdEdit = () => {
 
         setproductId(resp.id);
 
-        FileService.findImagesByContainerId(resp.id)
-          .then((data) => {
-            setImgRealDisplay(data);
-          });
+        FileService.findImagesByContainerId(resp.id).then((data) => {
+          setImgRealDisplay(data);
+        });
 
         FileService.findDocumentByContainerId(resp.id)
           .then((data) => {
@@ -110,10 +110,20 @@ export const ProdEdit = () => {
   const [productArticleAndSize, setProductArticleAndSize] = useState([]);
 
   const handleSubmit1 = (y) => {
-    y.preventDefault();
+    if (!article || !size) {
+      console.log("You don't have data");
+      toast.error("Данные отсутствуют", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      y.preventDefault();
+      return;
+    }
+
     toast.success("Успешно добавлено !", {
       position: toast.POSITION.TOP_RIGHT,
     });
+
+    y.preventDefault();
 
     const productsi = {
       article,
@@ -123,7 +133,9 @@ export const ProdEdit = () => {
 
     fetch(URL + "/product/size", {
       method: "POST",
-      headers: { "Content-type": "application/json" },
+      headers: {
+        "Content-type": "application/json",
+      },
       body: JSON.stringify(productsi),
     })
       .then(function (response) {
@@ -168,7 +180,6 @@ export const ProdEdit = () => {
     setProductArticleAndSize(newProductArticleAndSize);
   };
   const Removefunction = (product) => {
-
     FileService.removeById(product.id)
       .then((res) => {
         product.isRemoved = true;
@@ -221,21 +232,30 @@ export const ProdEdit = () => {
   const [imgRealDisplay, setImgRealDisplay] = useState([]);
   const [imageDisplay, setimageDisplay] = useState([]);
 
-  async function handleUpload() {
+  async function handleUpload(y) {
+    y.preventDefault();
     const images = [];
 
-    for (let i = 0; i < files.length; i++) {
+    if (!files || files.length === 0) {
+      toast.warning("Не удалось загрузить картинки!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      for (let i = 0; i < files.length; i++) {
+        const container1 = new FormData();
+        container1.append("container", productId);
+        container1.append(`file`, files[i]);
 
-      const container1 = new FormData();
-      container1.append("container", productId);
-      container1.append(`file`, files[i]);
-
-      // const sendImage = await Send(container1);
-      const sendImage = await FileService.syncUpload(container1);
-      const sendImageResponse = await sendImage.json();
-      images.push(sendImageResponse);
+        // const sendImage = await Send(container1);
+        const sendImage = await FileService.syncUpload(container1);
+        const sendImageResponse = await sendImage.json();
+        images.push(sendImageResponse);
+      }
+      setimageDisplay(images);
+      toast.success("Успешно  загружено!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-    setimageDisplay(images);
   }
   const [files2, setFiles2] = useState();
   const [fileRealName, setFileRealName] = useState("");
@@ -248,12 +268,13 @@ export const ProdEdit = () => {
       description: fileRealName,
     };
 
-    FileService.updateDescription(fileServ).then((data) => {
-      setFileRealName(data.name);
-      toast.success("Успешно обновлено !", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    })
+    FileService.updateDescription(fileServ)
+      .then((data) => {
+        setFileRealName(data.name);
+        toast.success("Успешно обновлено !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      })
 
       .catch((error) => {
         console.error("Error:", error);
@@ -267,20 +288,28 @@ export const ProdEdit = () => {
   const [fileDisplay, setFileDisplay] = useState([]);
   const [documentID, setDocumentID] = useState();
 
-  async function handleUploadFiles() {
+  async function handleUploadFiles(y) {
+    y.preventDefault();
     const docs = [];
-
-    for (let i = 0; i < files2.length; i++) {
-      const container1 = new FormData();
-      container1.append("container", productId);
-      container1.append(`file`, files2[i]);
-      const sendFile = await FileService.syncUploadDocument(container1);
-      const sendFileResponse = await sendFile.json();
-      docs.push(sendFileResponse);
+    if (!files2 || files2.length === 0) {
+      toast.warning("Не удалось загрузить файлы!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    } else {
+      for (let i = 0; i < files2.length; i++) {
+        const container1 = new FormData();
+        container1.append("container", productId);
+        container1.append(`file`, files2[i]);
+        const sendFile = await FileService.syncUploadDocument(container1);
+        const sendFileResponse = await sendFile.json();
+        docs.push(sendFileResponse);
+      }
+      setFileDisplay(docs);
+      setDocumentID(docs[0].id);
+      toast.success("Успешно  загружено!", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
     }
-    setFileDisplay(docs);
-    setDocumentID(docs[0].id);
-    console.log("1dm:", docs[0].id);
   }
 
   useEffect(() => {
@@ -305,32 +334,29 @@ export const ProdEdit = () => {
   };
 
   const removeById = (id, type) => {
-    FileService.removeById(id)
-      .then(result => {
-        if (result) {
-          if (type == 'doc') {
-            FileService.findDocumentByContainerId(empid)
-              .then((data) => {
-                setFileRealDisplay(data);
-              })
-              .catch((err) => console.log(err));
-          } else {
-            FileService.findImagesByContainerId(empid)
-              .then((data) => {
-                setImgRealDisplay(data);
-              });
-          }
+    FileService.removeById(id).then((result) => {
+      if (result) {
+        if (type == "doc") {
+          FileService.findDocumentByContainerId(empid)
+            .then((data) => {
+              setFileRealDisplay(data);
+            })
+            .catch((err) => console.log(err));
+        } else {
+          FileService.findImagesByContainerId(empid).then((data) => {
+            setImgRealDisplay(data);
+          });
         }
-      });
+      }
+    });
   };
-
 
   return (
     <>
       <div>
         {/* <div className="row"> */}
         <div className="">
-          <form onSubmit={saveProduct}>
+          <form>
             <div className="card" style={{ textAlign: "left" }}>
               <div className="card-title">
                 <h2>Редактирование</h2>
@@ -488,14 +514,14 @@ export const ProdEdit = () => {
                         onChange={(y) => setSize(y.target.value)}
                       />
                     </div>
-
-                    <button
-                      className="mt-3 btn btn-sm btn-success"
-                      onClick={handleSubmit1}
-                    >
-                      Добавить
-                    </button>
-
+                    <div className="form-group">
+                      <button
+                        className="mt-3 btn btn-sm  btn-primary"
+                        onClick={handleSubmit1}
+                      >
+                        Добавить
+                      </button>
+                    </div>
                     <table>
                       <thead>
                         <tr>
@@ -522,7 +548,13 @@ export const ProdEdit = () => {
                                   </a>
                                   <a
                                     onClick={() => {
-                                      Removefunction(product);
+                                      if (
+                                        window.confirm(
+                                          "Вы действительно хотите удалить?"
+                                        )
+                                      ) {
+                                        Removefunction(product);
+                                      }
                                     }}
                                     className="btn btn-danger"
                                   >
@@ -548,17 +580,31 @@ export const ProdEdit = () => {
                       multiple
                       onChange={handleImage}
                     />
+
+                    <div className="col-lg-12 mb-3 UploadFilebutton">
+                      <div className="form-group">
+                        <button
+                          className="btn btn-sm  btn-primary"
+                          onClick={handleUpload}
+                        >
+                          {" "}
+                          Загрузить{" "}
+                        </button>
+                      </div>
+                    </div>
                     {imageDisplay.map((product) => {
-                      return product.isRemoved == false && (
-                        <div className="img-thumbnail" key={product.id}>
-                          {product.filename}
-                          <br />
-                          <img
-                            src={imgPrefixURL + "/" + product.filename}
-                            alt="Filepath"
-                            className="img-thumbnail"
-                          />
-                        </div>
+                      return (
+                        product.isRemoved == false && (
+                          <div className="img-thumbnail" key={product.id}>
+                            {product.filename}
+                            <br />
+                            <img
+                              src={imgPrefixURL + "/" + product.filename}
+                              alt="Filepath"
+                              className="img-thumbnail"
+                            />
+                          </div>
+                        )
                       );
                     })}
                   </div>
@@ -567,40 +613,38 @@ export const ProdEdit = () => {
                     <div className="row">
                       {imgRealDisplay
                         .filter((s) => s.filename.startsWith("thumbnail-"))
-                        .map((product) => product.isRemoved == false && (
-                          <div className="col-md-4 mb-3" key={product.id}>
-                            <div className="img-thumbnail">
-                              <p>{product.filename}</p>
-                              <img
-                                src={imgPrefixURL + "/" + product.filename}
-                                alt="Filepath"
-                                className="img-thumbnail"
-                              />
-                              <div className="col-12 mt-2">
-                                <button
-                                  type="button"
-                                  className="btn btn-danger"
-                                  onClick={() => {
-                                    removeById(product.id, 'image');
-                                  }}
-                                >
-                                  Удалить
-                                </button>
+                        .map(
+                          (product) =>
+                            product.isRemoved == false && (
+                              <div className="col-md-4 mb-3" key={product.id}>
+                                <div className="img-thumbnail">
+                                  <p>{product.filename}</p>
+                                  <img
+                                    src={imgPrefixURL + "/" + product.filename}
+                                    alt="Filepath"
+                                    className="img-thumbnail"
+                                  />
+                                  <div className="col-12 mt-2">
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger"
+                                      onClick={() => {
+                                        if (
+                                          window.confirm(
+                                            "Вы действительно хотите удалить?"
+                                          )
+                                        ) {
+                                          removeById(product.id, "image");
+                                        }
+                                      }}
+                                    >
+                                      Удалить
+                                    </button>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-                  <div className="col-lg-12 mb-3">
-                    <div className="form-group">
-                      <button
-                        className="btn btn-sm  btn-primary"
-                        onClick={handleUpload}
-                      >
-                        {" "}
-                        Загрузить{" "}
-                      </button>
+                            )
+                        )}
                     </div>
                   </div>
 
@@ -694,33 +738,37 @@ export const ProdEdit = () => {
                     })}
                   </>
 
-                  <div className="container">
-                    <div className="row">
+                  <div className="container ">
+                    <div className="row ">
                       {fileRealDisplay.map((product) => (
-                        <div className="col-md-4 mb-3" key={product.id}>
-                          <div className="img-thumbnail">
-                            <div className="img-thumbnail">
-                              <div className="d-flex">
+                        <div className="col-md-4 mb-3 " key={product.id}>
+                          <div className="img-thumbnail position-relative ">
+                            <div className="d-flex align-items-center ">
+                              <a
+                                href={docPrefixURL + product.filename}
+                                target="_blank"
+                                className="d-flex"
+                              >
+                                <i className="fa fa-file-pdf-o pdfFile"></i>
+                                <span className="file_name">
+                                  {product.description}
+                                </span>
+                              </a>
+                              <div className="deleteButton ">
                                 <a
-                                  href={docPrefixURL + product.filename}
-                                  target="_blank"
-                                >
-                                  <i className="fa fa-file-pdf-o pdfFile"></i>
-                                  <span className="file_name">
-                                    {product.description}
-                                  </span>
-                                </a>
-                              </div>
-                              <div className="col-12 mt-2">
-                                <button
-                                  type="button"
-                                  className="btn btn-danger"
+                                  className="btn btn-danger "
                                   onClick={() => {
-                                    removeById(product.id, 'doc');
+                                    if (
+                                      window.confirm(
+                                        "Вы действительно хотите удалить?"
+                                      )
+                                    ) {
+                                      removeById(product.id, "doc");
+                                    }
                                   }}
                                 >
-                                  Удалить
-                                </button>
+                                  <i className="fa fa-trash"></i>
+                                </a>
                               </div>
                             </div>
                           </div>
@@ -733,7 +781,8 @@ export const ProdEdit = () => {
                     <div className="form-group">
                       <button
                         className="btn btn-success float-right"
-                        type="submit"
+                        // type="submit"
+                        onClick={saveProduct}
                       >
                         Сохранить
                       </button>
