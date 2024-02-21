@@ -56,3 +56,11 @@ section {
   /* background-color: rgba(0, 0, 0, 0.5); Add a semi-transparent background (optional) */
   padding: 5px; /* Add some padding around the text (optional) */
 }
+
+.santec-product {
+  color:  #FA8072;
+  border: 1px solid #FA8072;
+  border-radius: 5px;
+  padding-left:2px;
+  padding-right:2px;
+}

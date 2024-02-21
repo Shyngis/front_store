@@ -25,11 +25,13 @@ a {
 }
 
 .slider_wrap{
-    height: 220px;
+    /* height: 220px;
+    border-radius: 5px; */
 }
 .slider img{
     height: 200px;
-    margin-bottom: 30px;
+    border-radius: 5px;
+    /* margin-bottom: 30px; */
 }
 /* $btn-hover-bg-shade-amount: 2%; */
 

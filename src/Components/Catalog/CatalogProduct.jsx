@@ -31,6 +31,8 @@ export const CatalogProduct = () => {
                 />
                 <div className="card-body">
                   <p className="card-text">
+                    {product.isSantec ? (<span className="santec-product">santec</span>): ''}
+                    <br/>
                     {product.name}
                   </p>
                 </div>
