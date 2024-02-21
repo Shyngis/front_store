@@ -102,7 +102,7 @@ export const Footer = () => {
         </div>
 
         <div class="text-center p-3">
-          <p>© 2024 TОО «SantehPlast»</p>
+          <p>© 2024 TОО «Santehplast»</p>
         </div>
       </div>
     </>
