@@ -83,7 +83,8 @@ const ProductDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {productSizes.map((productSize) => (
+                  {productSizes.map((productSize) => 
+                    !productSize.isRemoved && (
                     <tr>
                       <td>{productSize.article}</td>
                       <td>{productSize.size}</td>

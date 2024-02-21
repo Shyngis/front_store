@@ -70,7 +70,7 @@ export const Header = () => {
 
   return (
     <>
-      <Navbar key={size} expand={size} className="bg-body-tertiary mb-3 mt-3">
+      <Navbar key={size} expand={size} className="bg-body-tertiary mb-3 mt-4">
         <Container fluid>
           <Form
             className="d-flex  flex-md-row align-items-center"

@@ -3,8 +3,8 @@ import React from "react";
 export const Footer = () => {
   return (
     <>
-      <div class="bg-body-tertiary text-center mt-5 pb-5">
-        <div class="row  gy-3">
+      <div class="bg-body-tertiary text-center pb-5">
+        <div class="row mt-1 gy-3">
           <div class="col-12 col-lg-4" style={{ textAlign: "center" }}>
             <p>Мы в соцсетях</p>
             <a
