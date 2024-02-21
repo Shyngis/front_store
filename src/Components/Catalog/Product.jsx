@@ -14,8 +14,8 @@ export const Product = () => {
           .filter((r) => r.product === params.id)
           .map((posts) => (
             <Link to={`/category_1/${posts.name}`}>
-              <div className="cards">
-                <div className="image_box">
+              <div className="cards ">
+                <div className="image-container image_box">
                   <img src={posts.image} alt="" />
                 </div>
                 <div className="details">

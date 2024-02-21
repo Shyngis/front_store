@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { URL, imgPrefixURL } from "../Common/ddata";
-import { Button, Card } from "react-bootstrap";
 import CategoryService from "../services/CategoryService";
 import "./Catalog.css";
-import { CatalogFilter } from "./CatalogFilter";
-import carou from "../../Assets/carou.jpg";
-import cow from "../../Assets/cow.png";
-import lake from "../../Assets/lake.jpg";
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
 
 export const Catalog = () => {
   const [mainCategories, setMainCategories] = useState([]);

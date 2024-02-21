@@ -20,11 +20,11 @@ export const CatalogProduct = () => {
 
   return (
     <>
-      <div class="row">
+      <div class="row mt-4">
         {products.map((product) => (
           <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
             <Link to={`product/${product.id}`}>
-              <div className="card santehplast-card">
+              <div className={`${product.isNew? 'image-container':'' } card santehplast-card`}>
                 <img
                   src={`${imgPrefixURL}/${(product.filename ? product.filename : 'santec-bg.png')}`}
                   className="card-img-top"

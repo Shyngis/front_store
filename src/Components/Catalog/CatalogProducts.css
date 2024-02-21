@@ -36,3 +36,23 @@ section {
   color: grey;
 }
 
+
+.image-container {
+  position: relative; /* Make the container positionable */
+}
+
+.image-container img {
+  display: block; /* Ensure the image fills the container */
+  width: 100%; /* Set image width to 100% of container */
+}
+
+.image-container::after {
+  content: "новинка"; /* Set the content to display */
+  color: red; /* Set the text color to red */
+  font-weight: bold; /* Make the text bold (optional) */
+  position: absolute; /* Position the text absolutely */
+  /* top: 0px; Set the top position from the image edge */
+  right: 7px; /* Set the left position from the image edge */
+  /* background-color: rgba(0, 0, 0, 0.5); Add a semi-transparent background (optional) */
+  padding: 5px; /* Add some padding around the text (optional) */
+}
