@@ -8,11 +8,11 @@ const ProductSizeService = {
         }).then((data) => { return data.json() })
     },
 
-    // findById: function (id) {
-    //     return fetch(URL + "/product/id/" + id, {
-    //         method: "GET",
-    //     }).then((data) => { return data.json() });
-    // },
+    remove: function (id) {
+        return fetch(URL + "/product/size/" + id, {
+            method: "DELETE",
+        }).then((data) => { return data.json() });
+    },
 
     // findLevelCategoriesById: function (id) {
     //     return fetch(URL + "/category/by/rows-parent-id/" + id, {

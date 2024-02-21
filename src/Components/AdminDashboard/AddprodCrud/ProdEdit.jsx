@@ -10,6 +10,8 @@ import ReactPlayer from "react-player";
 import pdf from "../../../Assets/pdf.png";
 import "./ProdEdit.css";
 import AuthService from "../../services/AuthService";
+import ProductSizeService from "../../services/ProductSizeService";
+
 export const ProdEdit = () => {
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
@@ -111,7 +113,6 @@ export const ProdEdit = () => {
 
   const handleSubmit1 = (y) => {
     if (!article || !size) {
-      console.log("You don't have data");
       toast.error("Данные отсутствуют", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -155,9 +156,7 @@ export const ProdEdit = () => {
         return res.json();
       })
       .then((resp) => {
-        //  setProductsize(resp);
         setProductArticleAndSize(resp);
-        console.log("PRoduct size seen");
       })
       .catch((err) => {
         console.log(err.message);
@@ -166,18 +165,24 @@ export const ProdEdit = () => {
 
   const LoadEdit = (id) => {
     navigate("/adminpage/prodlisting/prodedit/" + empid + "/" + id);
-    console.log("loadedit");
   };
 
-  const removeArticleAndSize = (id) => {
-    const newProductArticleAndSize = productArticleAndSize.map((paz) => {
-      if (paz === id) {
-        return { ...paz, isRemoved: true };
-      }
-      return paz;
+  const removeArticleAndSize = (productSize) => {
+
+    const productSizeID = productSize.id;
+    ProductSizeService.remove(productSizeID).then(result => {
+      toast.success("Успешно удалено !", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      const newProductArticleAndSize = productArticleAndSize.map((item) => {
+        if (item.id === productSizeID) {
+          return { ...item, isRemoved: true };
+        }
+        return item;
+      });
+      setProductArticleAndSize(newProductArticleAndSize);
     });
 
-    setProductArticleAndSize(newProductArticleAndSize);
   };
   const Removefunction = (product) => {
     FileService.removeById(product.id)
@@ -204,24 +209,7 @@ export const ProdEdit = () => {
 
     setImgRealDisplay(newProductFileandImage);
   };
-  const RemoveFile = (product) => {
-    fetch(URL + "/upload/" + product.id, {
-      method: "DELETE",
-      // headers:{"content-type":"application/json"},
-      // body:JSON.stringify(empdata)
-    })
-      .then((res) => {
-        product.isRemoved = true;
-        removeFileandImage(product.id);
-        console.log(removeFileandImage);
-        toast.error("Успешно удалено !", {
-          position: toast.POSITION.TOP_RIGHT,
-        });
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  };
+
 
   const [files, setFiles] = useState();
 
@@ -509,7 +497,7 @@ export const ProdEdit = () => {
                       <label className="form-label">Размер товара</label>
                       <input
                         className="form-control"
-                        type="number"
+                        type="text"
                         value={size || ""}
                         onChange={(y) => setSize(y.target.value)}
                       />
@@ -553,7 +541,7 @@ export const ProdEdit = () => {
                                           "Вы действительно хотите удалить?"
                                         )
                                       ) {
-                                        Removefunction(product);
+                                        removeArticleAndSize(product);
                                       }
                                     }}
                                     className="btn btn-danger"

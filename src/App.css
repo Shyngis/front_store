@@ -1,3 +1,8 @@
 body {
     font: 10pt/1.5 Verdana, Tahoma, Arial, sans-serif;
 }
+.bg-body-tertiary {
+    border: 1px
+    solid #feebeb;    
+    border-radius: 5px;
+}

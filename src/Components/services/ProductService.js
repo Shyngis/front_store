@@ -61,6 +61,20 @@ const ProductService = {
       },
     }).then((res) => res.json());
   },
+
+  remove: function (id) {
+    return fetch(URL + "/private/product/id/" + id, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + AuthService.token(),
+      },
+    }).then((res) => res.json());
+  
+  },
+
+
+
 };
 
 export default ProductService;

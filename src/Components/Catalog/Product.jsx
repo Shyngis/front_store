@@ -5,13 +5,6 @@ import { Link, useParams } from "react-router-dom";
 export const Product = () => {
   const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    fetch("http://161.97.144.45:8181/product")
-      .then((response) => response.json())
-      .then((records) => setRecords(records))
-      .catch((err) => console.log(err));
-  }, []);
-
   const params = useParams();
 
   return (

@@ -39,7 +39,7 @@ export const Catalog = () => {
         </MDBCarouselItem>
       </MDBCarousel> */}
       <div>
-        <div className="row mt-3">
+        <div className="row mt-4">
           {mainCategories.map((item) => (
             <div
               className="col-6 col-sm-4 col-md-3 col-lg-2"
