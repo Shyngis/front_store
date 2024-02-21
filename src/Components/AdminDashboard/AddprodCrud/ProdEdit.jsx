@@ -497,7 +497,7 @@ export const ProdEdit = () => {
                       <label className="form-label">Размер товара</label>
                       <input
                         className="form-control"
-                        type="number"
+                        type="text"
                         value={size || ""}
                         onChange={(y) => setSize(y.target.value)}
                       />
