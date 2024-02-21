@@ -11,10 +11,14 @@ import ReactPlayer from "react-player";
 import { URL } from "../../Common/ddata";
 import ProductService from "../../services/ProductService";
 import CategoryService from "../../services/CategoryService";
-export const ProdListing = () => {
-  const [empdata, empdatachange] = useState();
-  const [empdata1, empdatachange1] = useState();
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+
+
+export const ProdListing = () => {
+
+  // const [products, empdatachange] = useState([]);
   const navigate = useNavigate();
 
   const LoadDetail = (id) => {
@@ -23,33 +27,33 @@ export const ProdListing = () => {
   const LoadEdit = (id) => {
     navigate("/adminpage/prodlisting/prodedit/" + id);
   };
+
   const Removefunction = (item) => {
     {
-      fetch(URL + "/product/id/" + item.id, {
-        method: "DELETE",
-        // headers:{"content-type":"application/json"},
-        // body:JSON.stringify(empdata)
-      })
-        .then((item) => {
-          console.log(item.id);
-          // alert("Removed Succesfully!")
-          // window.location.reload();
+      ProductService.remove(item.id)
+        .then(() => {
+
+          const newProducts = products.map((productItem) => {
+            if (productItem.id === item.id) {
+              return { ...productItem, isRemoved: true };
+            }
+            return productItem;
+          });
+          setProducts(newProducts);
+
+
+          toast.success("Успешно удалено !", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         })
-        .catch((err) => {
-          console.log(err.message);
+        .catch(() => {
+          toast.error("Ошибка при удалении !", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         });
+
     }
   };
-
-  useEffect(() => {
-    ProductService.getProducts(20)
-      .then((resp) => {
-        empdatachange(resp.products);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
 
   const [mainCategories, setMainCategories] = useState([]);
   const [subcategories, setSubCategories] = useState([]);
@@ -81,23 +85,11 @@ export const ProdListing = () => {
         subCategoryId,
         isSantec,
         isValtec
-      ).then((product) => {
-        setProducts(product);
+      ).then((products) => {
+        setProducts(products);
       });
     }
   }, [subCategoryId, setProducts]);
-
-  // useEffect(() => {
-  //   fetch(URL + "/category/extended/parent/" + 1).then((response) =>
-  //     response.json().then((data) => setCategories(data))
-  //   );
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch(URL + "/category/extended/parent/" + 2).then((response) =>
-  //     response.json().then((data) => setSubCategories(data))
-  //   );
-  // }, []);
 
   return (
     <>
@@ -108,9 +100,6 @@ export const ProdListing = () => {
             <label htmlFor="cars">Выберите основную категорию:</label>
             <select
               className="category-select"
-              // value={mainCategoryId}
-              // onChange={(y) => mainCategorySelected(y.target.value)}
-              // value={category.id}
               onChange={(e) => setMainCategoryId(e.target.value)}
             >
               <option value="">--</option>
@@ -123,9 +112,6 @@ export const ProdListing = () => {
             <label htmlFor="cars">Выберите под категорию:</label>
             <select
               className="category-select"
-              // value={mainCategoryId}
-              // onChange={(y) => mainCategorySelected(y.target.value)}
-              // value={category.id}
               onChange={(e) => setSubCategoryId(e.target.value)}
             >
               <option value="">--</option>
@@ -156,15 +142,12 @@ export const ProdListing = () => {
               </tr>
             </thead>
             <tbody>
-              {products &&
-                products.map((item) => (
-                  <tr key={item.id}>
+              {
+                products && products.map((item) => 
+                
+                !item.isRemoved && (<tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>
-                      {/* {records
-                        .filter((cat) => cat.id === item.category)
-                        .map((cat) => cat.name)} */}
-                    </td>
+                    <td></td>
                     <td>{item.name}</td>
                     <td>{item.description}</td>
                     <td>{item.isNew ? "ДА" : "НЕТ"}</td>
@@ -198,7 +181,9 @@ export const ProdListing = () => {
                       </a>
                     </td>
                   </tr>
-                ))}
+                )
+              )
+            }
             </tbody>
           </table>
         </div>
