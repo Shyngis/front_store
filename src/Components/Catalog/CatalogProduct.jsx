@@ -24,15 +24,16 @@ export const CatalogProduct = () => {
         {products.map((product) => (
           <div className=" col-6 col-sm-4 col-md-3 col-lg-2">
             <Link to={`product/${product.id}`}>
-              <div className={`${product.isNew? 'image-container':'' } card santehplast-card`}>
-                <img
-                  src={`${imgPrefixURL}/${(product.filename ? product.filename : 'santec-bg.png')}`}
-                  className="card-img-top"
-                />
+              <div className={`${product.isNew ? 'image-container' : ''} card santehplast-card`}>
+                <div className="product-image">
+                  <img
+                    src={`${imgPrefixURL}/${(product.filename ? product.filename : 'santec-bg.png')}`}
+                    className="card-img-top"
+                  />
+                </div>
                 <div className="card-body">
                   <p className="card-text">
-                    {product.isSantec ? (<span className="santec-product">santec</span>): ''}
-                    <br/>
+                    {product.isSantec ? (<span className="santec-product">santec<br/></span>) : ''}
                     {product.name}
                   </p>
                 </div>

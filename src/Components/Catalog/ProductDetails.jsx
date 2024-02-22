@@ -73,6 +73,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="col-md-6">
+              {product.isSantec ? (<p className="santec-product">santec</p>) : ''}
               <p className="product-description">{product.description}</p>
 
               <table>
