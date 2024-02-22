@@ -26,18 +26,14 @@ export const CatalogSubCategory = () => {
 
             <div className="col-6 col-sm-4 col-md-3 col-lg-2">
               <Link to={`products/${item.category.id}`}>
-                <div
-                  className="card santehplast-card"
-                  style={{ width: "10rem", height: "15rem" }}
-                >
-
+                <div className="card santehplast-card">
                   <img
                       src={`${imgPrefixURL}/${(item.image.filename ? item.image.filename : 'santec-bg.png')}`}
                       alt="no-image"
                       className="card-img-top"
                     />
 
-                  <div className="card-body" style={{ overflow: "hidden" }}>
+                  <div className="card-body">
                     <p
                       className="card-text"
                     >

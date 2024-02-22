@@ -1,4 +1,4 @@
-import { MDBCarousel, MDBCarouselItem } from "mdb-react-ui-kit";
+import { MDBCarousel, MDBCarouselItem, MDBCarouselCaption } from "mdb-react-ui-kit";
 import React, { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { URL, imgPrefixURL } from "../Common/ddata";
@@ -8,11 +8,18 @@ import one from "../../Assets/1.png";
 import two from "../../Assets/2.png";
 import three from "../../Assets/3.png";
 import four from "../../Assets/4.png";
+import { isMobile, isBrowser } from 'react-device-detect';
 
 export const Catalog = () => {
   const [mainCategories, setMainCategories] = useState([]);
+  const [carousels, setCarousels] = useState([
+    {id: 1, imageSrc: one, link: "https://santehplast.kz/catalog/1463/products/1460"},
+    {id: 2, imageSrc: two, link: "https://santehplast.kz/catalog/1465/products/1424"},
+    {id: 3, imageSrc: three, link: "https://santehplast.kz/catalog/1477/products/1480/product/443"},
+  ]);
 
   useEffect(() => {
+    console.log('isMobile', isMobile, isBrowser);
     loadCategories();
   }, []);
 
@@ -27,20 +34,18 @@ export const Catalog = () => {
   return (
     <>
       {
-      <MDBCarousel  fade interval={3000} className="bg-body-tertiary mt-4 slider_wrap">
-        <MDBCarouselItem itemId={1} className="slider">
-          <img src={one} className="d-block w-100" alt="..." />
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={2} className="slider">
-          <img src={two} className="d-block w-100" alt="..." />
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={3} className="slider">
-          <img src={three} className="d-block w-100" alt="..." />
-        </MDBCarouselItem>
-        <MDBCarouselItem itemId={4} className="slider">
-          <img src={four} className="d-block w-100" alt="..." />
-        </MDBCarouselItem>
-      </MDBCarousel>
+        isBrowser && (
+          <MDBCarousel showIndicators showControls className="bg-body-tertiary mt-4 slider_wrap">
+          {
+            carousels.map((item) => (
+              <MDBCarouselItem itemId={item.id} className="slider" >
+                <a href={item.link}>
+                  <img src={item.imageSrc} className="d-block w-100" alt="..." />
+                </a>
+              </MDBCarouselItem>
+            ))
+          }
+          </MDBCarousel>)
       }
       <div>
         <div className="row mt-4">

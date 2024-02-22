@@ -59,7 +59,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-6 image-container">
+            <div className="col-md-6 ">
               <img src={activeImg} alt="" className="product-image" />
               <div className="thumbnail-container">
                 {images.map((image) => (
