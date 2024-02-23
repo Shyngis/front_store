@@ -30,7 +30,7 @@ export const CatalogSubCategory = () => {
                   <img
                       src={`${imgPrefixURL}/${(item.image.filename ? item.image.filename : 'santec-bg.png')}`}
                       alt="no-image"
-                      className="card-img-top"
+                      className="card-image-class"
                     />
 
                   <div className="card-body">
