@@ -156,21 +156,6 @@ export const SubCategory = () => {
               />
             </div>
 
-            {/* <div class="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="form-check-label"> Категория для Santec </label>
-                  <input className="form-check-control" checked={isSantec} onChange={(e) => setIsSantec(e.target.checked)} type="checkbox" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="form-check-label"> Категория для Valtec </label>
-                  <input className="form-check-control" checked={isValtec} onChange={(e) => setIsValtec(e.target.checked)} type="checkbox" />
-                </div>
-              </div>
-            </div> */}
-
             <div className="col-md-12">
               <label className="form-label">Загрузить фото </label>
               <input

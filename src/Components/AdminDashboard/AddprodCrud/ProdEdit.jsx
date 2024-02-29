@@ -7,10 +7,9 @@ import CategoryService from "../../services/CategoryService";
 import ProductService from "../../services/ProductService";
 import FileService from "../../services/FileService";
 import ReactPlayer from "react-player";
-import pdf from "../../../Assets/pdf.png";
 import "./ProdEdit.css";
-import AuthService from "../../services/AuthService";
 import ProductSizeService from "../../services/ProductSizeService";
+import BrandService from "../../services/BrandService";
 
 export const ProdEdit = () => {
   const { empid } = useParams();
@@ -18,6 +17,8 @@ export const ProdEdit = () => {
   const [mainCategory, setMainCategory] = useState("");
   const [mainCategories, setMainCategories] = useState([]);
   const [firstLevelCategories, setFirstLevelCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [brand, setBrand] = useState("");
 
   useEffect(() => {
     fetch(URL + "/product/id/" + empid)
@@ -25,6 +26,7 @@ export const ProdEdit = () => {
         return res.json();
       })
       .then((resp) => {
+
         idchange(resp.id);
         setFirstLevelCategory(resp.category);
         namechange(resp.name);
@@ -33,6 +35,7 @@ export const ProdEdit = () => {
         setVideo_pr(resp.video);
         setproduct(resp.id);
         setIsSantec(resp.isSantec);
+        setBrand(resp.brand);
 
         if (resp.category) {
           CategoryService.findLevelCategoriesById(resp.category).then(
@@ -67,6 +70,11 @@ export const ProdEdit = () => {
       .catch((err) => {
         console.log(err.message);
       });
+
+      BrandService.getBrands().then(result => {
+        setBrands(result);
+      })
+
   }, []);
 
   const [id, idchange] = useState("");
@@ -89,6 +97,7 @@ export const ProdEdit = () => {
       isNew,
       video,
       isSantec,
+      brand
     };
 
     ProductService.update(product)
@@ -397,6 +406,20 @@ export const ProdEdit = () => {
                             value={category.id}
                           >
                             {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="col-lg-12">
+                    <div className="form-group">
+                      <label htmlFor="uroven1">Выберите Брэнд: </label>
+                      <select required className="category-select" value={brand} onChange={(e) => setBrand(e.target.value)} >
+                        <option value="">--</option>
+                        {brands.map((item) => (
+                          <option name="option" key={item.code} value={item.code}>
+                            {item.name}
                           </option>
                         ))}
                       </select>

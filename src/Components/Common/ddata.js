@@ -6,7 +6,7 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
 
 export const URL = process.env.REACT_APP_API_URL;
-// export const URL = "http://161.97.144.45:8181";
+export const DOMAIN = process.env.REACT_APP_URL;
 export const imgPrefixURL = process.env.REACT_APP_IMAGE_PREFIX_URL;
 export const docPrefixURL = process.env.REACT_APP_DOC_PREFIX_URL;
 export const file_image =

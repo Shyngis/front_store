@@ -32,6 +32,12 @@
     width: 100%;
 }
 
+.santehplast-card .product-brand {
+    width: 70px;
+    margin: auto;
+    display: block;
+}
+
 .product-filter {
     text-align: center;
 }
