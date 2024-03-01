@@ -10,10 +10,10 @@ const ProductService = {
     });
   },
 
-  findByCategoryAndParams: function (categoryId, isSantec, isValtec) {
+  findByCategoryAndParams: function (categoryId) {
     return fetch(
       URL +
-        `/product/category/${categoryId}/?isSantec=${isSantec}&isValtec=${isValtec}`,
+        `/product/category/${categoryId}`,
       {
         method: "GET",
       }
@@ -73,6 +73,19 @@ const ProductService = {
   
   },
 
+  findByPrivateCategoryAndParams: function (categoryId) {
+    return fetch(URL + `/private/product/category/${categoryId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + AuthService.token(),
+        },
+      }
+    ).then((data) => {
+      return data.json();
+    });
+  },
 
 
 };

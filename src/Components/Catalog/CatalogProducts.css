@@ -36,3 +36,74 @@ section {
   color: grey;
 }
 
+
+.image-container {
+  position: relative; /* Make the container positionable */
+}
+
+.image-container img {
+  /* display: block;  */
+  /* Ensure the image fills the container */
+  /* width: 100%; */
+   /* Set image width to 100% of container */
+}
+
+.image-container::after {
+  content: "new"; /* Set the content to display */
+  color: red; /* Set the text color to red */
+  font-weight: bold; /* Make the text bold (optional) */
+  position: absolute; /* Position the text absolutely */
+  /* top: 0px; Set the top position from the image edge */
+  right: 7px; /* Set the left position from the image edge */
+  /* background-color: rgba(0, 0, 0, 0.5); Add a semi-transparent background (optional) */
+  padding: 5px; /* Add some padding around the text (optional) */
+}
+
+.santec-product {
+  color:  #FA8072;
+  border: 1px solid #FA8072;
+  border-radius: 5px;
+  padding-left:2px;
+  padding-right:2px;
+  width: 50px;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 12px;
+}
+
+.brands-container img {
+  width: 110px;
+}
+
+.brands-container label{
+  float:left;
+  margin-right: 5px;
+  /* align-items: center; */
+}
+
+.brands-container .filter-label {
+
+  border: 2px solid #ff0000; /* Set border width to 2px and color to bright red */
+  border-radius: 10px; /* Increase corner radius to 10px */
+  padding: 5px; /* Increase padding to 10px */
+  display: inline-block; /* Make the label display as an inline block */
+  background-color: #f5f5f5; /* Add a light gray background */
+  font-weight: bold; /* Make the text bold */
+  
+}
+label .valtec {
+  margin: 6px;
+  width: 95px;
+}
+/* 
+.brands-container {
+  display: flex;
+}
+
+.brands-container input{
+  align-items: center;
+} */
+
+

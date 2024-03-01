@@ -74,18 +74,11 @@ export const ProdListing = () => {
     }
   }, [mainCategoryId]);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const isSantec = searchParams.get("isSantec");
-  const isValtec = searchParams.get("isValtec");
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     if (subCategoryId !== "") {
-      ProductService.findByCategoryAndParams(
-        subCategoryId,
-        isSantec,
-        isValtec
-      ).then((products) => {
+      ProductService.findByPrivateCategoryAndParams(subCategoryId).then((products) => {
         setProducts(products);
       });
     }

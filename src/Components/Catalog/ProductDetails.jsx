@@ -28,7 +28,7 @@ const ProductDetails = () => {
       setFileRealDisplay(docs);
       if (thumbs && thumbs.length > 0) {
         setImages(thumbs);
-
+        console.log('thubms', thumbs.sort(compareFn));
         const originalFilename = getImageFilename(thumbs[0].filename);
         setActiveImage(imgPrefixURL + "/" + originalFilename);
       }
@@ -38,6 +38,15 @@ const ProductDetails = () => {
       setProductSizes(result);
     });
   }, []);
+
+  function compareFn(a, b) {
+    if (a.id < b.id) {
+      return -1;
+    } else if (a.id > b.id) {
+      return 1;
+    }
+    return 0;
+  }
 
   function getImageFilename(filename) {
     if (filename) {
@@ -59,7 +68,7 @@ const ProductDetails = () => {
           </div>
 
           <div className="row">
-            <div className="col-md-6 image-container">
+            <div className="col-md-6 ">
               <img src={activeImg} alt="" className="product-image" />
               <div className="thumbnail-container">
                 {images.map((image) => (
@@ -73,6 +82,7 @@ const ProductDetails = () => {
               </div>
             </div>
             <div className="col-md-6">
+              {product.isSantec ? (<p className="santec-product">santec</p>) : ''}
               <p className="product-description">{product.description}</p>
 
               <table>
