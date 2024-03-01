@@ -14,10 +14,7 @@ import CategoryService from "../../services/CategoryService";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
-
 export const ProdListing = () => {
-
   // const [products, empdatachange] = useState([]);
   const navigate = useNavigate();
 
@@ -32,7 +29,6 @@ export const ProdListing = () => {
     {
       ProductService.remove(item.id)
         .then(() => {
-
           const newProducts = products.map((productItem) => {
             if (productItem.id === item.id) {
               return { ...productItem, isRemoved: true };
@@ -40,7 +36,6 @@ export const ProdListing = () => {
             return productItem;
           });
           setProducts(newProducts);
-
 
           toast.success("Успешно удалено !", {
             position: toast.POSITION.TOP_RIGHT,
@@ -51,7 +46,6 @@ export const ProdListing = () => {
             position: toast.POSITION.TOP_RIGHT,
           });
         });
-
     }
   };
 
@@ -78,9 +72,12 @@ export const ProdListing = () => {
 
   useEffect(() => {
     if (subCategoryId !== "") {
-      ProductService.findByPrivateCategoryAndParams(subCategoryId).then((products) => {
-        setProducts(products);
-      });
+      ProductService.findByPrivateCategoryAndParams(subCategoryId).then(
+        (products) => {
+          console.log(products);
+          setProducts(products);
+        }
+      );
     }
   }, [subCategoryId, setProducts]);
 
@@ -135,48 +132,48 @@ export const ProdListing = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                products && products.map((item) => 
-                
-                !item.isRemoved && (<tr key={item.id}>
-                    <td>{item.id}</td>
-                    <td></td>
-                    <td>{item.name}</td>
-                    <td>{item.description}</td>
-                    <td>{item.isNew ? "ДА" : "НЕТ"}</td>
-                    <td>
-                      <a
-                        onClick={() => {
-                          LoadEdit(item.id);
-                        }}
-                        className="btn btn-success"
-                      >
-                        {/* Редакт. */}
-                        <i className="fa fa-edit"></i>
-                      </a>
-                      <a
-                        onClick={() => {
-                          Removefunction(item);
-                        }}
-                        className="btn btn-danger"
-                      >
-                        {/* Удалить */}
-                        <i className="fa fa-trash"></i>
-                      </a>
-                      <a
-                        onClick={() => {
-                          LoadDetail(item.id);
-                        }}
-                        className="btn btn-primary"
-                      >
-                        {/* Подр. */}
-                        <i className="fa fa-eye"></i>
-                      </a>
-                    </td>
-                  </tr>
-                )
-              )
-            }
+              {products &&
+                products.map(
+                  (item) =>
+                    !item.isRemoved && (
+                      <tr key={item.id}>
+                        <td>{item.id}</td>
+                        <td></td>
+                        <td>{item.name}</td>
+                        <td>{item.description}</td>
+                        <td>{item.isNew ? "ДА" : "НЕТ"}</td>
+                        <td>
+                          <a
+                            onClick={() => {
+                              LoadEdit(item.id);
+                            }}
+                            className="btn btn-success"
+                          >
+                            {/* Редакт. */}
+                            <i className="fa fa-edit"></i>
+                          </a>
+                          <a
+                            onClick={() => {
+                              Removefunction(item);
+                            }}
+                            className="btn btn-danger"
+                          >
+                            {/* Удалить */}
+                            <i className="fa fa-trash"></i>
+                          </a>
+                          <a
+                            onClick={() => {
+                              LoadDetail(item.id);
+                            }}
+                            className="btn btn-primary"
+                          >
+                            {/* Подр. */}
+                            <i className="fa fa-eye"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    )
+                )}
             </tbody>
           </table>
         </div>

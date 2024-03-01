@@ -11,6 +11,9 @@ import "./ProdEdit.css";
 import ProductSizeService from "../../services/ProductSizeService";
 import BrandService from "../../services/BrandService";
 
+import Typewriter from "typewriter-effect";
+import Spinner from "react-bootstrap/Spinner";
+
 export const ProdEdit = () => {
   const { empid } = useParams();
   const [firstLevelCategory, setFirstLevelCategory] = useState();
@@ -26,7 +29,6 @@ export const ProdEdit = () => {
         return res.json();
       })
       .then((resp) => {
-
         idchange(resp.id);
         setFirstLevelCategory(resp.category);
         namechange(resp.name);
@@ -71,10 +73,9 @@ export const ProdEdit = () => {
         console.log(err.message);
       });
 
-      BrandService.getBrands().then(result => {
-        setBrands(result);
-      })
-
+    BrandService.getBrands().then((result) => {
+      setBrands(result);
+    });
   }, []);
 
   const [id, idchange] = useState("");
@@ -97,7 +98,7 @@ export const ProdEdit = () => {
       isNew,
       video,
       isSantec,
-      brand
+      brand,
     };
 
     ProductService.update(product)
@@ -177,9 +178,8 @@ export const ProdEdit = () => {
   };
 
   const removeArticleAndSize = (productSize) => {
-
     const productSizeID = productSize.id;
-    ProductSizeService.remove(productSizeID).then(result => {
+    ProductSizeService.remove(productSizeID).then((result) => {
       toast.success("Успешно удалено !", {
         position: toast.POSITION.TOP_RIGHT,
       });
@@ -191,7 +191,6 @@ export const ProdEdit = () => {
       });
       setProductArticleAndSize(newProductArticleAndSize);
     });
-
   };
   const Removefunction = (product) => {
     FileService.removeById(product.id)
@@ -219,7 +218,6 @@ export const ProdEdit = () => {
     setImgRealDisplay(newProductFileandImage);
   };
 
-
   const [files, setFiles] = useState();
 
   const handleImage = (y) => {
@@ -238,6 +236,7 @@ export const ProdEdit = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
+      showLoaderImg();
       for (let i = 0; i < files.length; i++) {
         const container1 = new FormData();
         container1.append("container", productId);
@@ -248,12 +247,23 @@ export const ProdEdit = () => {
         const sendImageResponse = await sendImage.json();
         images.push(sendImageResponse);
       }
+      hideLoaderImg();
       setimageDisplay(images);
       toast.success("Успешно  загружено!", {
         position: toast.POSITION.TOP_RIGHT,
       });
     }
   }
+
+  const [isLoadingImg, setIsLoadingImg] = useState(false);
+
+  const showLoaderImg = () => {
+    setIsLoadingImg(true);
+  };
+
+  const hideLoaderImg = () => {
+    setIsLoadingImg(false);
+  };
   const [files2, setFiles2] = useState();
   const [fileRealName, setFileRealName] = useState("");
 
@@ -293,6 +303,7 @@ export const ProdEdit = () => {
         position: toast.POSITION.TOP_RIGHT,
       });
     } else {
+      showLoader();
       for (let i = 0; i < files2.length; i++) {
         const container1 = new FormData();
         container1.append("container", productId);
@@ -301,6 +312,7 @@ export const ProdEdit = () => {
         const sendFileResponse = await sendFile.json();
         docs.push(sendFileResponse);
       }
+      hideLoader();
       setFileDisplay(docs);
       setDocumentID(docs[0].id);
       toast.success("Успешно  загружено!", {
@@ -308,7 +320,15 @@ export const ProdEdit = () => {
       });
     }
   }
+  const [isLoading, setIsLoading] = useState(false);
 
+  const showLoader = () => {
+    setIsLoading(true);
+  };
+
+  const hideLoader = () => {
+    setIsLoading(false);
+  };
   useEffect(() => {
     CategoryService.findByParentIdPrivate(1).then((result) => {
       setMainCategories(result);
@@ -415,10 +435,19 @@ export const ProdEdit = () => {
                   <div className="col-lg-12">
                     <div className="form-group">
                       <label htmlFor="uroven1">Выберите Брэнд: </label>
-                      <select required className="category-select" value={brand} onChange={(e) => setBrand(e.target.value)} >
+                      <select
+                        required
+                        className="category-select"
+                        value={brand}
+                        onChange={(e) => setBrand(e.target.value)}
+                      >
                         <option value="">--</option>
                         {brands.map((item) => (
-                          <option name="option" key={item.code} value={item.code}>
+                          <option
+                            name="option"
+                            key={item.code}
+                            value={item.code}
+                          >
                             {item.name}
                           </option>
                         ))}
@@ -598,9 +627,14 @@ export const ProdEdit = () => {
                           className="btn btn-sm  btn-primary"
                           onClick={handleUpload}
                         >
-                          {" "}
-                          Загрузить{" "}
+                          Загрузить
                         </button>
+                        <hr />
+                        {isLoadingImg && (
+                          <>
+                            <Spinner animation="border" variant="primary" />
+                          </>
+                        )}
                       </div>
                     </div>
                     {imageDisplay.map((product) => {
@@ -682,6 +716,12 @@ export const ProdEdit = () => {
                       >
                         Загрузить паспорта и сертификаты
                       </button>
+                      <hr />
+                      {isLoading && (
+                        <>
+                          <Spinner animation="border" variant="secondary" />
+                        </>
+                      )}
                     </div>
                   </div>
                   <hr />
