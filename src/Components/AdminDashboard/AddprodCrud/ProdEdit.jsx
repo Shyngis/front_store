@@ -267,7 +267,7 @@ export const ProdEdit = () => {
   const [files2, setFiles2] = useState();
   const [fileRealName, setFileRealName] = useState("");
 
-  const handleFileRealName = (t) => {
+  const handleFileRealName = async (t) => {
     t.preventDefault();
 
     const fileServ = {
@@ -315,9 +315,15 @@ export const ProdEdit = () => {
       hideLoader();
       setFileDisplay(docs);
       setDocumentID(docs[0].id);
-      toast.success("Успешно  загружено!", {
-        position: toast.POSITION.TOP_RIGHT,
-      });
+      if (docs[0].id == null || undefined || false) {
+        toast.error("Не удалось загрузить файлы!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      } else {
+        toast.success("Успешно  загружено!", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }
     }
   }
   const [isLoading, setIsLoading] = useState(false);
@@ -727,7 +733,7 @@ export const ProdEdit = () => {
                   <hr />
                   <>
                     {fileDisplay.map((product) => {
-                      return (
+                      return product.id != null || undefined || false ? (
                         <fieldset>
                           <table>
                             <thead>
@@ -785,6 +791,11 @@ export const ProdEdit = () => {
                             </tbody>
                           </table>
                         </fieldset>
+                      ) : (
+                        <div class="alert alert-danger" role="alert">
+                          Не удалось загрузить. Возможные причины: ошибка
+                          сервера, слишком большие данные!
+                        </div>
                       );
                     })}
                   </>
